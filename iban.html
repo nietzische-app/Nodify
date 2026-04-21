@@ -7,6 +7,7 @@
 <meta name="description" content="IBAN numarasının geçerliliğini anında kontrol edin ve hangi bankaya ait olduğunu öğrenin.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://logo.clearbit.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -20,8 +21,7 @@ a{color:inherit;text-decoration:none}
 
 nav{padding:24px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
 .brand{font-family:"Bebas Neue",sans-serif;font-size:1.4rem;letter-spacing:0.08em}
-.back{font-family:"Syne",sans-serif;font-size:0.75rem;font-weight:700;color:var(--grey4);letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
-.back:hover{color:var(--white)}
+.back{font-family:"Syne",sans-serif;font-size:0.75rem;font-weight:700;color:var(--grey4);letter-spacing:0.1em;text-transform:uppercase}
 
 main{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 24px}
 .wrap{width:100%;max-width:640px}
@@ -56,8 +56,20 @@ button:active{transform:translateY(1px)}
 .status.valid{color:var(--ok)}
 .status.invalid{color:var(--err)}
 .status-sub{font-family:"Syne",sans-serif;font-size:0.72rem;font-weight:600;color:var(--grey4);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:18px}
+
+.bank-card{display:flex;align-items:center;gap:16px;padding:16px 0 18px;border-top:1px solid var(--border);margin-bottom:4px}
+.bank-card:first-of-type{border-top:none;padding-top:0}
+.logo{
+  width:56px;height:56px;flex-shrink:0;border-radius:8px;background:var(--white);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  font-family:"Bebas Neue",sans-serif;font-size:1.5rem;color:var(--black);letter-spacing:0.02em;
+}
+.logo img{width:100%;height:100%;object-fit:contain;padding:6px}
+.bank-meta{display:flex;flex-direction:column;gap:3px;min-width:0}
+.bank-name{font-family:"Syne",sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);line-height:1.2}
+.bank-tag{font-family:"Syne",sans-serif;font-size:0.68rem;font-weight:600;color:var(--grey4);letter-spacing:0.14em;text-transform:uppercase}
+
 .row{display:grid;grid-template-columns:140px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--border)}
-.row:first-of-type{border-top:none;padding-top:0}
 .k{font-family:"Syne",sans-serif;font-size:0.72rem;font-weight:600;color:var(--grey4);letter-spacing:0.12em;text-transform:uppercase;align-self:center}
 .v{font-family:"Instrument Sans",sans-serif;font-size:1rem;color:var(--white);word-break:break-all}
 .v.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0.04em}
@@ -70,6 +82,7 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
 @media (max-width:560px){
   nav{padding:18px 24px}
   footer{padding:18px 24px}
+  .row{grid-template-columns:110px 1fr}
 }
 </style>
 </head>
@@ -84,7 +97,7 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
   <div class="wrap">
     <div class="eyebrow">Ücretsiz Araç</div>
     <h1>IBAN SORGULAMA</h1>
-    <p class="lead">IBAN numarasını girin; numaranın geçerli olup olmadığını ve Türkiye IBAN'ları için hangi bankaya ait olduğunu anında öğrenin. Hiçbir veri sunucuya gönderilmez, doğrulama tarayıcınızda yapılır.</p>
+    <p class="lead">IBAN numarasını girin; numaranın geçerli olup olmadığını ve hangi banka ya da fintech kuruluşuna ait olduğunu anında öğrenin. Hiçbir veri sunucuya gönderilmez, doğrulama tarayıcınızda yapılır.</p>
 
     <form id="iban-form" autocomplete="off" novalidate>
       <label for="iban">IBAN</label>
@@ -96,7 +109,7 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
 
     <div id="result" class="result" aria-live="polite"></div>
 
-    <p class="note"><b>Not:</b> IBAN standartı şehir veya şube bilgisini içermez; bu bilgiler yalnızca ilgili bankanın iç sisteminde bulunur.</p>
+    <p class="note"><b>Not:</b> IBAN standartı şehir veya şube bilgisini içermez; bu bilgiler yalnızca ilgili kurumun iç sisteminde bulunur.</p>
   </div>
 </main>
 
@@ -116,52 +129,68 @@ const IBAN_LENGTHS = {
   TN:24,TR:26,UA:29,VA:22,VG:24,XK:20
 };
 
-const TR_BANK_CODES = {
-  "00001":"Türkiye Cumhuriyet Merkez Bankası",
-  "00004":"İller Bankası",
-  "00010":"Ziraat Bankası",
-  "00012":"Halkbank",
-  "00015":"Vakıfbank",
-  "00016":"Türkiye Sınai Kalkınma Bankası",
-  "00017":"Türkiye Kalkınma ve Yatırım Bankası",
-  "00029":"Birleşik Fon Bankası",
-  "00032":"Türk Ekonomi Bankası (TEB)",
-  "00046":"Akbank",
-  "00059":"Şekerbank",
-  "00062":"Garanti BBVA",
-  "00064":"Türkiye İş Bankası",
-  "00067":"Yapı Kredi",
-  "00092":"Denizbank",
-  "00094":"Citibank",
-  "00096":"Turkish Bank",
-  "00098":"Arap Türk Bankası",
-  "00099":"Société Générale",
-  "00100":"HSBC Bank",
-  "00103":"Fibabanka",
-  "00108":"Odea Bank",
-  "00109":"Bank of China Turkey",
-  "00111":"QNB Finansbank",
-  "00115":"Deutsche Bank",
-  "00121":"Alternatifbank",
-  "00123":"HSBC Bank",
-  "00124":"Alternatifbank",
-  "00125":"Burgan Bank",
-  "00134":"ICBC Turkey Bank",
-  "00135":"Rabobank",
-  "00137":"Intesa Sanpaolo",
-  "00138":"Standard Chartered Yatırım Bankası",
-  "00139":"Turkland Bank (T-Bank)",
-  "00143":"MUFG Bank Turkey",
-  "00146":"Golden Global Yatırım Bankası",
-  "00147":"DenizBank",
-  "00148":"Vakıf Katılım",
-  "00203":"Albaraka Türk",
-  "00205":"Kuveyt Türk",
-  "00206":"Türkiye Finans Katılım",
-  "00209":"Ziraat Katılım",
-  "00210":"Emlak Katılım",
-  "00211":"Hayat Finans Katılım",
-  "00212":"TOM Katılım"
+// Türkiye EFT banka kodları (TCMB / BKM kayıtlı kuruluşlar).
+// type: "kamu" | "ozel" | "yabanci" | "yatirim" | "katilim" | "dijital" | "merkez"
+const TR_BANKS = {
+  "00001": {name:"Türkiye Cumhuriyet Merkez Bankası", domain:"tcmb.gov.tr",           type:"merkez"},
+  "00004": {name:"İller Bankası",                     domain:"ilbank.gov.tr",         type:"yatirim"},
+  "00010": {name:"Ziraat Bankası",                    domain:"ziraatbank.com.tr",     type:"kamu"},
+  "00012": {name:"Halkbank",                          domain:"halkbank.com.tr",       type:"kamu"},
+  "00014": {name:"Türk Eximbank",                     domain:"eximbank.gov.tr",       type:"yatirim"},
+  "00015": {name:"Vakıfbank",                         domain:"vakifbank.com.tr",      type:"kamu"},
+  "00016": {name:"Türkiye Sınai Kalkınma Bankası",    domain:"tskb.com.tr",           type:"yatirim"},
+  "00017": {name:"Türkiye Kalkınma ve Yatırım Bankası", domain:"kalkinma.com.tr",     type:"yatirim"},
+  "00029": {name:"Birleşik Fon Bankası",              domain:"bfb.com.tr",            type:"ozel"},
+  "00032": {name:"Türk Ekonomi Bankası (TEB)",        domain:"teb.com.tr",            type:"ozel"},
+  "00046": {name:"Akbank",                            domain:"akbank.com",            type:"ozel"},
+  "00059": {name:"Şekerbank",                         domain:"sekerbank.com.tr",      type:"ozel"},
+  "00062": {name:"Garanti BBVA",                      domain:"garantibbva.com.tr",    type:"ozel"},
+  "00064": {name:"Türkiye İş Bankası",                domain:"isbank.com.tr",         type:"ozel"},
+  "00067": {name:"Yapı Kredi",                        domain:"yapikredi.com.tr",      type:"ozel"},
+  "00091": {name:"Millennium Bank",                   domain:"millenniumbank.com.tr", type:"yabanci"},
+  "00092": {name:"Denizbank",                         domain:"denizbank.com",         type:"ozel"},
+  "00094": {name:"Citibank",                          domain:"citibank.com.tr",       type:"yabanci"},
+  "00096": {name:"Turkish Bank",                      domain:"turkishbank.com",       type:"ozel"},
+  "00098": {name:"Arap Türk Bankası",                 domain:"atbank.com.tr",         type:"ozel"},
+  "00099": {name:"Société Générale",                  domain:"societegenerale.com",   type:"yabanci"},
+  "00100": {name:"HSBC Bank",                         domain:"hsbc.com.tr",           type:"yabanci"},
+  "00103": {name:"Fibabanka",                         domain:"fibabanka.com.tr",      type:"ozel"},
+  "00108": {name:"Odeabank",                          domain:"odeabank.com.tr",       type:"yabanci"},
+  "00109": {name:"Bank of China Turkey",              domain:"bankofchina.com",       type:"yabanci"},
+  "00111": {name:"QNB (eski QNB Finansbank)",         domain:"qnb.com.tr",            type:"yabanci"},
+  "00115": {name:"Deutsche Bank",                     domain:"db.com",                type:"yabanci"},
+  "00121": {name:"Alternatifbank",                    domain:"alternatifbank.com.tr", type:"yabanci"},
+  "00123": {name:"HSBC Bank",                         domain:"hsbc.com.tr",           type:"yabanci"},
+  "00124": {name:"Alternatifbank",                    domain:"alternatifbank.com.tr", type:"yabanci"},
+  "00125": {name:"Burgan Bank",                       domain:"burgan.com.tr",         type:"yabanci"},
+  "00134": {name:"ICBC Turkey Bank",                  domain:"icbc.com.tr",           type:"yabanci"},
+  "00135": {name:"Rabobank",                          domain:"rabobank.com",          type:"yabanci"},
+  "00137": {name:"Intesa Sanpaolo",                   domain:"intesasanpaolo.com",    type:"yabanci"},
+  "00138": {name:"Standard Chartered Yatırım Bankası",domain:"sc.com",                type:"yabanci"},
+  "00139": {name:"Turkland Bank (T-Bank)",            domain:"tbank.com.tr",          type:"yabanci"},
+  "00143": {name:"MUFG Bank Turkey",                  domain:"mufgemea.com",          type:"yabanci"},
+  "00146": {name:"Golden Global Yatırım Bankası",     domain:"goldenglobalbank.com",  type:"yatirim"},
+  "00147": {name:"ING",                               domain:"ing.com.tr",            type:"yabanci"},
+  "00148": {name:"Vakıf Katılım",                     domain:"vakifkatilim.com.tr",   type:"katilim"},
+  "00203": {name:"Albaraka Türk",                     domain:"albaraka.com.tr",       type:"katilim"},
+  "00205": {name:"Kuveyt Türk",                       domain:"kuveytturk.com.tr",     type:"katilim"},
+  "00206": {name:"Türkiye Finans Katılım",            domain:"turkiyefinans.com.tr",  type:"katilim"},
+  "00209": {name:"Ziraat Katılım",                    domain:"ziraatkatilim.com.tr",  type:"katilim"},
+  "00210": {name:"Emlak Katılım",                     domain:"emlakkatilim.com.tr",   type:"katilim"},
+  "00211": {name:"Hayat Finans Katılım",              domain:"hayatfinans.com.tr",    type:"katilim"},
+  "00212": {name:"TOM Bank",                          domain:"tombank.com.tr",        type:"dijital"},
+  "00213": {name:"Colendi Bank",                      domain:"colendi.com",           type:"dijital"},
+  "00214": {name:"Enpara.com",                        domain:"enpara.com",            type:"dijital"}
+};
+
+const TYPE_LABELS = {
+  kamu:    "Kamu Bankası",
+  ozel:    "Özel Banka",
+  yabanci: "Yabancı Sermayeli Banka",
+  yatirim: "Kalkınma ve Yatırım Bankası",
+  katilim: "Katılım Bankası",
+  dijital: "Dijital Banka / Fintech",
+  merkez:  "Merkez Bankası"
 };
 
 const COUNTRY_NAMES = {
@@ -173,7 +202,7 @@ const COUNTRY_NAMES = {
   SI:"Slovenya",EE:"Estonya",LV:"Letonya",LT:"Litvanya",CY:"Kıbrıs",
   MT:"Malta",IS:"İzlanda",LI:"Lihtenştayn",MC:"Monako",SM:"San Marino",
   AE:"BAE",SA:"Suudi Arabistan",QA:"Katar",KW:"Kuveyt",BH:"Bahreyn",
-  JO:"Ürdün",IL:"İsrail",LB:"Lübnan",EG:"Mısır",TN:"Tunus",MA:"Fas",
+  JO:"Ürdün",IL:"İsrail",LB:"Lübnan",EG:"Mısır",TN:"Tunus",
   AZ:"Azerbaycan",GE:"Gürcistan",KZ:"Kazakistan",UA:"Ukrayna",BY:"Belarus",
   RS:"Sırbistan",ME:"Karadağ",MK:"Kuzey Makedonya",AL:"Arnavutluk",
   BA:"Bosna Hersek",XK:"Kosova"
@@ -189,15 +218,11 @@ function mod97(iban){
     else numeric += c;
   }
   let remainder = 0;
-  for (const d of numeric){
-    remainder = (remainder * 10 + Number(d)) % 97;
-  }
+  for (const d of numeric) remainder = (remainder * 10 + Number(d)) % 97;
   return remainder;
 }
 
-function pretty(iban){
-  return iban.replace(/(.{4})/g,"$1 ").trim();
-}
+function pretty(iban){ return iban.replace(/(.{4})/g,"$1 ").trim(); }
 
 function parseIban(input){
   const iban = normalize(input);
@@ -211,11 +236,24 @@ function parseIban(input){
 
   const out = {valid:true, iban, country};
   if (country === "TR"){
-    const bankCode = iban.slice(4,9);
-    out.bankCode = bankCode;
-    out.bankName = TR_BANK_CODES[bankCode] || "Bu banka kodu listemizde yok";
+    const code = iban.slice(4,9);
+    out.bankCode = code;
+    out.bank = TR_BANKS[code] || null;
   }
   return out;
+}
+
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])); }
+
+function logoHtml(bank, bankCode){
+  if (!bank || !bank.domain){
+    const initials = bank ? bank.name.split(/\s+/).slice(0,2).map(w=>w[0]||"").join("").toUpperCase() : (bankCode||"?").slice(-2);
+    return `<div class="logo">${esc(initials)}</div>`;
+  }
+  const primary  = `https://logo.clearbit.com/${bank.domain}`;
+  const fallback = `https://www.google.com/s2/favicons?domain=${bank.domain}&sz=128`;
+  return `<div class="logo"><img src="${primary}" alt="${esc(bank.name)} logo"
+     onerror="if(this.src!=='${fallback}'){this.onerror=null;this.src='${fallback}';}else{this.remove();}"></div>`;
 }
 
 const form = document.getElementById("iban-form");
@@ -226,29 +264,40 @@ function render(res, raw){
   result.classList.remove("valid","invalid");
   result.classList.add("show", res.valid ? "valid" : "invalid");
 
-  const rows = [];
-  rows.push(`<div class="status ${res.valid?'valid':'invalid'}">${res.valid?'Geçerli':'Geçersiz'}</div>`);
-  rows.push(`<div class="status-sub">${res.valid?'Kontrol rakamı doğrulandı':'IBAN doğrulanamadı'}</div>`);
+  const parts = [];
+  parts.push(`<div class="status ${res.valid?'valid':'invalid'}">${res.valid?'Geçerli':'Geçersiz'}</div>`);
+  parts.push(`<div class="status-sub">${res.valid?'Kontrol rakamı doğrulandı':'IBAN doğrulanamadı'}</div>`);
 
   if (!res.valid){
-    rows.push(`<div class="row"><div class="k">Sebep</div><div class="v">${res.error}</div></div>`);
-    if (raw) rows.push(`<div class="row"><div class="k">Giriş</div><div class="v mono">${pretty(normalize(raw))}</div></div>`);
+    parts.push(`<div class="row"><div class="k">Sebep</div><div class="v">${esc(res.error)}</div></div>`);
+    if (raw) parts.push(`<div class="row"><div class="k">Giriş</div><div class="v mono">${esc(pretty(normalize(raw)))}</div></div>`);
   } else {
-    rows.push(`<div class="row"><div class="k">IBAN</div><div class="v mono">${pretty(res.iban)}</div></div>`);
-    const countryLabel = COUNTRY_NAMES[res.country] ? `${COUNTRY_NAMES[res.country]} (${res.country})` : res.country;
-    rows.push(`<div class="row"><div class="k">Ülke</div><div class="v">${countryLabel}</div></div>`);
-    if (res.bankName){
-      rows.push(`<div class="row"><div class="k">Banka</div><div class="v">${res.bankName}</div></div>`);
-      rows.push(`<div class="row"><div class="k">Banka kodu</div><div class="v mono">${res.bankCode}</div></div>`);
+    if (res.country === "TR"){
+      const b = res.bank;
+      const name = b ? b.name : "Kayıtlı olmayan banka kodu";
+      const tag  = b ? (TYPE_LABELS[b.type] || "") : "Listede yok";
+      parts.push(`
+        <div class="bank-card">
+          ${logoHtml(b, res.bankCode)}
+          <div class="bank-meta">
+            <span class="bank-name">${esc(name)}</span>
+            <span class="bank-tag">${esc(tag)}</span>
+          </div>
+        </div>`);
+    }
+    parts.push(`<div class="row"><div class="k">IBAN</div><div class="v mono">${esc(pretty(res.iban))}</div></div>`);
+    const cl = COUNTRY_NAMES[res.country] ? `${COUNTRY_NAMES[res.country]} (${res.country})` : res.country;
+    parts.push(`<div class="row"><div class="k">Ülke</div><div class="v">${esc(cl)}</div></div>`);
+    if (res.bankCode){
+      parts.push(`<div class="row"><div class="k">Banka kodu</div><div class="v mono">${esc(res.bankCode)}</div></div>`);
     }
   }
-  result.innerHTML = rows.join("");
+  result.innerHTML = parts.join("");
 }
 
 form.addEventListener("submit",(e)=>{
   e.preventDefault();
-  const raw = input.value;
-  render(parseIban(raw), raw);
+  render(parseIban(input.value), input.value);
 });
 
 input.addEventListener("input",()=>{
@@ -256,7 +305,6 @@ input.addEventListener("input",()=>{
   input.value = v.replace(/(.{4})/g,"$1 ").trim();
 });
 
-// URL ile ön-dolu sorgu: iban.html?iban=TR...
 const urlIban = new URLSearchParams(location.search).get("iban");
 if (urlIban){
   input.value = urlIban.replace(/\s+/g,"").toUpperCase().replace(/(.{4})/g,"$1 ").trim();
