@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Her-iban — IBAN Sorgulama</title>
 <meta name="description" content="IBAN numarasının geçerliliğini anında kontrol edin ve hangi bankaya ait olduğunu öğrenin.">
-<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23080808'/><path d='M22 18v28M42 18v28M22 32h20' stroke='%23F2F2F0' stroke-width='6' stroke-linecap='square' fill='none'/></svg>">
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,8 +23,8 @@ a{color:inherit;text-decoration:none}
 
 nav{padding:24px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
 .brand-wrap{display:flex;align-items:center;gap:10px;line-height:0}
-.brand-logo{height:32px;width:auto;display:block}
-.brand-fallback{font-family:"Bebas Neue",sans-serif;font-size:1.4rem;letter-spacing:0.08em;color:var(--white);line-height:1}
+.brand-logo{height:56px;width:auto;display:block}
+.brand-fallback{font-family:"Bebas Neue",sans-serif;font-size:2rem;letter-spacing:0.08em;color:var(--white);line-height:1}
 .back{font-family:"Syne",sans-serif;font-size:0.75rem;font-weight:700;color:var(--grey4);letter-spacing:0.1em;text-transform:uppercase}
 
 main{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 24px}
@@ -67,7 +67,11 @@ button:active{transform:translateY(1px)}
   display:flex;align-items:center;justify-content:center;overflow:hidden;
   font-family:"Bebas Neue",sans-serif;font-size:3.5rem;color:var(--black);letter-spacing:0.02em;
 }
-.logo img{width:100%;height:100%;object-fit:contain;padding:14px}
+.logo img{
+  width:100%;height:100%;object-fit:contain;padding:18px;
+  image-rendering:-webkit-optimize-contrast;
+  image-rendering:crisp-edges;
+}
 .bank-meta{display:flex;flex-direction:column;gap:6px;align-items:center;min-width:0;width:100%}
 .bank-name{font-family:"Bebas Neue",sans-serif;font-weight:400;font-size:1.8rem;color:var(--white);line-height:1.1;letter-spacing:0.02em}
 .bank-tag{font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:700;color:var(--grey4);letter-spacing:0.16em;text-transform:uppercase}
@@ -188,7 +192,13 @@ const TR_BANKS = {
   "00211": {name:"Hayat Finans Katılım",              domain:"hayatfinans.com.tr",    type:"katilim"},
   "00212": {name:"TOM Bank",                          domain:"tombank.com.tr",        type:"dijital"},
   "00213": {name:"Colendi Bank",                      domain:"colendi.com",           type:"dijital"},
-  "00214": {name:"Enpara.com",                        domain:"enpara.com",            type:"dijital"}
+  "00214": {name:"Enpara.com",                        domain:"enpara.com",            type:"dijital"},
+  // BKM kodları kesin doğrulanmadı — gerçek IBAN ile test edilip düzeltilecek.
+  "00215": {name:"Papara",                            domain:"papara.com",            type:"dijital"},
+  "00216": {name:"İninal",                            domain:"ininal.com",            type:"dijital"},
+  "00217": {name:"Paycell",                           domain:"paycell.com.tr",        type:"dijital"},
+  "00218": {name:"Ozan",                              domain:"ozan.com",              type:"dijital"},
+  "00219": {name:"Param",                             domain:"param.com.tr",          type:"dijital"}
 };
 
 const TYPE_LABELS = {
@@ -258,10 +268,10 @@ function logoHtml(bank, bankCode){
     const initials = bank ? bank.name.split(/\s+/).slice(0,2).map(w=>w[0]||"").join("").toUpperCase() : (bankCode||"?").slice(-2);
     return `<div class="logo">${esc(initials)}</div>`;
   }
-  const primary  = `https://logo.clearbit.com/${bank.domain}`;
-  const fallback = `https://www.google.com/s2/favicons?domain=${bank.domain}&sz=128`;
-  return `<div class="logo"><img src="${primary}" alt="${esc(bank.name)} logo"
-     onerror="if(this.src!=='${fallback}'){this.onerror=null;this.src='${fallback}';}else{this.remove();}"></div>`;
+  const primary  = `https://logo.clearbit.com/${bank.domain}?size=400&format=png`;
+  const fallback = `https://www.google.com/s2/favicons?domain=${bank.domain}&sz=256`;
+  return `<div class="logo"><img src="${primary}" alt="${esc(bank.name)} logo" width="400" height="400"
+     onerror="if(this.src.indexOf('google.com')===-1){this.onerror=null;this.src='${fallback}';}else{this.remove();}"></div>`;
 }
 
 const form = document.getElementById("iban-form");
