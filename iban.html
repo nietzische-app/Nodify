@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IBAN Sorgulama — Nodify</title>
+<meta name="description" content="IBAN numarasının geçerliliğini anında kontrol edin ve hangi bankaya ait olduğunu öğrenin.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#080808;--white:#F2F2F0;
+  --grey1:#161616;--grey2:#222222;--grey3:#333333;--grey4:#888888;--grey5:#AAAAAA;
+  --ok:#6DE089;--err:#E06D6D;--border:#1E1E1E;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Instrument Sans",sans-serif;background:var(--black);color:var(--white);min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none}
+
+nav{padding:24px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.brand{font-family:"Bebas Neue",sans-serif;font-size:1.4rem;letter-spacing:0.08em}
+.back{font-family:"Syne",sans-serif;font-size:0.75rem;font-weight:700;color:var(--grey4);letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
+.back:hover{color:var(--white)}
+
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 24px}
+.wrap{width:100%;max-width:640px}
+
+.eyebrow{font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:700;color:var(--grey4);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:16px}
+h1{font-family:"Bebas Neue",sans-serif;font-size:clamp(2.8rem,6vw,4.5rem);line-height:1;letter-spacing:0.02em;margin-bottom:14px}
+.lead{color:var(--grey5);font-size:0.98rem;line-height:1.55;margin-bottom:36px;max-width:520px}
+
+form{display:flex;flex-direction:column;gap:14px;margin-bottom:24px}
+label{font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:700;color:var(--grey4);letter-spacing:0.14em;text-transform:uppercase}
+.input-row{display:flex;gap:10px;flex-wrap:wrap}
+input{
+  flex:1;min-width:240px;background:var(--grey1);border:1px solid var(--border);
+  padding:16px 18px;font-family:"Instrument Sans",sans-serif;font-size:1rem;
+  color:var(--white);outline:none;letter-spacing:0.06em;transition:border-color 0.2s;border-radius:2px;
+}
+input:focus{border-color:var(--grey4)}
+input::placeholder{color:var(--grey3);letter-spacing:0.04em}
+button{
+  font-family:"Syne",sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--black);background:var(--white);border:none;padding:16px 28px;cursor:pointer;border-radius:2px;
+  transition:background 0.2s,transform 0.1s;
+}
+button:hover{background:var(--grey5)}
+button:active{transform:translateY(1px)}
+
+.result{border:1px solid var(--border);background:var(--grey1);padding:24px;border-radius:2px;display:none}
+.result.show{display:block}
+.result.valid{border-color:color-mix(in srgb,var(--ok) 40%,var(--border))}
+.result.invalid{border-color:color-mix(in srgb,var(--err) 40%,var(--border))}
+.status{font-family:"Bebas Neue",sans-serif;font-size:1.6rem;letter-spacing:0.04em;margin-bottom:4px}
+.status.valid{color:var(--ok)}
+.status.invalid{color:var(--err)}
+.status-sub{font-family:"Syne",sans-serif;font-size:0.72rem;font-weight:600;color:var(--grey4);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:18px}
+.row{display:grid;grid-template-columns:140px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--border)}
+.row:first-of-type{border-top:none;padding-top:0}
+.k{font-family:"Syne",sans-serif;font-size:0.72rem;font-weight:600;color:var(--grey4);letter-spacing:0.12em;text-transform:uppercase;align-self:center}
+.v{font-family:"Instrument Sans",sans-serif;font-size:1rem;color:var(--white);word-break:break-all}
+.v.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0.04em}
+
+.note{margin-top:20px;color:var(--grey4);font-size:0.82rem;line-height:1.55}
+.note b{color:var(--grey5);font-weight:600}
+
+footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);font-size:0.75rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:560px){
+  nav{padding:18px 24px}
+  footer{padding:18px 24px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="brand">NODIFY</a>
+  <a href="index.html" class="back">← Ana sayfa</a>
+</nav>
+
+<main>
+  <div class="wrap">
+    <div class="eyebrow">Ücretsiz Araç</div>
+    <h1>IBAN SORGULAMA</h1>
+    <p class="lead">IBAN numarasını girin; numaranın geçerli olup olmadığını ve Türkiye IBAN'ları için hangi bankaya ait olduğunu anında öğrenin. Hiçbir veri sunucuya gönderilmez, doğrulama tarayıcınızda yapılır.</p>
+
+    <form id="iban-form" autocomplete="off" novalidate>
+      <label for="iban">IBAN</label>
+      <div class="input-row">
+        <input id="iban" name="iban" placeholder="TR33 0006 1005 1978 6457 8413 26" maxlength="42" spellcheck="false">
+        <button type="submit">Sorgula</button>
+      </div>
+    </form>
+
+    <div id="result" class="result" aria-live="polite"></div>
+
+    <p class="note"><b>Not:</b> IBAN standartı şehir veya şube bilgisini içermez; bu bilgiler yalnızca ilgili bankanın iç sisteminde bulunur.</p>
+  </div>
+</main>
+
+<footer>
+  <span>© Nodify</span>
+  <span>Tarayıcıda çalışır · Veri toplanmaz</span>
+</footer>
+
+<script>
+const IBAN_LENGTHS = {
+  AD:24,AE:23,AL:28,AT:20,AZ:28,BA:20,BE:16,BG:22,BH:22,BR:29,BY:28,CH:21,
+  CR:22,CY:28,CZ:24,DE:22,DK:18,DO:28,EE:20,EG:29,ES:24,FI:18,FO:18,FR:27,
+  GB:22,GE:22,GI:23,GL:18,GR:27,GT:28,HR:21,HU:28,IE:22,IL:23,IQ:23,IS:26,
+  IT:27,JO:30,KW:30,KZ:20,LB:28,LC:32,LI:21,LT:20,LU:20,LV:21,LY:25,MC:27,
+  MD:24,ME:22,MK:19,MR:27,MT:31,MU:30,NL:18,NO:15,PK:24,PL:28,PS:29,PT:25,
+  QA:29,RO:24,RS:22,SA:24,SC:31,SE:24,SI:19,SK:24,SM:27,ST:25,SV:28,TL:23,
+  TN:24,TR:26,UA:29,VA:22,VG:24,XK:20
+};
+
+const TR_BANK_CODES = {
+  "00001":"Türkiye Cumhuriyet Merkez Bankası",
+  "00004":"İller Bankası",
+  "00010":"Ziraat Bankası",
+  "00012":"Halkbank",
+  "00015":"Vakıfbank",
+  "00016":"Türkiye Sınai Kalkınma Bankası",
+  "00017":"Türkiye Kalkınma ve Yatırım Bankası",
+  "00029":"Birleşik Fon Bankası",
+  "00032":"Türk Ekonomi Bankası (TEB)",
+  "00046":"Akbank",
+  "00059":"Şekerbank",
+  "00062":"Garanti BBVA",
+  "00064":"Türkiye İş Bankası",
+  "00067":"Yapı Kredi",
+  "00092":"Denizbank",
+  "00094":"Citibank",
+  "00096":"Turkish Bank",
+  "00098":"Arap Türk Bankası",
+  "00099":"Société Générale",
+  "00100":"HSBC Bank",
+  "00103":"Fibabanka",
+  "00108":"Odea Bank",
+  "00109":"Bank of China Turkey",
+  "00111":"QNB Finansbank",
+  "00115":"Deutsche Bank",
+  "00121":"Alternatifbank",
+  "00123":"HSBC Bank",
+  "00124":"Alternatifbank",
+  "00125":"Burgan Bank",
+  "00134":"ICBC Turkey Bank",
+  "00135":"Rabobank",
+  "00137":"Intesa Sanpaolo",
+  "00138":"Standard Chartered Yatırım Bankası",
+  "00139":"Turkland Bank (T-Bank)",
+  "00143":"MUFG Bank Turkey",
+  "00146":"Golden Global Yatırım Bankası",
+  "00147":"DenizBank",
+  "00148":"Vakıf Katılım",
+  "00203":"Albaraka Türk",
+  "00205":"Kuveyt Türk",
+  "00206":"Türkiye Finans Katılım",
+  "00209":"Ziraat Katılım",
+  "00210":"Emlak Katılım",
+  "00211":"Hayat Finans Katılım",
+  "00212":"TOM Katılım"
+};
+
+const COUNTRY_NAMES = {
+  TR:"Türkiye",DE:"Almanya",FR:"Fransa",GB:"Birleşik Krallık",NL:"Hollanda",
+  BE:"Belçika",CH:"İsviçre",AT:"Avusturya",IT:"İtalya",ES:"İspanya",
+  PT:"Portekiz",GR:"Yunanistan",SE:"İsveç",NO:"Norveç",DK:"Danimarka",
+  FI:"Finlandiya",PL:"Polonya",RO:"Romanya",IE:"İrlanda",LU:"Lüksemburg",
+  CZ:"Çekya",SK:"Slovakya",HU:"Macaristan",BG:"Bulgaristan",HR:"Hırvatistan",
+  SI:"Slovenya",EE:"Estonya",LV:"Letonya",LT:"Litvanya",CY:"Kıbrıs",
+  MT:"Malta",IS:"İzlanda",LI:"Lihtenştayn",MC:"Monako",SM:"San Marino",
+  AE:"BAE",SA:"Suudi Arabistan",QA:"Katar",KW:"Kuveyt",BH:"Bahreyn",
+  JO:"Ürdün",IL:"İsrail",LB:"Lübnan",EG:"Mısır",TN:"Tunus",MA:"Fas",
+  AZ:"Azerbaycan",GE:"Gürcistan",KZ:"Kazakistan",UA:"Ukrayna",BY:"Belarus",
+  RS:"Sırbistan",ME:"Karadağ",MK:"Kuzey Makedonya",AL:"Arnavutluk",
+  BA:"Bosna Hersek",XK:"Kosova"
+};
+
+function normalize(iban){return (iban||"").replace(/\s+/g,"").toUpperCase();}
+
+function mod97(iban){
+  const rearranged = iban.slice(4) + iban.slice(0,4);
+  let numeric = "";
+  for (const c of rearranged){
+    if (c >= 'A' && c <= 'Z') numeric += (c.charCodeAt(0) - 55).toString();
+    else numeric += c;
+  }
+  let remainder = 0;
+  for (const d of numeric){
+    remainder = (remainder * 10 + Number(d)) % 97;
+  }
+  return remainder;
+}
+
+function pretty(iban){
+  return iban.replace(/(.{4})/g,"$1 ").trim();
+}
+
+function parseIban(input){
+  const iban = normalize(input);
+  if (!iban) return {valid:false, error:"IBAN girin."};
+  if (!/^[A-Z0-9]+$/.test(iban)) return {valid:false, error:"IBAN sadece harf ve rakam içerebilir."};
+  const country = iban.slice(0,2);
+  const expected = IBAN_LENGTHS[country];
+  if (!expected) return {valid:false, error:`Bilinmeyen ülke kodu: ${country}`, country};
+  if (iban.length !== expected) return {valid:false, error:`${country} IBAN uzunluğu ${expected} karakter olmalı (girilen ${iban.length}).`, country};
+  if (mod97(iban) !== 1) return {valid:false, error:"Kontrol rakamı hatalı — IBAN yanlış yazılmış olabilir.", country};
+
+  const out = {valid:true, iban, country};
+  if (country === "TR"){
+    const bankCode = iban.slice(4,9);
+    out.bankCode = bankCode;
+    out.bankName = TR_BANK_CODES[bankCode] || "Bu banka kodu listemizde yok";
+  }
+  return out;
+}
+
+const form = document.getElementById("iban-form");
+const input = document.getElementById("iban");
+const result = document.getElementById("result");
+
+function render(res, raw){
+  result.classList.remove("valid","invalid");
+  result.classList.add("show", res.valid ? "valid" : "invalid");
+
+  const rows = [];
+  rows.push(`<div class="status ${res.valid?'valid':'invalid'}">${res.valid?'Geçerli':'Geçersiz'}</div>`);
+  rows.push(`<div class="status-sub">${res.valid?'Kontrol rakamı doğrulandı':'IBAN doğrulanamadı'}</div>`);
+
+  if (!res.valid){
+    rows.push(`<div class="row"><div class="k">Sebep</div><div class="v">${res.error}</div></div>`);
+    if (raw) rows.push(`<div class="row"><div class="k">Giriş</div><div class="v mono">${pretty(normalize(raw))}</div></div>`);
+  } else {
+    rows.push(`<div class="row"><div class="k">IBAN</div><div class="v mono">${pretty(res.iban)}</div></div>`);
+    const countryLabel = COUNTRY_NAMES[res.country] ? `${COUNTRY_NAMES[res.country]} (${res.country})` : res.country;
+    rows.push(`<div class="row"><div class="k">Ülke</div><div class="v">${countryLabel}</div></div>`);
+    if (res.bankName){
+      rows.push(`<div class="row"><div class="k">Banka</div><div class="v">${res.bankName}</div></div>`);
+      rows.push(`<div class="row"><div class="k">Banka kodu</div><div class="v mono">${res.bankCode}</div></div>`);
+    }
+  }
+  result.innerHTML = rows.join("");
+}
+
+form.addEventListener("submit",(e)=>{
+  e.preventDefault();
+  const raw = input.value;
+  render(parseIban(raw), raw);
+});
+
+input.addEventListener("input",()=>{
+  const v = input.value.replace(/\s+/g,"").toUpperCase();
+  input.value = v.replace(/(.{4})/g,"$1 ").trim();
+});
+
+// URL ile ön-dolu sorgu: iban.html?iban=TR...
+const urlIban = new URLSearchParams(location.search).get("iban");
+if (urlIban){
+  input.value = urlIban.replace(/\s+/g,"").toUpperCase().replace(/(.{4})/g,"$1 ").trim();
+  render(parseIban(urlIban), urlIban);
+}
+</script>
+</body>
+</html>
