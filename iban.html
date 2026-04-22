@@ -10,6 +10,7 @@
 <meta name="author" content="Her-iban">
 <meta name="theme-color" content="#080808">
 <meta name="google-site-verification" content="FrljGV1NTb50zLFPb0kP4dJfeGDrLik_BiAbhy8LGxo">
+<meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">
 <link rel="canonical" href="https://her-iban.com/">
 
 <meta property="og:type" content="website">
@@ -161,6 +162,39 @@ button:active{transform:translateY(1px)}
 .legal .body li{margin-bottom:4px}
 
 footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);font-size:0.75rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:64px}
+.footer-link{color:var(--grey5);text-decoration:underline;cursor:pointer;background:none;border:none;font-family:inherit;font-size:inherit;padding:0}
+.footer-link:hover{color:var(--white)}
+
+.ad-container{
+  max-width:640px;margin:56px auto 0;padding:0 24px;width:100%;
+  min-height:90px;display:flex;align-items:center;justify-content:center;
+}
+.ad-container .adsbygoogle{display:block;width:100%;min-height:90px}
+
+.cookie-consent{
+  position:fixed;bottom:0;left:0;right:0;z-index:1000;
+  background:var(--grey1);border-top:1px solid var(--border);
+  padding:18px 32px;box-shadow:0 -12px 30px rgba(0,0,0,0.4);
+}
+.cookie-consent[hidden]{display:none}
+.cookie-content{
+  max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.cookie-text{flex:1;min-width:260px}
+.cookie-text strong{font-family:"Syne",sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--white);display:block;margin-bottom:6px}
+.cookie-text p{color:var(--grey5);font-size:0.82rem;line-height:1.5}
+.cookie-text a{color:var(--white);text-decoration:underline}
+.cookie-actions{display:flex;gap:10px;flex-shrink:0}
+.cookie-btn{
+  font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;padding:12px 18px;
+  border-radius:2px;cursor:pointer;border:1px solid var(--border);line-height:1;
+  transition:background 0.2s,color 0.2s,border-color 0.2s;
+}
+.cookie-accept{background:var(--white);color:var(--black);border-color:var(--white)}
+.cookie-accept:hover{background:var(--grey5)}
+.cookie-reject{background:transparent;color:var(--grey5)}
+.cookie-reject:hover{color:var(--white);border-color:var(--grey4)}
 
 @media (max-width:560px){
   nav{padding:18px 24px}
@@ -168,6 +202,9 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
   .row{grid-template-columns:110px 1fr}
   .logo{width:130px;height:130px}
   .bank-name{font-size:1.5rem}
+  .cookie-consent{padding:16px 20px}
+  .cookie-actions{width:100%}
+  .cookie-btn{flex:1}
 }
 </style>
 </head>
@@ -207,6 +244,15 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
   </div>
 </main>
 
+<aside class="ad-container" aria-label="Reklam alanı">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+       data-ad-slot="XXXXXXXXXX"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+</aside>
+
 <section class="legal" aria-label="Yasal Bilgilendirme">
   <div class="legal-title">Yasal Bilgilendirme</div>
 
@@ -214,15 +260,30 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
     <summary>Gizlilik Politikası & KVKK</summary>
     <div class="body">
       <p>Her-iban, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve 2016/679 sayılı Genel Veri Koruma Tüzüğü (GDPR) ilkelerine uygun olarak tasarlanmıştır.</p>
-      <p><b>Veri işleme durumu:</b></p>
+      <p><b>Tarafımızca işlenen veriler:</b></p>
       <ul>
-        <li>Girdiğiniz IBAN numarası <b>sunucumuza gönderilmez</b>; doğrulama tamamen cihazınızın tarayıcısında gerçekleşir.</li>
-        <li>Hiçbir kişisel veri tarafımızca toplanmaz, saklanmaz veya işlenmez.</li>
-        <li>Çerez (cookie), yerel depolama (localStorage), analitik veya izleme teknolojileri kullanılmamaktadır.</li>
-        <li>IP adresiniz, tarayıcı parmak izi veya kullanım istatistikleri tarafımızdan kaydedilmez.</li>
+        <li><b>IBAN doğrulama:</b> Girdiğiniz IBAN numarası <b>sunucumuza gönderilmez</b>; doğrulama tamamen cihazınızın tarayıcısında gerçekleşir. IBAN'ınız, kimliğiniz veya hesap bilgileriniz tarafımızca hiçbir şekilde görülmez, saklanmaz veya işlenmez.</li>
+        <li><b>Bilinmeyen banka kodu bildirimi:</b> Listemizde bulunmayan bir banka kodu ile karşılaşıldığında, yalnızca o 5 haneli kod (örn. <code>00160</code>) ve zaman damgası sistemimize iletilir. IBAN'ın geri kalanı veya kişisel bilgi gönderilmez. BKM banka kodları kamuya açık tanımlayıcılardır; kişisel veri niteliğinde değildir.</li>
+        <li><b>Çerez tercihiniz:</b> "Kabul Et" veya "Reddet" kararınız, bir sonraki ziyaretinizde tekrar sorulmamak üzere <b>kendi tarayıcınızın yerel depolamasında</b> tutulur. Bu bilgi bize gönderilmez.</li>
       </ul>
-      <p><b>Tek istisna — bilinmeyen banka kodu bildirimi:</b> Listemizde bulunmayan bir banka kodu ile karşılaşıldığında, yalnızca o kodu (örn. <code>00160</code>) ve zaman damgasını sistemimize iletiriz. <b>IBAN'ınızın geri kalanı, kimlik bilginiz veya başka hiçbir veri gönderilmez.</b> Bu bildirim; banka kodunun sistemimize eklenerek sonraki kullanıcılar için doğru sonuç üretmemizi sağlamak içindir. BKM banka kodları kamuya açık tanımlayıcılardır ve KVKK kapsamında <b>kişisel veri niteliğinde değildir</b>.</p>
-      <p>Bu nedenle KVKK kapsamında tarafımızca işlenen kişisel veri bulunmamakta olup; "veri sorumlusu" sıfatıyla herhangi bir yükümlülük doğmamaktadır.</p>
+      <p><b>Üçüncü taraflarca işlenen veriler (onay durumunda):</b> "Kabul Et" seçeneğini işaretlerseniz Google AdSense ve ilgili reklam ağları, çerez ve IP adresi gibi veriler aracılığıyla reklam kişiselleştirmesi yapabilir. Reddettiğinizde reklam yüklenmez. Detaylar için <b>"Çerez Politikası"</b> bölümüne bakınız.</p>
+      <p><b>Haklarınız:</b> KVKK Madde 11 kapsamında verilerinizle ilgili haklarınızı kullanmak için <a href="mailto:iletisim@her-iban.com" style="color:var(--white);text-decoration:underline">iletisim@her-iban.com</a> adresine başvurabilirsiniz.</p>
+    </div>
+  </details>
+
+  <details id="cookie-policy">
+    <summary>Çerez Politikası</summary>
+    <div class="body">
+      <p>Her-iban, kullanıcı deneyimini etkilemeyen zorunlu çerezlerin dışında hiçbir çerezi <b>onayınız olmadan</b> yüklemez.</p>
+      <p><b>Zorunlu çerez (yok):</b> Site temel işlevselliği için çerez gerektirmez.</p>
+      <p><b>Reklam çerezleri (Google AdSense):</b> "Kabul Et" seçeneğini işaretlerseniz, Google AdSense ve iş ortakları aşağıdaki amaçlarla çerez ve benzeri teknolojiler kullanır:</p>
+      <ul>
+        <li>Reklamları ilgi alanlarınıza göre kişiselleştirmek,</li>
+        <li>Aynı reklamı tekrar göstermemek için sıklık kontrolü,</li>
+        <li>Reklam performansını ölçmek ve dolandırıcılığı önlemek.</li>
+      </ul>
+      <p>Bu çerezlere onay vermek istemiyorsanız "Reddet" butonuna tıklayın; site aynı şekilde reklamsız çalışmaya devam eder. Kararınızı istediğiniz zaman sayfa altındaki <b>"Çerez Tercihleri"</b> bağlantısından değiştirebilirsiniz.</p>
+      <p>Google'ın reklam çerezi uygulamaları hakkında detay: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener" style="color:var(--white);text-decoration:underline">policies.google.com/technologies/ads</a></p>
     </div>
   </details>
 
@@ -260,6 +321,8 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
         <li><b>Google Fonts</b> — sayfa tipografisi için yazı tipleri yüklenir (fonts.googleapis.com, fonts.gstatic.com).</li>
         <li><b>Clearbit Logo API</b> — banka logoları için birincil görsel kaynağıdır (logo.clearbit.com).</li>
         <li><b>Google Favicon Service</b> — Clearbit'te bulunmayan logolar için yedek kaynaktır (google.com/s2/favicons).</li>
+        <li><b>Google AdSense</b> — <i>yalnızca kullanıcı onayı verdiğinde</i> reklam göstermek için yüklenir (pagead2.googlesyndication.com, googleads.g.doubleclick.net, google.com). Detaylar "Çerez Politikası" bölümünde.</li>
+        <li><b>Netlify</b> — site barındırma ve bilinmeyen banka kodu form bildirimleri için altyapı sağlayıcıdır.</li>
       </ul>
       <p>Bu servisler, teknik çalışmaları gereği IP adresiniz gibi bilgileri kendi sunucularında alabilir ve kendi gizlilik politikaları çerçevesinde işleyebilir. Bu veri akışı üzerinde Her-iban'ın kontrolü bulunmamaktadır.</p>
     </div>
@@ -288,8 +351,21 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
 
 <footer>
   <span>© 2026 Her-iban</span>
-  <span>Tarayıcıda çalışır · Veri toplanmaz</span>
+  <span><button type="button" class="footer-link" id="cookie-manage">Çerez Tercihleri</button></span>
 </footer>
+
+<div id="cookie-consent" class="cookie-consent" hidden role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-desc">
+  <div class="cookie-content">
+    <div class="cookie-text">
+      <strong id="cookie-title">Çerez ve Reklam Tercihleri</strong>
+      <p id="cookie-desc">IBAN doğrulama aracımız tarayıcıda çalışır; sizin verinizi bizim sunucumuz görmez. Siteyi ayakta tutmak için Google AdSense reklamlarını kullanırız ve bu reklamlar çerezlerle kişiselleştirilir. Detaylar için <a href="#cookie-policy" onclick="document.getElementById('cookie-policy').open=true">Çerez Politikası</a>'na bakabilirsiniz.</p>
+    </div>
+    <div class="cookie-actions">
+      <button type="button" class="cookie-btn cookie-reject" id="cookie-reject">Reddet</button>
+      <button type="button" class="cookie-btn cookie-accept" id="cookie-accept">Kabul Et</button>
+    </div>
+  </div>
+</div>
 
 <script>
 const IBAN_LENGTHS = {
@@ -544,6 +620,46 @@ if (urlIban){
   input.value = urlIban.replace(/\s+/g,"").toUpperCase().replace(/(.{4})/g,"$1 ").trim();
   render(parseIban(urlIban), urlIban);
 }
+
+// --- Cookie consent + AdSense ---
+const ADSENSE_CLIENT = "ca-pub-XXXXXXXXXXXXXXXX"; // TODO: AdSense onaylandığında publisher ID buraya
+const CONSENT_KEY = "her-iban-consent";
+const consentBanner = document.getElementById("cookie-consent");
+
+function getConsent(){
+  try { return localStorage.getItem(CONSENT_KEY); } catch { return null; }
+}
+function setConsent(v){
+  try { localStorage.setItem(CONSENT_KEY, v); } catch {}
+}
+
+function loadAdSense(){
+  if (window._adsenseLoaded) return;
+  if (!ADSENSE_CLIENT || ADSENSE_CLIENT.indexOf("XXXX") !== -1) return;
+  window._adsenseLoaded = true;
+  const s = document.createElement("script");
+  s.async = true;
+  s.crossOrigin = "anonymous";
+  s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + ADSENSE_CLIENT;
+  document.head.appendChild(s);
+  document.querySelectorAll(".adsbygoogle").forEach(() => {
+    try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch {}
+  });
+}
+
+function applyConsent(decision){
+  setConsent(decision);
+  consentBanner.hidden = true;
+  if (decision === "accepted") loadAdSense();
+}
+
+document.getElementById("cookie-accept").addEventListener("click", () => applyConsent("accepted"));
+document.getElementById("cookie-reject").addEventListener("click", () => applyConsent("rejected"));
+document.getElementById("cookie-manage").addEventListener("click", () => { consentBanner.hidden = false; });
+
+const initial = getConsent();
+if (initial === "accepted") loadAdSense();
+else if (!initial) consentBanner.hidden = false;
 </script>
 </body>
 </html>
