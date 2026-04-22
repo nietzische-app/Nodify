@@ -48,6 +48,44 @@
   "isAccessibleForFree": true
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "IBAN'ım 'Geçerli' çıktı — hesap gerçek mi?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Hayır. IBAN doğrulama yalnızca numaranın matematiksel yapısının doğru olduğunu gösterir. Arkasında aktif bir banka hesabı olduğunu veya belirtilen kişiye ait olduğunu garanti etmez. Para transferi öncesi daima alıcıyla teyit edin."}
+    },
+    {
+      "@type": "Question",
+      "name": "IBAN numaramı girmek güvenli mi?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Evet, güvenlidir. IBAN'ınız sunucumuza hiç iletilmez; doğrulama tamamen tarayıcınızın belleğinde gerçekleşir. Veri saklanmaz, loglanmaz veya üçüncü taraflarla paylaşılmaz."}
+    },
+    {
+      "@type": "Question",
+      "name": "Hangi ülkelerin IBAN'ı destekleniyor?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Araç 70+ ülkenin IBAN formatını destekler — Avrupa Birliği ülkeleri, Türkiye, Birleşik Krallık, İsviçre, Norveç, Orta Doğu ve seçili diğer bölgeler. ABD ve Japonya gibi IBAN kullanmayan ülkelerde bu standart yoktur."}
+    },
+    {
+      "@type": "Question",
+      "name": "Banka adı 'Kayıtlı olmayan banka kodu' çıktı, ne yapabilirim?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yeni kurulmuş dijital bankalar veya yeni tahsis edilmiş BKM kodları henüz listemize dahil edilmemiş olabilir. Böyle bir durumla karşılaştığınızda sistem otomatik olarak ilgili banka kodunu ekibimize iletir; en kısa sürede listemize eklenir."}
+    },
+    {
+      "@type": "Question",
+      "name": "Fintech kuruluşları IBAN verebilir mi?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Evet. Türkiye'de kendi banka lisansı olan fintech kuruluşları ayrı BKM kodlarıyla kendi IBAN'larını çıkarır. Banka lisansı olmayan elektronik para kuruluşları partner bankalarının BKM kodunu kullanır."}
+    },
+    {
+      "@type": "Question",
+      "name": "IBAN, şehir veya şube bilgisi gösterir mi?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Hayır. IBAN standardı şehir veya şube bilgisini içermez. Bu bilgiler yalnızca ilgili bankanın kendi iç sisteminde tutulur."}
+    }
+  ]
+}
+</script>
 <style>
 :root{
   --black:#080808;--white:#F2F2F0;
@@ -60,8 +98,8 @@ a{color:inherit;text-decoration:none}
 
 nav{padding:24px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
 .brand-wrap{display:flex;align-items:center;gap:10px;line-height:0}
-.brand-logo{height:56px;width:auto;display:block}
-.brand-fallback{font-family:"Bebas Neue",sans-serif;font-size:2rem;letter-spacing:0.08em;color:var(--white);line-height:1}
+.brand-logo{height:76px;width:auto;display:block}
+.brand-fallback{font-family:"Bebas Neue",sans-serif;font-size:2.6rem;letter-spacing:0.08em;color:var(--white);line-height:1}
 .back{font-family:"Syne",sans-serif;font-size:0.75rem;font-weight:700;color:var(--grey4);letter-spacing:0.1em;text-transform:uppercase}
 
 main{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 24px}
@@ -139,29 +177,53 @@ button:active{transform:translateY(1px)}
 .note{margin-top:20px;color:var(--grey4);font-size:0.82rem;line-height:1.55}
 .note b{color:var(--grey5);font-weight:600}
 
-.legal{max-width:640px;margin:64px auto 0;padding:0 24px;width:100%}
-.legal-title{font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:700;color:var(--grey4);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:14px}
-.legal details{border-top:1px solid var(--border)}
-.legal details:last-of-type{border-bottom:1px solid var(--border)}
-.legal summary{
+.content-boost{max-width:640px;margin:80px auto 0;padding:0 24px;width:100%}
+.content-boost article{margin-bottom:56px}
+.content-boost article:last-child{margin-bottom:0}
+.content-boost h2{font-family:"Bebas Neue",sans-serif;font-weight:400;font-size:2.2rem;letter-spacing:0.02em;margin-bottom:18px;color:var(--white);line-height:1.1}
+.content-boost p{color:var(--grey5);font-size:0.95rem;line-height:1.7;margin-bottom:14px}
+.content-boost p:last-child{margin-bottom:0}
+.content-boost ul,.content-boost ol{padding-left:22px;color:var(--grey5);font-size:0.95rem;line-height:1.7;margin-bottom:14px}
+.content-boost li{margin-bottom:8px}
+.content-boost strong{color:var(--white);font-weight:600}
+.content-boost .faq details{border-top:1px solid var(--border);padding:0}
+.content-boost .faq details:last-of-type{border-bottom:1px solid var(--border)}
+.content-boost .faq summary{
   list-style:none;cursor:pointer;padding:16px 0;
-  font-family:"Syne",sans-serif;font-size:0.85rem;font-weight:600;color:var(--white);letter-spacing:0.04em;
+  font-family:"Syne",sans-serif;font-size:0.95rem;font-weight:600;color:var(--white);letter-spacing:0.02em;
   display:flex;justify-content:space-between;align-items:center;gap:16px;
 }
+.content-boost .faq summary::-webkit-details-marker{display:none}
+.content-boost .faq summary::after{
+  content:"+";font-family:"Instrument Sans",sans-serif;font-weight:400;color:var(--grey4);
+  font-size:1.3rem;line-height:1;
+}
+.content-boost .faq details[open] summary::after{content:"−"}
+.content-boost .faq .answer{padding:0 0 18px;color:var(--grey5);font-size:0.92rem;line-height:1.65}
+
+.legal{max-width:900px;margin:0 auto;padding:24px;width:100%;border-top:1px solid var(--border)}
+.legal details{padding:0}
+.legal summary{
+  list-style:none;cursor:pointer;padding:10px 0;
+  font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:600;color:var(--grey5);letter-spacing:0.14em;text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+}
+.legal summary:hover{color:var(--white)}
 .legal summary::-webkit-details-marker{display:none}
 .legal summary::after{
   content:"+";font-family:"Instrument Sans",sans-serif;font-weight:400;color:var(--grey4);
-  font-size:1.3rem;line-height:1;transition:transform 0.2s;
+  font-size:1rem;line-height:1;
 }
 .legal details[open] summary::after{content:"−"}
 .legal details[open] summary{color:var(--white)}
-.legal .body{padding:0 0 20px;color:var(--grey5);font-size:0.88rem;line-height:1.65}
-.legal .body p{margin-bottom:10px}
+.legal .body{padding:4px 0 16px;color:var(--grey4);font-size:0.78rem;line-height:1.6}
+.legal .body p{margin-bottom:8px}
 .legal .body p:last-child{margin-bottom:0}
-.legal .body ul{padding-left:20px;margin-bottom:10px}
-.legal .body li{margin-bottom:4px}
+.legal .body ul{padding-left:20px;margin-bottom:8px}
+.legal .body li{margin-bottom:3px}
+.legal .body a{color:var(--grey5);text-decoration:underline}
 
-footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);font-size:0.75rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:64px}
+footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);font-size:0.75rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:72px}
 .footer-link{color:var(--grey5);text-decoration:underline;cursor:pointer;background:none;border:none;font-family:inherit;font-size:inherit;padding:0}
 .footer-link:hover{color:var(--white)}
 
@@ -199,9 +261,12 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
 @media (max-width:560px){
   nav{padding:18px 24px}
   footer{padding:18px 24px}
+  .brand-logo{height:54px}
+  .brand-fallback{font-size:1.8rem}
   .row{grid-template-columns:110px 1fr}
   .logo{width:130px;height:130px}
   .bank-name{font-size:1.5rem}
+  .content-boost h2{font-size:1.8rem}
   .cookie-consent{padding:16px 20px}
   .cookie-actions{width:100%}
   .cookie-btn{flex:1}
@@ -244,6 +309,83 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
   </div>
 </main>
 
+<section class="content-boost">
+  <article>
+    <h2>IBAN Nedir?</h2>
+    <p>IBAN (<i>International Bank Account Number</i>), bankalar arası para transferlerini standartlaştırmak için ISO 13616 standardı kapsamında tanımlanmış uluslararası banka hesap numarasıdır. Türkiye'de bir IBAN <strong>26 karakterden</strong> oluşur ve şu bileşenleri içerir:</p>
+    <ul>
+      <li><strong>Ülke kodu (2 hane):</strong> Türkiye için <code>TR</code>.</li>
+      <li><strong>Kontrol rakamları (2 hane):</strong> IBAN'ın bütünlüğünü doğrulamak için mod-97 algoritmasıyla hesaplanır.</li>
+      <li><strong>Banka kodu (5 hane):</strong> BKM (Bankalararası Kart Merkezi) tarafından her bankaya atanan eşsiz kimlik numarasıdır.</li>
+      <li><strong>Hesap bilgisi (16 hane):</strong> Bankanın kendi sisteminde şube ve hesap numarasını temsil eder.</li>
+    </ul>
+    <p>Her ülkenin IBAN uzunluğu farklıdır: Almanya 22, Birleşik Krallık 22, Fransa 27, Hollanda 18 karakter uzunluğundadır. Her-iban aracı 70+ ülkenin IBAN formatını tanıyabilir.</p>
+  </article>
+
+  <article>
+    <h2>Her-iban Nasıl Çalışır?</h2>
+    <p>Her-iban, IBAN doğrulamasını <strong>tamamen tarayıcınızda</strong> gerçekleştirir — hiçbir veri sunucumuza veya üçüncü taraflara gönderilmez. İşlem şu adımlardan oluşur:</p>
+    <ol>
+      <li>Girdiğiniz IBAN ilk olarak boşluk ve harf/rakam kontrolünden geçer.</li>
+      <li>ISO 13616 tablosuna göre ülke kodu ve uzunluk kontrol edilir.</li>
+      <li>ISO 7064 <strong>mod-97</strong> algoritmasıyla kontrol rakamları doğrulanır — bu, IBAN'ın matematiksel olarak doğru yazılıp yazılmadığını saniyenin altında tespit eder.</li>
+      <li>TR ile başlayan IBAN'larda 5-9. haneler (banka kodu) BKM/TCMB kayıtlarıyla eşleştirilerek banka bilgisi gösterilir.</li>
+    </ol>
+    <p>Tüm doğrulama mantığı cihazınızın JavaScript motorunda çalışır; ne biz ne de başka bir sunucu IBAN'ınızı <i>görmez</i>.</p>
+  </article>
+
+  <article>
+    <h2>IBAN Doğrulama Neden Önemli?</h2>
+    <p>Yanlış yazılmış bir IBAN'a gönderilen para, bankalar arası prosedürler nedeniyle her zaman geri alınamayabilir. Özellikle elle yazım veya kopyala-yapıştır hatalarında tek bir karakter farkı, paranın başka bir hesaba gitmesine yol açabilir.</p>
+    <p>Her-iban size üç koruma katmanı sunar:</p>
+    <ul>
+      <li><strong>Kontrol rakamı doğrulama:</strong> Yazım hatasını matematiksel olarak yakalar.</li>
+      <li><strong>Banka eşleşmesi:</strong> Gönderdiğiniz banka, beklediğiniz banka mı? Kontrolü kolaylaştırır.</li>
+      <li><strong>Uzunluk kontrolü:</strong> Eksik veya fazla karakter içeren IBAN'ları anında tespit eder.</li>
+    </ul>
+    <p>Bu araç bir doğrulama katmanıdır; <strong>hesap sahibinin kimliğini doğrulamaz</strong>. Para transferi yapmadan önce IBAN'ı mutlaka alıcıyla teyit edin.</p>
+  </article>
+
+  <article class="faq">
+    <h2>Sıkça Sorulan Sorular</h2>
+
+    <details>
+      <summary>IBAN'ım "Geçerli" çıktı — hesap gerçek mi?</summary>
+      <div class="answer">Hayır. IBAN doğrulama yalnızca numaranın <strong>matematiksel yapısının</strong> doğru olduğunu gösterir. Arkasında aktif bir banka hesabı olduğunu veya belirtilen kişiye ait olduğunu garanti etmez. Para transferi öncesi daima alıcıyla teyit edin.</div>
+    </details>
+
+    <details>
+      <summary>IBAN numaramı girmek güvenli mi?</summary>
+      <div class="answer">Evet, güvenlidir. IBAN'ınız sunucumuza <strong>hiç iletilmez</strong>; doğrulama tamamen tarayıcınızın belleğinde gerçekleşir. Veri saklanmaz, loglanmaz veya üçüncü taraflarla paylaşılmaz.</div>
+    </details>
+
+    <details>
+      <summary>Hangi ülkelerin IBAN'ı destekleniyor?</summary>
+      <div class="answer">Araç 70+ ülkenin IBAN formatını destekler — Avrupa Birliği ülkeleri, Türkiye, Birleşik Krallık, İsviçre, Norveç, Orta Doğu ve seçili diğer bölgeler. ABD ve Japonya gibi IBAN kullanmayan ülkelerde bu standart yoktur. Bu ülkelerde SWIFT/BIC ve hesap numarası birlikte kullanılır.</div>
+    </details>
+
+    <details>
+      <summary>Banka adı "Kayıtlı olmayan banka kodu" çıktı, ne yapabilirim?</summary>
+      <div class="answer">Yeni kurulmuş dijital bankalar veya yeni tahsis edilmiş BKM kodları henüz listemize dahil edilmemiş olabilir. Böyle bir durumla karşılaştığınızda sistem otomatik olarak ilgili banka kodunu ekibimize iletir; en kısa sürede listemize eklenir. IBAN'ın kendisi hâlâ geçerli olabilir — kontrol rakamı doğru çıktıysa matematiksel olarak doğru bir IBAN'dır.</div>
+    </details>
+
+    <details>
+      <summary>Fintech kuruluşları IBAN verebilir mi?</summary>
+      <div class="answer">Evet. Türkiye'de kendi banka lisansı olan fintech kuruluşları (ör. Papara) ayrı BKM kodlarıyla kendi IBAN'larını çıkarır. Banka lisansı olmayan elektronik para kuruluşları (EPK) ise partner bankalarının BKM kodunu kullanır — bu durumda Her-iban sistemde partner bankayı gösterir. Bu, hatalı bir sonuç değil; IBAN'ı teknik olarak tutan kuruluşu belirtir.</div>
+    </details>
+
+    <details>
+      <summary>IBAN, şehir veya şube bilgisi gösterir mi?</summary>
+      <div class="answer">Hayır. IBAN standardı şehir veya şube bilgisini <strong>içermez</strong>. Bu bilgiler yalnızca ilgili bankanın kendi iç sisteminde tutulur. Eski tarihli şube kodu formatları (6 haneli şube kodu gibi) hâlâ bazı kurumlarda kullanılır ama IBAN'dan doğrudan türetilemez.</div>
+    </details>
+
+    <details>
+      <summary>Bu araç ücretli mi olacak?</summary>
+      <div class="answer">Her-iban tamamen ücretsizdir ve öyle kalacaktır. Hizmeti ayakta tutmak için sayfada reklam gösterimi yapılır; reklamlar için çerez onayınız istenir. Çerez onayını reddetseniz bile IBAN doğrulama aracı eksiksiz çalışır.</div>
+    </details>
+  </article>
+</section>
+
 <aside class="ad-container" aria-label="Reklam alanı">
   <ins class="adsbygoogle"
        style="display:block"
@@ -253,9 +395,12 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
        data-full-width-responsive="true"></ins>
 </aside>
 
-<section class="legal" aria-label="Yasal Bilgilendirme">
-  <div class="legal-title">Yasal Bilgilendirme</div>
+<footer>
+  <span>© 2026 Her-iban</span>
+  <span><button type="button" class="footer-link" id="cookie-manage">Çerez Tercihleri</button></span>
+</footer>
 
+<section class="legal" aria-label="Yasal Bilgilendirme">
   <details>
     <summary>Gizlilik Politikası & KVKK</summary>
     <div class="body">
@@ -341,18 +486,13 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
     <div class="body">
       <p>Her-iban hakkındaki soru, talep, hata bildirimi, gizlilik veya telif itirazlarınız için aşağıdaki kanallardan ulaşabilirsiniz:</p>
       <ul>
-        <li><b>Web:</b> <a href="https://her-iban.com" style="color:var(--white);text-decoration:underline">her-iban.com</a></li>
-        <li><b>E-posta:</b> <a href="mailto:iletisim@her-iban.com" style="color:var(--white);text-decoration:underline">iletisim@her-iban.com</a></li>
+        <li><b>Web:</b> <a href="https://her-iban.com">her-iban.com</a></li>
+        <li><b>E-posta:</b> <a href="mailto:iletisim@her-iban.com">iletisim@her-iban.com</a></li>
       </ul>
       <p>E-posta taleplerinize genellikle 3 iş günü içinde yanıt verilir.</p>
     </div>
   </details>
 </section>
-
-<footer>
-  <span>© 2026 Her-iban</span>
-  <span><button type="button" class="footer-link" id="cookie-manage">Çerez Tercihleri</button></span>
-</footer>
 
 <div id="cookie-consent" class="cookie-consent" hidden role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-desc">
   <div class="cookie-content">
