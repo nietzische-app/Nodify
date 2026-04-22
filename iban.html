@@ -80,6 +80,18 @@ button:active{transform:translateY(1px)}
 .k{font-family:"Syne",sans-serif;font-size:0.72rem;font-weight:600;color:var(--grey4);letter-spacing:0.12em;text-transform:uppercase;align-self:center}
 .v{font-family:"Instrument Sans",sans-serif;font-size:1rem;color:var(--white);word-break:break-all}
 .v.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0.04em}
+.iban-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.iban-text{flex:1;min-width:0}
+.copy-btn{
+  background:transparent;border:1px solid var(--border);color:var(--grey5);
+  padding:7px 12px;font-family:"Syne",sans-serif;font-size:0.68rem;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;border-radius:2px;
+  display:inline-flex;align-items:center;gap:7px;transition:border-color 0.2s,color 0.2s;line-height:1;
+  flex-shrink:0;
+}
+.copy-btn:hover{border-color:var(--grey4);color:var(--white)}
+.copy-btn.copied{border-color:var(--ok);color:var(--ok)}
+.copy-btn svg{width:12px;height:12px;flex-shrink:0}
 
 .note{margin-top:20px;color:var(--grey4);font-size:0.82rem;line-height:1.55}
 .note b{color:var(--grey5);font-weight:600}
@@ -122,7 +134,6 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
     <div id="result" class="result" aria-live="polite"></div>
 
     <p class="note"><b>Not:</b> IBAN standartı şehir veya şube bilgisini içermez; bu bilgiler yalnızca ilgili kurumun iç sisteminde bulunur.</p>
-    <p class="note"><b>Fintech IBAN'ları:</b> Bazı fintech kuruluşları (ör. Getir Finans) kendi banka lisansına sahip değildir; IBAN'ları partner bankanın (ör. Fibabanka) BKM kodu ile başlar. Bu durumda sistem partner bankayı gösterir — yanılgı değil, teknik gerçek.</p>
   </div>
 </main>
 
@@ -297,7 +308,20 @@ function render(res, raw){
           </div>
         </div>`);
     }
-    parts.push(`<div class="row"><div class="k">IBAN</div><div class="v mono">${esc(pretty(res.iban))}</div></div>`);
+    parts.push(`
+      <div class="row">
+        <div class="k">IBAN</div>
+        <div class="v mono iban-row">
+          <span class="iban-text">${esc(pretty(res.iban))}</span>
+          <button class="copy-btn" type="button" data-copy="${esc(res.iban)}" aria-label="IBAN'ı kopyala">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+              <rect x="4.5" y="4.5" width="8" height="9" rx="1"/>
+              <path d="M3.5 11V2.5h8"/>
+            </svg>
+            <span class="copy-label">Kopyala</span>
+          </button>
+        </div>
+      </div>`);
     const cl = COUNTRY_NAMES[res.country] ? `${COUNTRY_NAMES[res.country]} (${res.country})` : res.country;
     parts.push(`<div class="row"><div class="k">Ülke</div><div class="v">${esc(cl)}</div></div>`);
     if (res.bankCode){
@@ -310,6 +334,30 @@ function render(res, raw){
 form.addEventListener("submit",(e)=>{
   e.preventDefault();
   render(parseIban(input.value), input.value);
+});
+
+result.addEventListener("click", async (e) => {
+  const btn = e.target.closest(".copy-btn");
+  if (!btn) return;
+  const iban = btn.dataset.copy || "";
+  try {
+    await navigator.clipboard.writeText(iban);
+  } catch {
+    const ta = document.createElement("textarea");
+    ta.value = iban; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); } catch {}
+    ta.remove();
+  }
+  const label = btn.querySelector(".copy-label");
+  const orig = label ? label.textContent : "";
+  btn.classList.add("copied");
+  if (label) label.textContent = "Kopyalandı";
+  clearTimeout(btn._t);
+  btn._t = setTimeout(() => {
+    btn.classList.remove("copied");
+    if (label) label.textContent = orig;
+  }, 1600);
 });
 
 input.addEventListener("input",()=>{
