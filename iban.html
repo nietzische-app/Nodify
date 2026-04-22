@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://logo.clearbit.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {
@@ -91,16 +91,50 @@
   --black:#080808;--white:#F2F2F0;
   --grey1:#161616;--grey2:#222222;--grey3:#333333;--grey4:#888888;--grey5:#AAAAAA;
   --ok:#6DE089;--err:#E06D6D;--border:#1E1E1E;
+  --shadow:rgba(0,0,0,0.4);
 }
+[data-theme="light"]{
+  --black:#F5F5F2;--white:#0C0C0C;
+  --grey1:#ECECE8;--grey2:#DDDDDA;--grey3:#BBBBB7;--grey4:#5E5E5E;--grey5:#3A3A3A;
+  --ok:#1F7A3A;--err:#B02A2A;--border:#D4D4D0;
+  --shadow:rgba(0,0,0,0.08);
+}
+html{transition:background-color 0.2s}
+[lang="ar"] body{font-family:"Noto Sans Arabic","Instrument Sans",sans-serif}
+[lang="ar"] h1,[lang="ar"] .status,[lang="ar"] .bank-name,[lang="ar"] .content-boost h2{font-family:"Noto Sans Arabic",sans-serif;font-weight:700}
+[lang="ar"] .eyebrow,[lang="ar"] .back,[lang="ar"] label,[lang="ar"] button,[lang="ar"] .bank-tag,[lang="ar"] .k,[lang="ar"] .status-sub,[lang="ar"] summary{font-family:"Noto Sans Arabic",sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:"Instrument Sans",sans-serif;background:var(--black);color:var(--white);min-height:100vh;display:flex;flex-direction:column}
 a{color:inherit;text-decoration:none}
 
-nav{padding:24px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+nav{padding:24px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);gap:16px;flex-wrap:wrap}
 .brand-wrap{display:flex;align-items:center;gap:10px;line-height:0}
 .brand-logo{height:76px;width:auto;display:block}
 .brand-fallback{font-family:"Bebas Neue",sans-serif;font-size:2.6rem;letter-spacing:0.08em;color:var(--white);line-height:1}
+.nav-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .back{font-family:"Syne",sans-serif;font-size:0.75rem;font-weight:700;color:var(--grey4);letter-spacing:0.1em;text-transform:uppercase}
+.lang-switch{display:inline-flex;gap:2px;border:1px solid var(--border);border-radius:2px;padding:3px}
+.lang-btn{
+  background:transparent;color:var(--grey4);border:none;
+  font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;
+  padding:6px 10px;cursor:pointer;border-radius:2px;
+  transition:background 0.2s,color 0.2s;line-height:1;
+}
+.lang-btn.active{background:var(--white);color:var(--black)}
+.lang-btn:hover:not(.active){color:var(--white)}
+.theme-toggle{
+  background:transparent;border:1px solid var(--border);
+  padding:8px;border-radius:2px;cursor:pointer;color:var(--grey5);
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:color 0.2s,border-color 0.2s;line-height:0;
+}
+.theme-toggle:hover{color:var(--white);border-color:var(--grey4)}
+.theme-toggle svg{width:16px;height:16px}
+[data-theme="light"] .theme-toggle .icon-sun{display:none}
+[data-theme="light"] .theme-toggle .icon-moon{display:block}
+.theme-toggle .icon-moon{display:none}
+.theme-toggle .icon-sun{display:block}
 
 main{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 24px}
 .wrap{width:100%;max-width:640px}
@@ -177,29 +211,30 @@ button:active{transform:translateY(1px)}
 .note{margin-top:20px;color:var(--grey4);font-size:0.82rem;line-height:1.55}
 .note b{color:var(--grey5);font-weight:600}
 
-.content-boost{max-width:640px;margin:80px auto 0;padding:0 24px;width:100%}
-.content-boost article{margin-bottom:56px}
-.content-boost article:last-child{margin-bottom:0}
-.content-boost h2{font-family:"Bebas Neue",sans-serif;font-weight:400;font-size:2.2rem;letter-spacing:0.02em;margin-bottom:18px;color:var(--white);line-height:1.1}
-.content-boost p{color:var(--grey5);font-size:0.95rem;line-height:1.7;margin-bottom:14px}
-.content-boost p:last-child{margin-bottom:0}
-.content-boost ul,.content-boost ol{padding-left:22px;color:var(--grey5);font-size:0.95rem;line-height:1.7;margin-bottom:14px}
-.content-boost li{margin-bottom:8px}
-.content-boost strong{color:var(--white);font-weight:600}
-.content-boost .faq details{border-top:1px solid var(--border);padding:0}
-.content-boost .faq details:last-of-type{border-bottom:1px solid var(--border)}
-.content-boost .faq summary{
+.content-boost{max-width:1100px;margin:64px auto 0;padding:0 24px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+@media (max-width:760px){.content-boost{grid-template-columns:1fr;gap:0}}
+.content-boost .section-head{font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:700;color:var(--grey4);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:12px}
+.content-boost details{border-top:1px solid var(--border)}
+.content-boost details:last-of-type{border-bottom:1px solid var(--border)}
+.content-boost summary{
   list-style:none;cursor:pointer;padding:16px 0;
   font-family:"Syne",sans-serif;font-size:0.95rem;font-weight:600;color:var(--white);letter-spacing:0.02em;
   display:flex;justify-content:space-between;align-items:center;gap:16px;
 }
-.content-boost .faq summary::-webkit-details-marker{display:none}
-.content-boost .faq summary::after{
+.content-boost summary::-webkit-details-marker{display:none}
+.content-boost summary::after{
   content:"+";font-family:"Instrument Sans",sans-serif;font-weight:400;color:var(--grey4);
   font-size:1.3rem;line-height:1;
 }
-.content-boost .faq details[open] summary::after{content:"−"}
-.content-boost .faq .answer{padding:0 0 18px;color:var(--grey5);font-size:0.92rem;line-height:1.65}
+.content-boost details[open] summary::after{content:"−"}
+.content-boost .body{padding:4px 0 22px;color:var(--grey5);font-size:0.92rem;line-height:1.65}
+.content-boost .body p{margin-bottom:12px}
+.content-boost .body p:last-child{margin-bottom:0}
+.content-boost .body ul,.content-boost .body ol{padding-left:20px;margin-bottom:12px}
+.content-boost .body li{margin-bottom:6px}
+.content-boost .body strong{color:var(--white);font-weight:600}
+.content-boost .group{margin-bottom:36px}
+.content-boost .group:last-of-type{margin-bottom:0}
 
 .legal{max-width:900px;margin:0 auto;padding:24px;width:100%;border-top:1px solid var(--border)}
 .legal details{padding:0}
@@ -259,14 +294,16 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
 .cookie-reject:hover{color:var(--white);border-color:var(--grey4)}
 
 @media (max-width:560px){
-  nav{padding:18px 24px}
+  nav{padding:18px 24px;gap:10px}
   footer{padding:18px 24px}
   .brand-logo{height:54px}
   .brand-fallback{font-size:1.8rem}
+  .back{display:none}
+  .nav-actions{gap:8px}
+  .lang-btn{padding:5px 8px;font-size:0.65rem}
   .row{grid-template-columns:110px 1fr}
   .logo{width:130px;height:130px}
   .bank-name{font-size:1.5rem}
-  .content-boost h2{font-size:1.8rem}
   .cookie-consent{padding:16px 20px}
   .cookie-actions{width:100%}
   .cookie-btn{flex:1}
@@ -276,11 +313,22 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
 <body>
 
 <nav>
-  <a href="./" class="brand-wrap" aria-label="Her-iban ana sayfa">
+  <a href="./" class="brand-wrap" aria-label="Her-iban">
     <img src="logo.png" alt="Her-iban" class="brand-logo"
          onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'brand-fallback',textContent:'HER-İBAN'}))">
   </a>
-  <span class="back">IBAN Doğrulama Aracı</span>
+  <div class="nav-actions">
+    <span class="back" data-i18n="nav.tagline">IBAN Doğrulama Aracı</span>
+    <div class="lang-switch" role="group" aria-label="Dil">
+      <button type="button" class="lang-btn" data-lang="tr">TR</button>
+      <button type="button" class="lang-btn" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" data-lang="ar">AR</button>
+    </div>
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Tema değiştir">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
 </nav>
 
 <form name="unknown-bank" data-netlify="true" netlify-honeypot="bot-field" hidden>
@@ -291,99 +339,109 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
 
 <main>
   <div class="wrap">
-    <div class="eyebrow">Ücretsiz Araç</div>
-    <h1>IBAN SORGULAMA</h1>
-    <p class="lead">IBAN numarasını girin; numaranın geçerli olup olmadığını ve hangi banka ya da fintech kuruluşuna ait olduğunu anında öğrenin. Hiçbir veri sunucuya gönderilmez, doğrulama tarayıcınızda yapılır.</p>
+    <div class="eyebrow" data-i18n="eyebrow">Ücretsiz Araç</div>
+    <h1 data-i18n="h1">IBAN SORGULAMA</h1>
+    <p class="lead" data-i18n="lead">IBAN numarasını girin; numaranın geçerli olup olmadığını ve hangi banka ya da fintech kuruluşuna ait olduğunu anında öğrenin. Hiçbir veri sunucuya gönderilmez, doğrulama tarayıcınızda yapılır.</p>
 
     <form id="iban-form" autocomplete="off" novalidate>
-      <label for="iban">IBAN</label>
+      <label for="iban" data-i18n="form.label">IBAN</label>
       <div class="input-row">
         <input id="iban" name="iban" placeholder="TR33 0006 1005 1978 6457 8413 26" maxlength="42" spellcheck="false">
-        <button type="submit">Sorgula</button>
+        <button type="submit" data-i18n="form.submit">Sorgula</button>
       </div>
     </form>
 
     <div id="result" class="result" aria-live="polite"></div>
 
-    <p class="note"><b>Not:</b> IBAN standartı şehir veya şube bilgisini içermez; bu bilgiler yalnızca ilgili kurumun iç sisteminde bulunur.</p>
+    <p class="note" data-i18n-html="note"><b>Not:</b> IBAN standartı şehir veya şube bilgisini içermez; bu bilgiler yalnızca ilgili kurumun iç sisteminde bulunur.</p>
   </div>
 </main>
 
 <section class="content-boost">
-  <article>
-    <h2>IBAN Nedir?</h2>
-    <p>IBAN (<i>International Bank Account Number</i>), bankalar arası para transferlerini standartlaştırmak için ISO 13616 standardı kapsamında tanımlanmış uluslararası banka hesap numarasıdır. Türkiye'de bir IBAN <strong>26 karakterden</strong> oluşur ve şu bileşenleri içerir:</p>
-    <ul>
-      <li><strong>Ülke kodu (2 hane):</strong> Türkiye için <code>TR</code>.</li>
-      <li><strong>Kontrol rakamları (2 hane):</strong> IBAN'ın bütünlüğünü doğrulamak için mod-97 algoritmasıyla hesaplanır.</li>
-      <li><strong>Banka kodu (5 hane):</strong> BKM (Bankalararası Kart Merkezi) tarafından her bankaya atanan eşsiz kimlik numarasıdır.</li>
-      <li><strong>Hesap bilgisi (16 hane):</strong> Bankanın kendi sisteminde şube ve hesap numarasını temsil eder.</li>
-    </ul>
-    <p>Her ülkenin IBAN uzunluğu farklıdır: Almanya 22, Birleşik Krallık 22, Fransa 27, Hollanda 18 karakter uzunluğundadır. Her-iban aracı 70+ ülkenin IBAN formatını tanıyabilir.</p>
-  </article>
+  <div class="group">
+    <div class="section-head" data-i18n="guide.head">Bilgi Rehberi</div>
 
-  <article>
-    <h2>Her-iban Nasıl Çalışır?</h2>
-    <p>Her-iban, IBAN doğrulamasını <strong>tamamen tarayıcınızda</strong> gerçekleştirir — hiçbir veri sunucumuza veya üçüncü taraflara gönderilmez. İşlem şu adımlardan oluşur:</p>
-    <ol>
-      <li>Girdiğiniz IBAN ilk olarak boşluk ve harf/rakam kontrolünden geçer.</li>
-      <li>ISO 13616 tablosuna göre ülke kodu ve uzunluk kontrol edilir.</li>
-      <li>ISO 7064 <strong>mod-97</strong> algoritmasıyla kontrol rakamları doğrulanır — bu, IBAN'ın matematiksel olarak doğru yazılıp yazılmadığını saniyenin altında tespit eder.</li>
-      <li>TR ile başlayan IBAN'larda 5-9. haneler (banka kodu) BKM/TCMB kayıtlarıyla eşleştirilerek banka bilgisi gösterilir.</li>
-    </ol>
-    <p>Tüm doğrulama mantığı cihazınızın JavaScript motorunda çalışır; ne biz ne de başka bir sunucu IBAN'ınızı <i>görmez</i>.</p>
-  </article>
-
-  <article>
-    <h2>IBAN Doğrulama Neden Önemli?</h2>
-    <p>Yanlış yazılmış bir IBAN'a gönderilen para, bankalar arası prosedürler nedeniyle her zaman geri alınamayabilir. Özellikle elle yazım veya kopyala-yapıştır hatalarında tek bir karakter farkı, paranın başka bir hesaba gitmesine yol açabilir.</p>
-    <p>Her-iban size üç koruma katmanı sunar:</p>
-    <ul>
-      <li><strong>Kontrol rakamı doğrulama:</strong> Yazım hatasını matematiksel olarak yakalar.</li>
-      <li><strong>Banka eşleşmesi:</strong> Gönderdiğiniz banka, beklediğiniz banka mı? Kontrolü kolaylaştırır.</li>
-      <li><strong>Uzunluk kontrolü:</strong> Eksik veya fazla karakter içeren IBAN'ları anında tespit eder.</li>
-    </ul>
-    <p>Bu araç bir doğrulama katmanıdır; <strong>hesap sahibinin kimliğini doğrulamaz</strong>. Para transferi yapmadan önce IBAN'ı mutlaka alıcıyla teyit edin.</p>
-  </article>
-
-  <article class="faq">
-    <h2>Sıkça Sorulan Sorular</h2>
-
-    <details>
-      <summary>IBAN'ım "Geçerli" çıktı — hesap gerçek mi?</summary>
-      <div class="answer">Hayır. IBAN doğrulama yalnızca numaranın <strong>matematiksel yapısının</strong> doğru olduğunu gösterir. Arkasında aktif bir banka hesabı olduğunu veya belirtilen kişiye ait olduğunu garanti etmez. Para transferi öncesi daima alıcıyla teyit edin.</div>
+    <details data-i18n-key="guide.whatIsIban">
+      <summary data-i18n="guide.whatIsIban.q">IBAN Nedir?</summary>
+      <div class="body" data-i18n-html="guide.whatIsIban.a">
+        <p>IBAN (<i>International Bank Account Number</i>), bankalar arası para transferlerini standartlaştırmak için ISO 13616 standardı kapsamında tanımlanmış uluslararası banka hesap numarasıdır. Türkiye'de bir IBAN <strong>26 karakterden</strong> oluşur ve şu bileşenleri içerir:</p>
+        <ul>
+          <li><strong>Ülke kodu (2 hane):</strong> Türkiye için <code>TR</code>.</li>
+          <li><strong>Kontrol rakamları (2 hane):</strong> IBAN'ın bütünlüğünü doğrulamak için mod-97 algoritmasıyla hesaplanır.</li>
+          <li><strong>Banka kodu (5 hane):</strong> BKM tarafından her bankaya atanan eşsiz kimlik.</li>
+          <li><strong>Hesap bilgisi (16 hane):</strong> Bankanın kendi sisteminde şube ve hesap numarasını temsil eder.</li>
+        </ul>
+        <p>Her ülkenin IBAN uzunluğu farklıdır: Almanya 22, Birleşik Krallık 22, Fransa 27, Hollanda 18 karakter. Her-iban 70+ ülkenin IBAN formatını tanıyabilir.</p>
+      </div>
     </details>
 
     <details>
-      <summary>IBAN numaramı girmek güvenli mi?</summary>
-      <div class="answer">Evet, güvenlidir. IBAN'ınız sunucumuza <strong>hiç iletilmez</strong>; doğrulama tamamen tarayıcınızın belleğinde gerçekleşir. Veri saklanmaz, loglanmaz veya üçüncü taraflarla paylaşılmaz.</div>
+      <summary data-i18n="guide.howItWorks.q">Her-iban Nasıl Çalışır?</summary>
+      <div class="body" data-i18n-html="guide.howItWorks.a">
+        <p>Her-iban, IBAN doğrulamasını <strong>tamamen tarayıcınızda</strong> gerçekleştirir — hiçbir veri sunucumuza veya üçüncü taraflara gönderilmez.</p>
+        <ol>
+          <li>Girdiğiniz IBAN boşluk ve harf/rakam kontrolünden geçer.</li>
+          <li>ISO 13616 tablosuna göre ülke kodu ve uzunluk kontrol edilir.</li>
+          <li>ISO 7064 <strong>mod-97</strong> algoritmasıyla kontrol rakamları doğrulanır.</li>
+          <li>TR IBAN'larında 5-9. haneler (banka kodu) BKM/TCMB kayıtlarıyla eşleştirilir.</li>
+        </ol>
+        <p>Tüm doğrulama mantığı cihazınızın JavaScript motorunda çalışır; ne biz ne de başka bir sunucu IBAN'ınızı görmez.</p>
+      </div>
     </details>
 
     <details>
-      <summary>Hangi ülkelerin IBAN'ı destekleniyor?</summary>
-      <div class="answer">Araç 70+ ülkenin IBAN formatını destekler — Avrupa Birliği ülkeleri, Türkiye, Birleşik Krallık, İsviçre, Norveç, Orta Doğu ve seçili diğer bölgeler. ABD ve Japonya gibi IBAN kullanmayan ülkelerde bu standart yoktur. Bu ülkelerde SWIFT/BIC ve hesap numarası birlikte kullanılır.</div>
+      <summary data-i18n="guide.whyImportant.q">IBAN Doğrulama Neden Önemli?</summary>
+      <div class="body" data-i18n-html="guide.whyImportant.a">
+        <p>Yanlış yazılmış bir IBAN'a gönderilen para, bankalar arası prosedürler nedeniyle her zaman geri alınamayabilir. Tek karakter farkı paranın başka bir hesaba gitmesine yol açabilir.</p>
+        <p>Her-iban üç koruma katmanı sunar:</p>
+        <ul>
+          <li><strong>Kontrol rakamı doğrulama:</strong> Yazım hatasını matematiksel olarak yakalar.</li>
+          <li><strong>Banka eşleşmesi:</strong> Gönderdiğiniz banka, beklediğiniz banka mı?</li>
+          <li><strong>Uzunluk kontrolü:</strong> Eksik veya fazla karakterli IBAN'ları tespit eder.</li>
+        </ul>
+        <p>Bu araç <strong>hesap sahibinin kimliğini doğrulamaz</strong>. Para transferi öncesi IBAN'ı alıcıyla teyit edin.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="group">
+    <div class="section-head" data-i18n="faq.head">Sıkça Sorulan Sorular</div>
+
+    <details>
+      <summary data-i18n="faq.q1">IBAN'ım "Geçerli" çıktı — hesap gerçek mi?</summary>
+      <div class="body" data-i18n-html="faq.a1"><p>Hayır. IBAN doğrulama yalnızca numaranın <strong>matematiksel yapısının</strong> doğru olduğunu gösterir. Arkasında aktif bir banka hesabı olduğunu veya belirtilen kişiye ait olduğunu garanti etmez. Para transferi öncesi daima alıcıyla teyit edin.</p></div>
     </details>
 
     <details>
-      <summary>Banka adı "Kayıtlı olmayan banka kodu" çıktı, ne yapabilirim?</summary>
-      <div class="answer">Yeni kurulmuş dijital bankalar veya yeni tahsis edilmiş BKM kodları henüz listemize dahil edilmemiş olabilir. Böyle bir durumla karşılaştığınızda sistem otomatik olarak ilgili banka kodunu ekibimize iletir; en kısa sürede listemize eklenir. IBAN'ın kendisi hâlâ geçerli olabilir — kontrol rakamı doğru çıktıysa matematiksel olarak doğru bir IBAN'dır.</div>
+      <summary data-i18n="faq.q2">IBAN numaramı girmek güvenli mi?</summary>
+      <div class="body" data-i18n-html="faq.a2"><p>Evet. IBAN'ınız sunucumuza <strong>hiç iletilmez</strong>; doğrulama tarayıcınızın belleğinde gerçekleşir. Veri saklanmaz, loglanmaz veya üçüncü taraflarla paylaşılmaz.</p></div>
     </details>
 
     <details>
-      <summary>Fintech kuruluşları IBAN verebilir mi?</summary>
-      <div class="answer">Evet. Türkiye'de kendi banka lisansı olan fintech kuruluşları (ör. Papara) ayrı BKM kodlarıyla kendi IBAN'larını çıkarır. Banka lisansı olmayan elektronik para kuruluşları (EPK) ise partner bankalarının BKM kodunu kullanır — bu durumda Her-iban sistemde partner bankayı gösterir. Bu, hatalı bir sonuç değil; IBAN'ı teknik olarak tutan kuruluşu belirtir.</div>
+      <summary data-i18n="faq.q3">Hangi ülkelerin IBAN'ı destekleniyor?</summary>
+      <div class="body" data-i18n-html="faq.a3"><p>Araç 70+ ülkenin IBAN formatını destekler — AB ülkeleri, Türkiye, Birleşik Krallık, İsviçre, Norveç, Orta Doğu ve seçili diğer bölgeler. ABD ve Japonya gibi IBAN kullanmayan ülkelerde bu standart yoktur.</p></div>
     </details>
 
     <details>
-      <summary>IBAN, şehir veya şube bilgisi gösterir mi?</summary>
-      <div class="answer">Hayır. IBAN standardı şehir veya şube bilgisini <strong>içermez</strong>. Bu bilgiler yalnızca ilgili bankanın kendi iç sisteminde tutulur. Eski tarihli şube kodu formatları (6 haneli şube kodu gibi) hâlâ bazı kurumlarda kullanılır ama IBAN'dan doğrudan türetilemez.</div>
+      <summary data-i18n="faq.q4">Banka "Kayıtlı olmayan" çıktı, ne yapabilirim?</summary>
+      <div class="body" data-i18n-html="faq.a4"><p>Yeni kurulmuş dijital bankalar veya yeni BKM kodları henüz listeye eklenmemiş olabilir. Sistem ilgili kodu otomatik olarak ekibimize iletir; en kısa sürede eklenir. Kontrol rakamı doğru çıktıysa IBAN matematiksel olarak geçerlidir.</p></div>
     </details>
 
     <details>
-      <summary>Bu araç ücretli mi olacak?</summary>
-      <div class="answer">Her-iban tamamen ücretsizdir ve öyle kalacaktır. Hizmeti ayakta tutmak için sayfada reklam gösterimi yapılır; reklamlar için çerez onayınız istenir. Çerez onayını reddetseniz bile IBAN doğrulama aracı eksiksiz çalışır.</div>
+      <summary data-i18n="faq.q5">Fintech kuruluşları IBAN verebilir mi?</summary>
+      <div class="body" data-i18n-html="faq.a5"><p>Evet. Kendi banka lisansı olan fintech'ler (ör. Papara) ayrı BKM kodlarıyla IBAN çıkarır. Lisansı olmayan elektronik para kuruluşları (EPK) partner bankanın kodunu kullanır — bu durumda sistem partner bankayı gösterir.</p></div>
     </details>
-  </article>
+
+    <details>
+      <summary data-i18n="faq.q6">IBAN şehir veya şube bilgisi gösterir mi?</summary>
+      <div class="body" data-i18n-html="faq.a6"><p>Hayır. IBAN standardı şehir veya şube bilgisini <strong>içermez</strong>. Bu bilgiler yalnızca bankanın kendi iç sisteminde tutulur.</p></div>
+    </details>
+
+    <details>
+      <summary data-i18n="faq.q7">Bu araç ücretli mi olacak?</summary>
+      <div class="body" data-i18n-html="faq.a7"><p>Her-iban tamamen ücretsizdir ve öyle kalacaktır. Hizmeti ayakta tutmak için sayfada reklam gösterilir. Çerez onayını reddetseniz bile IBAN doğrulama aracı eksiksiz çalışır.</p></div>
+    </details>
+  </div>
 </section>
 
 <aside class="ad-container" aria-label="Reklam alanı">
@@ -397,12 +455,12 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
 
 <footer>
   <span>© 2026 Her-iban</span>
-  <span><button type="button" class="footer-link" id="cookie-manage">Çerez Tercihleri</button></span>
+  <span><button type="button" class="footer-link" id="cookie-manage" data-i18n="footer.preferences">Çerez Tercihleri</button></span>
 </footer>
 
 <section class="legal" aria-label="Yasal Bilgilendirme">
   <details>
-    <summary>Gizlilik Politikası & KVKK</summary>
+    <summary data-i18n="legal.privacy">Gizlilik Politikası & KVKK</summary>
     <div class="body">
       <p>Her-iban, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve 2016/679 sayılı Genel Veri Koruma Tüzüğü (GDPR) ilkelerine uygun olarak tasarlanmıştır.</p>
       <p><b>Tarafımızca işlenen veriler:</b></p>
@@ -417,7 +475,7 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
   </details>
 
   <details id="cookie-policy">
-    <summary>Çerez Politikası</summary>
+    <summary data-i18n="legal.cookies">Çerez Politikası</summary>
     <div class="body">
       <p>Her-iban, kullanıcı deneyimini etkilemeyen zorunlu çerezlerin dışında hiçbir çerezi <b>onayınız olmadan</b> yüklemez.</p>
       <p><b>Zorunlu çerez (yok):</b> Site temel işlevselliği için çerez gerektirmez.</p>
@@ -433,7 +491,7 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
   </details>
 
   <details>
-    <summary>Kullanım Koşulları</summary>
+    <summary data-i18n="legal.terms">Kullanım Koşulları</summary>
     <div class="body">
       <p>Bu araç, IBAN numaralarının ISO 13616 standardına uygunluğunu ve Türk IBAN'larında BKM/TCMB kayıtlarına göre hangi banka veya finans kuruluşuna ait olduğunu belirlemek amacıyla ücretsiz olarak sunulmaktadır.</p>
       <ul>
@@ -446,7 +504,7 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
   </details>
 
   <details>
-    <summary>Sorumluluk Reddi</summary>
+    <summary data-i18n="legal.disclaimer">Sorumluluk Reddi</summary>
     <div class="body">
       <p>IBAN doğrulama sonucu, numaranın <b>matematiksel olarak geçerli</b> olduğunu ifade eder; bu durum aşağıdakilerin garantisi değildir:</p>
       <ul>
@@ -459,7 +517,7 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
   </details>
 
   <details>
-    <summary>Üçüncü Taraf Servisler</summary>
+    <summary data-i18n="legal.thirdparty">Üçüncü Taraf Servisler</summary>
     <div class="body">
       <p>Araç aşağıdaki üçüncü taraf servislerinden dinamik olarak yararlanır:</p>
       <ul>
@@ -474,7 +532,7 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
   </details>
 
   <details>
-    <summary>Telif & Marka Hakları</summary>
+    <summary data-i18n="legal.trademarks">Telif & Marka Hakları</summary>
     <div class="body">
       <p>Banka ve finans kuruluşlarının isim, logo ve markaları, ilgili kurumların tescilli mülkiyetidir. Bu araçta söz konusu markalar yalnızca <b>tanımlama amacıyla</b> ve nominatif kullanım ilkesi çerçevesinde yer almaktadır; Her-iban bu kurumlarla resmi bir bağlantıya sahip değildir.</p>
       <p>Aracın kaynak kodu ve arayüz tasarımı Her-iban'a aittir; izinsiz çoğaltılması, tersine mühendisliği veya ticari amaçla yeniden dağıtımı yasaktır.</p>
@@ -482,7 +540,7 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
   </details>
 
   <details>
-    <summary>İletişim</summary>
+    <summary data-i18n="legal.contact">İletişim</summary>
     <div class="body">
       <p>Her-iban hakkındaki soru, talep, hata bildirimi, gizlilik veya telif itirazlarınız için aşağıdaki kanallardan ulaşabilirsiniz:</p>
       <ul>
@@ -497,12 +555,12 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
 <div id="cookie-consent" class="cookie-consent" hidden role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-desc">
   <div class="cookie-content">
     <div class="cookie-text">
-      <strong id="cookie-title">Çerez ve Reklam Tercihleri</strong>
-      <p id="cookie-desc">IBAN doğrulama aracımız tarayıcıda çalışır; sizin verinizi bizim sunucumuz görmez. Siteyi ayakta tutmak için Google AdSense reklamlarını kullanırız ve bu reklamlar çerezlerle kişiselleştirilir. Detaylar için <a href="#cookie-policy" onclick="document.getElementById('cookie-policy').open=true">Çerez Politikası</a>'na bakabilirsiniz.</p>
+      <strong id="cookie-title" data-i18n="cookie.title">Çerez ve Reklam Tercihleri</strong>
+      <p id="cookie-desc" data-i18n-html="cookie.desc">IBAN doğrulama aracımız tarayıcıda çalışır; sizin verinizi bizim sunucumuz görmez. Siteyi ayakta tutmak için Google AdSense reklamlarını kullanırız ve bu reklamlar çerezlerle kişiselleştirilir.</p>
     </div>
     <div class="cookie-actions">
-      <button type="button" class="cookie-btn cookie-reject" id="cookie-reject">Reddet</button>
-      <button type="button" class="cookie-btn cookie-accept" id="cookie-accept">Kabul Et</button>
+      <button type="button" class="cookie-btn cookie-reject" id="cookie-reject" data-i18n="cookie.reject">Reddet</button>
+      <button type="button" class="cookie-btn cookie-accept" id="cookie-accept" data-i18n="cookie.accept">Kabul Et</button>
     </div>
   </div>
 </div>
@@ -615,13 +673,13 @@ function pretty(iban){ return iban.replace(/(.{4})/g,"$1 ").trim(); }
 
 function parseIban(input){
   const iban = normalize(input);
-  if (!iban) return {valid:false, error:"IBAN girin."};
-  if (!/^[A-Z0-9]+$/.test(iban)) return {valid:false, error:"IBAN sadece harf ve rakam içerebilir."};
+  if (!iban) return {valid:false, errorKey:"error.empty"};
+  if (!/^[A-Z0-9]+$/.test(iban)) return {valid:false, errorKey:"error.chars"};
   const country = iban.slice(0,2);
   const expected = IBAN_LENGTHS[country];
-  if (!expected) return {valid:false, error:`Bilinmeyen ülke kodu: ${country}`, country};
-  if (iban.length !== expected) return {valid:false, error:`${country} IBAN uzunluğu ${expected} karakter olmalı (girilen ${iban.length}).`, country};
-  if (mod97(iban) !== 1) return {valid:false, error:"Kontrol rakamı hatalı — IBAN yanlış yazılmış olabilir.", country};
+  if (!expected) return {valid:false, errorKey:"error.country", errorData:{country}, country};
+  if (iban.length !== expected) return {valid:false, errorKey:"error.length", errorData:{country, expected, actual:iban.length}, country};
+  if (mod97(iban) !== 1) return {valid:false, errorKey:"error.mod97", country};
 
   const out = {valid:true, iban, country};
   if (country === "TR"){
@@ -630,6 +688,16 @@ function parseIban(input){
     out.bank = TR_BANKS[code] || null;
   }
   return out;
+}
+
+function errorText(res){
+  const t = i18nDict();
+  if (res.errorKey === "error.country") return t["error.country"].replace("{country}", res.errorData.country);
+  if (res.errorKey === "error.length") return t["error.length"]
+    .replace("{country}", res.errorData.country)
+    .replace("{expected}", res.errorData.expected)
+    .replace("{actual}", res.errorData.actual);
+  return t[res.errorKey] || "";
 }
 
 function esc(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])); }
@@ -666,27 +734,28 @@ const input = document.getElementById("iban");
 const result = document.getElementById("result");
 
 function render(res, raw){
+  const t = i18nDict();
   result.classList.remove("valid","invalid");
   result.classList.add("show", res.valid ? "valid" : "invalid");
 
   const parts = [];
-  parts.push(`<div class="status ${res.valid?'valid':'invalid'}">${res.valid?'Geçerli':'Geçersiz'}</div>`);
-  parts.push(`<div class="status-sub">${res.valid?'Kontrol rakamı doğrulandı':'IBAN doğrulanamadı'}</div>`);
+  parts.push(`<div class="status ${res.valid?'valid':'invalid'}">${res.valid?t["status.valid"]:t["status.invalid"]}</div>`);
+  parts.push(`<div class="status-sub">${res.valid?t["status.validSub"]:t["status.invalidSub"]}</div>`);
 
   if (!res.valid){
-    parts.push(`<div class="row"><div class="k">Sebep</div><div class="v">${esc(res.error)}</div></div>`);
-    if (raw) parts.push(`<div class="row"><div class="k">Giriş</div><div class="v mono">${esc(pretty(normalize(raw)))}</div></div>`);
+    parts.push(`<div class="row"><div class="k">${t["label.reason"]}</div><div class="v">${esc(errorText(res))}</div></div>`);
+    if (raw) parts.push(`<div class="row"><div class="k">${t["label.input"]}</div><div class="v mono">${esc(pretty(normalize(raw)))}</div></div>`);
   } else {
     if (res.country === "TR"){
       const b = res.bank;
-      const name = b ? b.name : "Kayıtlı olmayan banka kodu";
-      const tag  = b ? (TYPE_LABELS[b.type] || "") : "Listede yok";
+      const name = b ? b.name : t["bank.notInList"];
+      const tag  = b ? (typeLabel(b.type)) : t["bank.tagNotInList"];
       const reportedNote = !b && res.bankCode ? `
           <div class="reported-note">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
               <path d="M3 8l3 3 7-7"/>
             </svg>
-            <span>Bu banka kodu ekibimize iletildi. En kısa sürede sisteme eklenecek.</span>
+            <span>${t["reported"]}</span>
           </div>` : "";
       parts.push(`
         <div class="bank-card">
@@ -700,25 +769,35 @@ function render(res, raw){
     }
     parts.push(`
       <div class="row">
-        <div class="k">IBAN</div>
+        <div class="k">${t["label.iban"]}</div>
         <div class="v mono iban-row">
           <span class="iban-text">${esc(pretty(res.iban))}</span>
-          <button class="copy-btn" type="button" data-copy="${esc(res.iban)}" aria-label="IBAN'ı kopyala">
+          <button class="copy-btn" type="button" data-copy="${esc(res.iban)}" aria-label="${t["btn.copy"]}">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
               <rect x="4.5" y="4.5" width="8" height="9" rx="1"/>
               <path d="M3.5 11V2.5h8"/>
             </svg>
-            <span class="copy-label">Kopyala</span>
+            <span class="copy-label">${t["btn.copy"]}</span>
           </button>
         </div>
       </div>`);
-    const cl = COUNTRY_NAMES[res.country] ? `${COUNTRY_NAMES[res.country]} (${res.country})` : res.country;
-    parts.push(`<div class="row"><div class="k">Ülke</div><div class="v">${esc(cl)}</div></div>`);
+    const cname = countryName(res.country);
+    const cl = cname ? `${cname} (${res.country})` : res.country;
+    parts.push(`<div class="row"><div class="k">${t["label.country"]}</div><div class="v">${esc(cl)}</div></div>`);
     if (res.bankCode){
-      parts.push(`<div class="row"><div class="k">Banka kodu</div><div class="v mono">${esc(res.bankCode)}</div></div>`);
+      parts.push(`<div class="row"><div class="k">${t["label.bankCode"]}</div><div class="v mono">${esc(res.bankCode)}</div></div>`);
     }
   }
   result.innerHTML = parts.join("");
+}
+
+function typeLabel(type){
+  const t = i18nDict();
+  return t["type."+type] || type;
+}
+function countryName(code){
+  const t = i18nDict();
+  return t["country."+code] || COUNTRY_NAMES[code] || "";
 }
 
 form.addEventListener("submit",(e)=>{
@@ -742,7 +821,7 @@ result.addEventListener("click", async (e) => {
   const label = btn.querySelector(".copy-label");
   const orig = label ? label.textContent : "";
   btn.classList.add("copied");
-  if (label) label.textContent = "Kopyalandı";
+  if (label) label.textContent = i18nDict()["btn.copied"];
   clearTimeout(btn._t);
   btn._t = setTimeout(() => {
     btn.classList.remove("copied");
@@ -756,10 +835,6 @@ input.addEventListener("input",()=>{
 });
 
 const urlIban = new URLSearchParams(location.search).get("iban");
-if (urlIban){
-  input.value = urlIban.replace(/\s+/g,"").toUpperCase().replace(/(.{4})/g,"$1 ").trim();
-  render(parseIban(urlIban), urlIban);
-}
 
 // --- Cookie consent + AdSense ---
 const ADSENSE_CLIENT = "ca-pub-XXXXXXXXXXXXXXXX"; // TODO: AdSense onaylandığında publisher ID buraya
@@ -800,6 +875,197 @@ document.getElementById("cookie-manage").addEventListener("click", () => { conse
 const initial = getConsent();
 if (initial === "accepted") loadAdSense();
 else if (!initial) consentBanner.hidden = false;
+
+// --- i18n ---
+const translations = {
+  tr: {
+    "meta.title": "Her-iban · Ücretsiz IBAN Sorgulama ve Doğrulama Aracı",
+    "nav.tagline": "IBAN Doğrulama Aracı",
+    "eyebrow": "Ücretsiz Araç",
+    "h1": "IBAN SORGULAMA",
+    "lead": "IBAN numarasını girin; numaranın geçerli olup olmadığını ve hangi banka ya da fintech kuruluşuna ait olduğunu anında öğrenin. Hiçbir veri sunucuya gönderilmez, doğrulama tarayıcınızda yapılır.",
+    "form.label": "IBAN",
+    "form.submit": "Sorgula",
+    "form.placeholder": "TR33 0006 1005 1978 6457 8413 26",
+    "note": "<b>Not:</b> IBAN standartı şehir veya şube bilgisini içermez; bu bilgiler yalnızca ilgili kurumun iç sisteminde bulunur.",
+    "status.valid": "Geçerli", "status.invalid": "Geçersiz",
+    "status.validSub": "Kontrol rakamı doğrulandı", "status.invalidSub": "IBAN doğrulanamadı",
+    "label.reason": "Sebep", "label.input": "Giriş", "label.iban": "IBAN", "label.country": "Ülke", "label.bankCode": "Banka kodu",
+    "btn.copy": "Kopyala", "btn.copied": "Kopyalandı",
+    "bank.notInList": "Kayıtlı olmayan banka kodu", "bank.tagNotInList": "Listede yok",
+    "reported": "Bu banka kodu ekibimize iletildi. En kısa sürede sisteme eklenecek.",
+    "error.empty": "IBAN girin.",
+    "error.chars": "IBAN sadece harf ve rakam içerebilir.",
+    "error.country": "Bilinmeyen ülke kodu: {country}",
+    "error.length": "{country} IBAN uzunluğu {expected} karakter olmalı (girilen {actual}).",
+    "error.mod97": "Kontrol rakamı hatalı — IBAN yanlış yazılmış olabilir.",
+    "type.kamu":"Kamu Bankası","type.ozel":"Özel Banka","type.yabanci":"Yabancı Sermayeli Banka",
+    "type.yatirim":"Kalkınma ve Yatırım Bankası","type.katilim":"Katılım Bankası",
+    "type.dijital":"Dijital Banka / Fintech","type.merkez":"Merkez Bankası",
+    "guide.head": "Bilgi Rehberi",
+    "guide.whatIsIban.q": "IBAN Nedir?",
+    "guide.howItWorks.q": "Her-iban Nasıl Çalışır?",
+    "guide.whyImportant.q": "IBAN Doğrulama Neden Önemli?",
+    "faq.head": "Sıkça Sorulan Sorular",
+    "faq.q1":"IBAN'ım \"Geçerli\" çıktı — hesap gerçek mi?","faq.q2":"IBAN numaramı girmek güvenli mi?",
+    "faq.q3":"Hangi ülkelerin IBAN'ı destekleniyor?","faq.q4":"Banka \"Kayıtlı olmayan\" çıktı, ne yapabilirim?",
+    "faq.q5":"Fintech kuruluşları IBAN verebilir mi?","faq.q6":"IBAN şehir veya şube bilgisi gösterir mi?",
+    "faq.q7":"Bu araç ücretli mi olacak?",
+    "footer.preferences": "Çerez Tercihleri",
+    "legal.privacy":"Gizlilik Politikası & KVKK","legal.cookies":"Çerez Politikası",
+    "legal.terms":"Kullanım Koşulları","legal.disclaimer":"Sorumluluk Reddi",
+    "legal.thirdparty":"Üçüncü Taraf Servisler","legal.trademarks":"Telif & Marka Hakları",
+    "legal.contact":"İletişim",
+    "cookie.title":"Çerez ve Reklam Tercihleri",
+    "cookie.desc":"IBAN doğrulama aracımız tarayıcıda çalışır; sizin verinizi bizim sunucumuz görmez. Siteyi ayakta tutmak için Google AdSense reklamlarını kullanırız ve bu reklamlar çerezlerle kişiselleştirilir.",
+    "cookie.accept":"Kabul Et","cookie.reject":"Reddet"
+  },
+  en: {
+    "meta.title": "Her-iban · Free IBAN Validation & Bank Lookup Tool",
+    "nav.tagline": "IBAN Validator",
+    "eyebrow": "Free Tool",
+    "h1": "IBAN LOOKUP",
+    "lead": "Enter an IBAN to instantly check whether it is valid and which bank or fintech institution it belongs to. No data is sent to any server — everything runs in your browser.",
+    "form.label": "IBAN", "form.submit": "Check", "form.placeholder": "TR33 0006 1005 1978 6457 8413 26",
+    "note": "<b>Note:</b> The IBAN standard does not encode city or branch information; those details exist only in the bank's internal systems.",
+    "status.valid": "Valid", "status.invalid": "Invalid",
+    "status.validSub": "Checksum verified", "status.invalidSub": "IBAN could not be validated",
+    "label.reason":"Reason","label.input":"Input","label.iban":"IBAN","label.country":"Country","label.bankCode":"Bank code",
+    "btn.copy":"Copy","btn.copied":"Copied",
+    "bank.notInList":"Unregistered bank code","bank.tagNotInList":"Not in list",
+    "reported":"This bank code has been reported to our team and will be added soon.",
+    "error.empty":"Please enter an IBAN.",
+    "error.chars":"IBAN may contain only letters and digits.",
+    "error.country":"Unknown country code: {country}",
+    "error.length":"{country} IBANs must be {expected} characters long (got {actual}).",
+    "error.mod97":"Checksum failed — the IBAN may be mistyped.",
+    "type.kamu":"State-owned Bank","type.ozel":"Private Bank","type.yabanci":"Foreign-owned Bank",
+    "type.yatirim":"Development & Investment Bank","type.katilim":"Participation Bank",
+    "type.dijital":"Digital Bank / Fintech","type.merkez":"Central Bank",
+    "guide.head":"Guide",
+    "guide.whatIsIban.q":"What is an IBAN?",
+    "guide.howItWorks.q":"How Does Her-iban Work?",
+    "guide.whyImportant.q":"Why Is IBAN Validation Important?",
+    "faq.head":"Frequently Asked Questions",
+    "faq.q1":"My IBAN shows \"Valid\" — is the account real?","faq.q2":"Is it safe to enter my IBAN?",
+    "faq.q3":"Which countries' IBANs are supported?","faq.q4":"Bank shows \"Unregistered\" — what can I do?",
+    "faq.q5":"Can fintechs issue IBANs?","faq.q6":"Does the IBAN reveal city or branch info?",
+    "faq.q7":"Will this tool ever cost money?",
+    "footer.preferences":"Cookie Preferences",
+    "legal.privacy":"Privacy Policy & KVKK","legal.cookies":"Cookie Policy",
+    "legal.terms":"Terms of Use","legal.disclaimer":"Disclaimer",
+    "legal.thirdparty":"Third-party Services","legal.trademarks":"Trademarks","legal.contact":"Contact",
+    "cookie.title":"Cookie & Ad Preferences",
+    "cookie.desc":"Our IBAN validator runs entirely in your browser; we never see your data. To keep the service free we use Google AdSense, whose ads rely on cookies.",
+    "cookie.accept":"Accept","cookie.reject":"Reject"
+  },
+  ar: {
+    "meta.title": "Her-iban · أداة مجانية للتحقق من IBAN والبحث عن البنك",
+    "nav.tagline": "أداة التحقق من IBAN",
+    "eyebrow": "أداة مجانية",
+    "h1": "التحقق من IBAN",
+    "lead": "أدخل رقم IBAN لمعرفة ما إذا كان صالحاً وإلى أي بنك أو مؤسسة مالية ينتمي. لا يتم إرسال أي بيانات إلى الخادم — يعمل كل شيء داخل متصفحك.",
+    "form.label": "IBAN", "form.submit": "تحقق", "form.placeholder": "TR33 0006 1005 1978 6457 8413 26",
+    "note": "<b>ملاحظة:</b> معيار IBAN لا يتضمن معلومات المدينة أو الفرع؛ هذه المعلومات متوفرة فقط في الأنظمة الداخلية للبنك.",
+    "status.valid":"صالح","status.invalid":"غير صالح",
+    "status.validSub":"تم التحقق من خانة الرقابة","status.invalidSub":"تعذّر التحقق من IBAN",
+    "label.reason":"السبب","label.input":"المدخل","label.iban":"IBAN","label.country":"الدولة","label.bankCode":"رمز البنك",
+    "btn.copy":"نسخ","btn.copied":"تم النسخ",
+    "bank.notInList":"رمز بنك غير مسجل","bank.tagNotInList":"غير مُدرج",
+    "reported":"تم إرسال رمز البنك إلى فريقنا وسيُضاف قريباً.",
+    "error.empty":"يرجى إدخال IBAN.",
+    "error.chars":"يجب أن يحتوي IBAN على حروف وأرقام فقط.",
+    "error.country":"رمز دولة غير معروف: {country}",
+    "error.length":"يجب أن يكون طول IBAN الخاص بـ {country} هو {expected} حرفاً (أدخلت {actual}).",
+    "error.mod97":"فشل التحقق من خانة الرقابة — قد يكون IBAN مكتوباً بشكل خاطئ.",
+    "type.kamu":"بنك حكومي","type.ozel":"بنك خاص","type.yabanci":"بنك أجنبي",
+    "type.yatirim":"بنك تنمية واستثمار","type.katilim":"بنك مشاركة",
+    "type.dijital":"بنك رقمي / فينتك","type.merkez":"بنك مركزي",
+    "guide.head":"دليل",
+    "guide.whatIsIban.q":"ما هو IBAN؟",
+    "guide.howItWorks.q":"كيف يعمل Her-iban؟",
+    "guide.whyImportant.q":"لماذا التحقق من IBAN مهم؟",
+    "faq.head":"الأسئلة الشائعة",
+    "faq.q1":"ظهر IBAN \"صالح\" — هل الحساب حقيقي؟","faq.q2":"هل إدخال IBAN آمن؟",
+    "faq.q3":"أي دول تدعم IBAN؟","faq.q4":"ظهر البنك \"غير مسجل\" — ماذا أفعل؟",
+    "faq.q5":"هل يمكن للفينتك إصدار IBAN؟","faq.q6":"هل يكشف IBAN معلومات المدينة أو الفرع؟",
+    "faq.q7":"هل ستصبح هذه الأداة مدفوعة؟",
+    "footer.preferences":"تفضيلات ملفات تعريف الارتباط",
+    "legal.privacy":"سياسة الخصوصية و KVKK","legal.cookies":"سياسة ملفات تعريف الارتباط",
+    "legal.terms":"شروط الاستخدام","legal.disclaimer":"إخلاء المسؤولية",
+    "legal.thirdparty":"خدمات الطرف الثالث","legal.trademarks":"حقوق النشر والعلامات التجارية","legal.contact":"اتصل بنا",
+    "cookie.title":"تفضيلات ملفات تعريف الارتباط والإعلانات",
+    "cookie.desc":"تعمل أداة التحقق من IBAN بالكامل في متصفحك؛ لا نرى بياناتك. لإبقاء الخدمة مجانية نستخدم Google AdSense وهو يعتمد على ملفات تعريف الارتباط.",
+    "cookie.accept":"قبول","cookie.reject":"رفض"
+  }
+};
+
+const LANG_KEY = "her-iban-lang";
+const THEME_KEY = "her-iban-theme";
+let currentLang = "tr";
+
+function i18nDict(){ return translations[currentLang] || translations.tr; }
+
+function applyI18n(){
+  const t = i18nDict();
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+  if (t["meta.title"]) document.title = t["meta.title"];
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const k = el.getAttribute("data-i18n");
+    if (t[k] !== undefined) el.textContent = t[k];
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => {
+    const k = el.getAttribute("data-i18n-html");
+    if (t[k] !== undefined) el.innerHTML = t[k];
+  });
+  const ph = document.getElementById("iban");
+  if (ph && t["form.placeholder"]) ph.placeholder = t["form.placeholder"];
+
+  document.querySelectorAll(".lang-btn").forEach(b => {
+    b.classList.toggle("active", b.dataset.lang === currentLang);
+  });
+}
+
+function setLang(lang){
+  if (!translations[lang]) return;
+  currentLang = lang;
+  try { localStorage.setItem(LANG_KEY, lang); } catch {}
+  applyI18n();
+}
+
+function applyTheme(theme){
+  document.documentElement.setAttribute("data-theme", theme);
+  try { localStorage.setItem(THEME_KEY, theme); } catch {}
+}
+
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute("data-theme") || "dark";
+  applyTheme(cur === "dark" ? "light" : "dark");
+}
+
+document.querySelectorAll(".lang-btn").forEach(b => {
+  b.addEventListener("click", () => setLang(b.dataset.lang));
+});
+document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
+
+try {
+  const savedLang = localStorage.getItem(LANG_KEY);
+  if (savedLang && translations[savedLang]) currentLang = savedLang;
+  else {
+    const nav = (navigator.language || "tr").slice(0,2).toLowerCase();
+    if (translations[nav]) currentLang = nav;
+  }
+  const savedTheme = localStorage.getItem(THEME_KEY);
+  if (savedTheme) applyTheme(savedTheme);
+} catch {}
+applyI18n();
+
+if (urlIban){
+  input.value = urlIban.replace(/\s+/g,"").toUpperCase().replace(/(.{4})/g,"$1 ").trim();
+  render(parseIban(urlIban), urlIban);
+}
 </script>
 </body>
 </html>
