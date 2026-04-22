@@ -109,6 +109,13 @@ button:active{transform:translateY(1px)}
 .bank-meta{display:flex;flex-direction:column;gap:6px;align-items:center;min-width:0;width:100%}
 .bank-name{font-family:"Bebas Neue",sans-serif;font-weight:400;font-size:1.8rem;color:var(--white);line-height:1.1;letter-spacing:0.02em}
 .bank-tag{font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:700;color:var(--grey4);letter-spacing:0.16em;text-transform:uppercase}
+.reported-note{
+  font-family:"Instrument Sans",sans-serif;font-size:0.82rem;color:var(--grey5);
+  background:var(--grey2);border:1px solid var(--border);
+  padding:10px 16px;border-radius:2px;max-width:380px;line-height:1.5;margin-top:8px;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.reported-note svg{flex-shrink:0;color:var(--ok)}
 
 .row{display:grid;grid-template-columns:140px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--border)}
 .k{font-family:"Syne",sans-serif;font-size:0.72rem;font-weight:600;color:var(--grey4);letter-spacing:0.12em;text-transform:uppercase;align-self:center}
@@ -173,6 +180,12 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
   <span class="back">IBAN Doğrulama Aracı</span>
 </nav>
 
+<form name="unknown-bank" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="bank_code">
+  <input type="text" name="timestamp">
+  <input type="text" name="bot-field">
+</form>
+
 <main>
   <div class="wrap">
     <div class="eyebrow">Ücretsiz Araç</div>
@@ -207,7 +220,8 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
         <li>Çerez (cookie), yerel depolama (localStorage), analitik veya izleme teknolojileri kullanılmamaktadır.</li>
         <li>IP adresiniz, tarayıcı parmak izi veya kullanım istatistikleri tarafımızdan kaydedilmez.</li>
       </ul>
-      <p>Bu nedenle KVKK kapsamında tarafımızca işlenen herhangi bir kişisel veri bulunmamakta olup; "veri sorumlusu" sıfatıyla herhangi bir yükümlülük doğmamaktadır.</p>
+      <p><b>Tek istisna — bilinmeyen banka kodu bildirimi:</b> Listemizde bulunmayan bir banka kodu ile karşılaşıldığında, yalnızca o kodu (örn. <code>00160</code>) ve zaman damgasını sistemimize iletiriz. <b>IBAN'ınızın geri kalanı, kimlik bilginiz veya başka hiçbir veri gönderilmez.</b> Bu bildirim; banka kodunun sistemimize eklenerek sonraki kullanıcılar için doğru sonuç üretmemizi sağlamak içindir. BKM banka kodları kamuya açık tanımlayıcılardır ve KVKK kapsamında <b>kişisel veri niteliğinde değildir</b>.</p>
+      <p>Bu nedenle KVKK kapsamında tarafımızca işlenen kişisel veri bulunmamakta olup; "veri sorumlusu" sıfatıyla herhangi bir yükümlülük doğmamaktadır.</p>
     </div>
   </details>
 
@@ -403,6 +417,22 @@ function parseIban(input){
 
 function esc(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])); }
 
+const _reportedCodes = new Set();
+function reportUnknownBank(code){
+  if (!code || _reportedCodes.has(code)) return;
+  _reportedCodes.add(code);
+  const body = new URLSearchParams({
+    "form-name": "unknown-bank",
+    "bank_code": code,
+    "timestamp": new Date().toISOString()
+  });
+  fetch("/", {
+    method: "POST",
+    headers: {"Content-Type": "application/x-www-form-urlencoded"},
+    body: body.toString()
+  }).catch(()=>{});
+}
+
 function logoHtml(bank, bankCode){
   if (!bank || !bank.domain){
     const initials = bank ? bank.name.split(/\s+/).slice(0,2).map(w=>w[0]||"").join("").toUpperCase() : (bankCode||"?").slice(-2);
@@ -434,14 +464,22 @@ function render(res, raw){
       const b = res.bank;
       const name = b ? b.name : "Kayıtlı olmayan banka kodu";
       const tag  = b ? (TYPE_LABELS[b.type] || "") : "Listede yok";
+      const reportedNote = !b && res.bankCode ? `
+          <div class="reported-note">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+              <path d="M3 8l3 3 7-7"/>
+            </svg>
+            <span>Bu banka kodu ekibimize iletildi. En kısa sürede sisteme eklenecek.</span>
+          </div>` : "";
       parts.push(`
         <div class="bank-card">
           ${logoHtml(b, res.bankCode)}
           <div class="bank-meta">
             <span class="bank-name">${esc(name)}</span>
             <span class="bank-tag">${esc(tag)}</span>
-          </div>
+          </div>${reportedNote}
         </div>`);
+      if (!b && res.bankCode) reportUnknownBank(res.bankCode);
     }
     parts.push(`
       <div class="row">
