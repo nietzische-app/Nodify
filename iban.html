@@ -94,7 +94,29 @@ button:active{transform:translateY(1px)}
 .note{margin-top:20px;color:var(--grey4);font-size:0.82rem;line-height:1.55}
 .note b{color:var(--grey5);font-weight:600}
 
-footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);font-size:0.75rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.legal{max-width:640px;margin:64px auto 0;padding:0 24px;width:100%}
+.legal-title{font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:700;color:var(--grey4);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:14px}
+.legal details{border-top:1px solid var(--border)}
+.legal details:last-of-type{border-bottom:1px solid var(--border)}
+.legal summary{
+  list-style:none;cursor:pointer;padding:16px 0;
+  font-family:"Syne",sans-serif;font-size:0.85rem;font-weight:600;color:var(--white);letter-spacing:0.04em;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+}
+.legal summary::-webkit-details-marker{display:none}
+.legal summary::after{
+  content:"+";font-family:"Instrument Sans",sans-serif;font-weight:400;color:var(--grey4);
+  font-size:1.3rem;line-height:1;transition:transform 0.2s;
+}
+.legal details[open] summary::after{content:"−"}
+.legal details[open] summary{color:var(--white)}
+.legal .body{padding:0 0 20px;color:var(--grey5);font-size:0.88rem;line-height:1.65}
+.legal .body p{margin-bottom:10px}
+.legal .body p:last-child{margin-bottom:0}
+.legal .body ul{padding-left:20px;margin-bottom:10px}
+.legal .body li{margin-bottom:4px}
+
+footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);font-size:0.75rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:64px}
 
 @media (max-width:560px){
   nav{padding:18px 24px}
@@ -135,8 +157,74 @@ footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);f
   </div>
 </main>
 
+<section class="legal" aria-label="Yasal Bilgilendirme">
+  <div class="legal-title">Yasal Bilgilendirme</div>
+
+  <details>
+    <summary>Gizlilik Politikası & KVKK</summary>
+    <div class="body">
+      <p>Her-iban, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve 2016/679 sayılı Genel Veri Koruma Tüzüğü (GDPR) ilkelerine uygun olarak tasarlanmıştır.</p>
+      <p><b>Veri işleme durumu:</b></p>
+      <ul>
+        <li>Girdiğiniz IBAN numarası <b>sunucumuza gönderilmez</b>; doğrulama tamamen cihazınızın tarayıcısında gerçekleşir.</li>
+        <li>Hiçbir kişisel veri tarafımızca toplanmaz, saklanmaz veya işlenmez.</li>
+        <li>Çerez (cookie), yerel depolama (localStorage), analitik veya izleme teknolojileri kullanılmamaktadır.</li>
+        <li>IP adresiniz, tarayıcı parmak izi veya kullanım istatistikleri tarafımızdan kaydedilmez.</li>
+      </ul>
+      <p>Bu nedenle KVKK kapsamında tarafımızca işlenen herhangi bir kişisel veri bulunmamakta olup; "veri sorumlusu" sıfatıyla herhangi bir yükümlülük doğmamaktadır.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Kullanım Koşulları</summary>
+    <div class="body">
+      <p>Bu araç, IBAN numaralarının ISO 13616 standardına uygunluğunu ve Türk IBAN'larında BKM/TCMB kayıtlarına göre hangi banka veya finans kuruluşuna ait olduğunu belirlemek amacıyla ücretsiz olarak sunulmaktadır.</p>
+      <ul>
+        <li>Hizmet "olduğu gibi" (as-is) sunulur; kesintisizlik veya hatasızlık garanti edilmez.</li>
+        <li>Kullanıcı, aracı yürürlükteki mevzuata uygun amaçlarla kullanmayı kabul eder.</li>
+        <li>Otomatize erişim, kazıma (scraping) veya servisi aksatacak girişimler kabul edilmez.</li>
+        <li>Bu araç finansal danışmanlık hizmeti değildir; yatırım, transfer veya hukuki kararlar için yetkili kurumlara danışın.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Sorumluluk Reddi</summary>
+    <div class="body">
+      <p>IBAN doğrulama sonucu, numaranın <b>matematiksel olarak geçerli</b> olduğunu ifade eder; bu durum aşağıdakilerin garantisi değildir:</p>
+      <ul>
+        <li>Numaranın gerçekten bir banka hesabına karşılık geldiği,</li>
+        <li>Hesabın aktif veya açık olduğu,</li>
+        <li>Hesap sahibinin beyan edilen kişi olduğu.</li>
+      </ul>
+      <p>Banka/kuruluş eşlemeleri, Bankalararası Kart Merkezi (BKM) ve TCMB tarafından yayınlanan kayıtlara dayanır; kayıtlar zamanla değişebilir. Para transferi yapmadan önce IBAN'ı daima alıcının kendisiyle teyit edin. Her-iban, bu araç kullanılarak yapılan işlemlerden doğabilecek doğrudan veya dolaylı zararlardan sorumlu tutulamaz.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Üçüncü Taraf Servisler</summary>
+    <div class="body">
+      <p>Araç aşağıdaki üçüncü taraf servislerinden dinamik olarak yararlanır:</p>
+      <ul>
+        <li><b>Google Fonts</b> — sayfa tipografisi için yazı tipleri yüklenir (fonts.googleapis.com, fonts.gstatic.com).</li>
+        <li><b>Clearbit Logo API</b> — banka logoları için birincil görsel kaynağıdır (logo.clearbit.com).</li>
+        <li><b>Google Favicon Service</b> — Clearbit'te bulunmayan logolar için yedek kaynaktır (google.com/s2/favicons).</li>
+      </ul>
+      <p>Bu servisler, teknik çalışmaları gereği IP adresiniz gibi bilgileri kendi sunucularında alabilir ve kendi gizlilik politikaları çerçevesinde işleyebilir. Bu veri akışı üzerinde Her-iban'ın kontrolü bulunmamaktadır.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Telif & Marka Hakları</summary>
+    <div class="body">
+      <p>Banka ve finans kuruluşlarının isim, logo ve markaları, ilgili kurumların tescilli mülkiyetidir. Bu araçta söz konusu markalar yalnızca <b>tanımlama amacıyla</b> ve nominatif kullanım ilkesi çerçevesinde yer almaktadır; Her-iban bu kurumlarla resmi bir bağlantıya sahip değildir.</p>
+      <p>Aracın kaynak kodu ve arayüz tasarımı Her-iban'a aittir; izinsiz çoğaltılması, tersine mühendisliği veya ticari amaçla yeniden dağıtımı yasaktır.</p>
+    </div>
+  </details>
+</section>
+
 <footer>
-  <span>© Her-iban</span>
+  <span>© 2026 Her-iban</span>
   <span>Tarayıcıda çalışır · Veri toplanmaz</span>
 </footer>
 
