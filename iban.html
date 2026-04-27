@@ -717,6 +717,7 @@ function parseIban(input){
     const code = iban.slice(4,9);
     out.bankCode = code;
     out.bank = TR_BANKS[code] || null;
+    out.accountNo = iban.slice(10);
   }
   return out;
 }
@@ -817,6 +818,12 @@ function render(res, raw){
     parts.push(`<div class="row"><div class="k">${t["label.country"]}</div><div class="v">${esc(cl)}</div></div>`);
     if (res.bankCode){
       parts.push(`<div class="row"><div class="k">${t["label.bankCode"]}</div><div class="v mono">${esc(res.bankCode)}</div></div>`);
+    }
+    if (res.bank && res.bank.swift){
+      parts.push(`<div class="row"><div class="k">${t["label.swift"]}</div><div class="v mono">${esc(res.bank.swift)}</div></div>`);
+    }
+    if (res.accountNo){
+      parts.push(`<div class="row"><div class="k">${t["label.accountNo"]}</div><div class="v mono">${esc(res.accountNo.replace(/(.{4})/g,"$1 ").trim())}</div></div>`);
     }
   }
   result.innerHTML = parts.join("");
@@ -921,7 +928,7 @@ const translations = {
     "note": "<b>Not:</b> IBAN standartı şehir veya şube bilgisini içermez; bu bilgiler yalnızca ilgili kurumun iç sisteminde bulunur.",
     "status.valid": "Geçerli", "status.invalid": "Geçersiz",
     "status.validSub": "Kontrol rakamı doğrulandı", "status.invalidSub": "IBAN doğrulanamadı",
-    "label.reason": "Sebep", "label.input": "Giriş", "label.iban": "IBAN", "label.country": "Ülke", "label.bankCode": "Banka kodu",
+    "label.reason": "Sebep", "label.input": "Giriş", "label.iban": "IBAN", "label.country": "Ülke", "label.bankCode": "Banka kodu", "label.swift": "SWIFT/BIC", "label.accountNo": "Hesap No",
     "btn.copy": "Kopyala", "btn.copied": "Kopyalandı",
     "bank.notInList": "Kayıtlı olmayan banka kodu", "bank.tagNotInList": "Listede yok",
     "reported": "Bu banka kodu ekibimize iletildi. En kısa sürede sisteme eklenecek.",
@@ -961,7 +968,7 @@ const translations = {
     "note": "<b>Note:</b> The IBAN standard does not encode city or branch information; those details exist only in the bank's internal systems.",
     "status.valid": "Valid", "status.invalid": "Invalid",
     "status.validSub": "Checksum verified", "status.invalidSub": "IBAN could not be validated",
-    "label.reason":"Reason","label.input":"Input","label.iban":"IBAN","label.country":"Country","label.bankCode":"Bank code",
+    "label.reason":"Reason","label.input":"Input","label.iban":"IBAN","label.country":"Country","label.bankCode":"Bank code","label.swift":"SWIFT/BIC","label.accountNo":"Account No.",
     "btn.copy":"Copy","btn.copied":"Copied",
     "bank.notInList":"Unregistered bank code","bank.tagNotInList":"Not in list",
     "reported":"This bank code has been reported to our team and will be added soon.",
@@ -1000,7 +1007,7 @@ const translations = {
     "note": "<b>ملاحظة:</b> معيار IBAN لا يتضمن معلومات المدينة أو الفرع؛ هذه المعلومات متوفرة فقط في الأنظمة الداخلية للبنك.",
     "status.valid":"صالح","status.invalid":"غير صالح",
     "status.validSub":"تم التحقق من خانة الرقابة","status.invalidSub":"تعذّر التحقق من IBAN",
-    "label.reason":"السبب","label.input":"المدخل","label.iban":"IBAN","label.country":"الدولة","label.bankCode":"رمز البنك",
+    "label.reason":"السبب","label.input":"المدخل","label.iban":"IBAN","label.country":"الدولة","label.bankCode":"رمز البنك","label.swift":"SWIFT/BIC","label.accountNo":"رقم الحساب",
     "btn.copy":"نسخ","btn.copied":"تم النسخ",
     "bank.notInList":"رمز بنك غير مسجل","bank.tagNotInList":"غير مُدرج",
     "reported":"تم إرسال رمز البنك إلى فريقنا وسيُضاف قريباً.",
