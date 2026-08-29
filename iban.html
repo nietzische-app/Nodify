@@ -3,27 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Her-iban — IBAN Sorgulama</title>
-<meta name="description" content="IBAN numarasının geçerliliğini anında kontrol edin ve hangi bankaya ait olduğunu öğrenin.">
+<title>Her-iban · Ücretsiz IBAN Sorgulama ve Doğrulama Aracı</title>
+<meta name="description" content="IBAN numarasının geçerliliğini saniyeler içinde doğrulayın ve hangi banka ya da fintech kuruluşuna ait olduğunu öğrenin. Tarayıcıda çalışır, veri toplamaz.">
+<meta name="keywords" content="iban sorgulama, iban doğrulama, iban kontrol, hangi banka, banka kodu, bkm, türkiye banka kodları, iban geçerlilik">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Her-iban">
+<meta name="theme-color" content="#080808">
+<meta name="google-site-verification" content="FrljGV1NTb50zLFPb0kP4dJfeGDrLik_BiAbhy8LGxo">
+<meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">
+<link rel="canonical" href="https://her-iban.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Her-iban">
+<meta property="og:title" content="Her-iban · Ücretsiz IBAN Sorgulama">
+<meta property="og:description" content="IBAN numarasının geçerliliğini saniyeler içinde doğrulayın ve hangi banka ya da fintech kuruluşuna ait olduğunu öğrenin.">
+<meta property="og:url" content="https://her-iban.com/">
+<meta property="og:image" content="https://her-iban.com/logo.png">
+<meta property="og:locale" content="tr_TR">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Her-iban · Ücretsiz IBAN Sorgulama">
+<meta name="twitter:description" content="IBAN doğrulama ve banka bilgisi — tarayıcıda çalışır, veri toplamaz.">
+<meta name="twitter:image" content="https://her-iban.com/logo.png">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23080808'/><path d='M22 18v28M42 18v28M22 32h20' stroke='%23F2F2F0' stroke-width='6' stroke-linecap='square' fill='none'/></svg>">
+<link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://logo.clearbit.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Her-iban",
+  "url": "https://her-iban.com/",
+  "description": "IBAN numarasının geçerliliğini saniyeler içinde doğrulayın ve hangi banka ya da fintech kuruluşuna ait olduğunu öğrenin.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Modern web browser",
+  "inLanguage": "tr-TR",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"},
+  "isAccessibleForFree": true
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "IBAN'ım 'Geçerli' çıktı — hesap gerçek mi?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Hayır. IBAN doğrulama yalnızca numaranın matematiksel yapısının doğru olduğunu gösterir. Arkasında aktif bir banka hesabı olduğunu veya belirtilen kişiye ait olduğunu garanti etmez. Para transferi öncesi daima alıcıyla teyit edin."}
+    },
+    {
+      "@type": "Question",
+      "name": "IBAN numaramı girmek güvenli mi?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Evet, güvenlidir. IBAN'ınız sunucumuza hiç iletilmez; doğrulama tamamen tarayıcınızın belleğinde gerçekleşir. Veri saklanmaz, loglanmaz veya üçüncü taraflarla paylaşılmaz."}
+    },
+    {
+      "@type": "Question",
+      "name": "Hangi ülkelerin IBAN'ı destekleniyor?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Araç 70+ ülkenin IBAN formatını destekler — Avrupa Birliği ülkeleri, Türkiye, Birleşik Krallık, İsviçre, Norveç, Orta Doğu ve seçili diğer bölgeler. ABD ve Japonya gibi IBAN kullanmayan ülkelerde bu standart yoktur."}
+    },
+    {
+      "@type": "Question",
+      "name": "Banka adı 'Kayıtlı olmayan banka kodu' çıktı, ne yapabilirim?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yeni kurulmuş dijital bankalar veya yeni tahsis edilmiş BKM kodları henüz listemize dahil edilmemiş olabilir. Böyle bir durumla karşılaştığınızda sistem otomatik olarak ilgili banka kodunu ekibimize iletir; en kısa sürede listemize eklenir."}
+    },
+    {
+      "@type": "Question",
+      "name": "Fintech kuruluşları IBAN verebilir mi?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Evet. Türkiye'de kendi banka lisansı olan fintech kuruluşları ayrı BKM kodlarıyla kendi IBAN'larını çıkarır. Banka lisansı olmayan elektronik para kuruluşları partner bankalarının BKM kodunu kullanır."}
+    },
+    {
+      "@type": "Question",
+      "name": "IBAN, şehir veya şube bilgisi gösterir mi?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Hayır. IBAN standardı şehir veya şube bilgisini içermez. Bu bilgiler yalnızca ilgili bankanın kendi iç sisteminde tutulur."}
+    }
+  ]
+}
+</script>
 <style>
 :root{
   --black:#080808;--white:#F2F2F0;
   --grey1:#161616;--grey2:#222222;--grey3:#333333;--grey4:#888888;--grey5:#AAAAAA;
   --ok:#6DE089;--err:#E06D6D;--border:#1E1E1E;
+  --shadow:rgba(0,0,0,0.4);
 }
+[data-theme="light"]{
+  --black:#F5F5F2;--white:#0C0C0C;
+  --grey1:#ECECE8;--grey2:#DDDDDA;--grey3:#BBBBB7;--grey4:#5E5E5E;--grey5:#3A3A3A;
+  --ok:#1F7A3A;--err:#B02A2A;--border:#D4D4D0;
+  --shadow:rgba(0,0,0,0.08);
+}
+html{transition:background-color 0.2s}
+[lang="ar"] body{font-family:"Noto Sans Arabic","Instrument Sans",sans-serif}
+[lang="ar"] h1,[lang="ar"] .status,[lang="ar"] .bank-name,[lang="ar"] .content-boost h2{font-family:"Noto Sans Arabic",sans-serif;font-weight:700}
+[lang="ar"] .eyebrow,[lang="ar"] .back,[lang="ar"] label,[lang="ar"] button,[lang="ar"] .bank-tag,[lang="ar"] .k,[lang="ar"] .status-sub,[lang="ar"] summary{font-family:"Noto Sans Arabic",sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:"Instrument Sans",sans-serif;background:var(--black);color:var(--white);min-height:100vh;display:flex;flex-direction:column}
 a{color:inherit;text-decoration:none}
 
-nav{padding:24px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
-.brand-wrap{display:flex;align-items:center;gap:10px}
-.brand-logo{height:28px;width:auto;display:block}
-.brand{font-family:"Bebas Neue",sans-serif;font-size:1.4rem;letter-spacing:0.08em;color:var(--white)}
+nav{padding:24px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);gap:16px;flex-wrap:wrap}
+.brand-wrap{display:flex;align-items:center;gap:10px;line-height:0}
+.brand-logo{height:76px;width:auto;display:block}
+.brand-fallback{font-family:"Bebas Neue",sans-serif;font-size:2.6rem;letter-spacing:0.08em;color:var(--white);line-height:1}
+.nav-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .back{font-family:"Syne",sans-serif;font-size:0.75rem;font-weight:700;color:var(--grey4);letter-spacing:0.1em;text-transform:uppercase}
+.lang-switch{display:inline-flex;gap:2px;border:1px solid var(--border);border-radius:2px;padding:3px}
+.lang-btn{
+  background:transparent;color:var(--grey4);border:none;
+  font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;
+  padding:6px 10px;cursor:pointer;border-radius:2px;
+  transition:background 0.2s,color 0.2s;line-height:1;
+}
+.lang-btn.active{background:var(--white);color:var(--black)}
+.lang-btn:hover:not(.active){color:var(--white)}
+.theme-toggle{
+  background:transparent;border:1px solid var(--border);
+  padding:8px;border-radius:2px;cursor:pointer;color:var(--grey5);
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:color 0.2s,border-color 0.2s;line-height:0;
+}
+.theme-toggle:hover{color:var(--white);border-color:var(--grey4)}
+.theme-toggle svg{width:16px;height:16px}
+[data-theme="light"] .theme-toggle .icon-sun{display:none}
+[data-theme="light"] .theme-toggle .icon-moon{display:block}
+.theme-toggle .icon-moon{display:none}
+.theme-toggle .icon-sun{display:block}
 
 main{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 24px}
 .wrap{width:100%;max-width:640px}
@@ -33,6 +144,7 @@ h1{font-family:"Bebas Neue",sans-serif;font-size:clamp(2.8rem,6vw,4.5rem);line-h
 .lead{color:var(--grey5);font-size:0.98rem;line-height:1.55;margin-bottom:36px;max-width:520px}
 
 form{display:flex;flex-direction:column;gap:14px;margin-bottom:24px}
+form[hidden]{display:none}
 label{font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:700;color:var(--grey4);letter-spacing:0.14em;text-transform:uppercase}
 .input-row{display:flex;gap:10px;flex-wrap:wrap}
 input{
@@ -59,69 +171,399 @@ button:active{transform:translateY(1px)}
 .status.invalid{color:var(--err)}
 .status-sub{font-family:"Syne",sans-serif;font-size:0.72rem;font-weight:600;color:var(--grey4);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:18px}
 
-.bank-card{display:flex;align-items:center;gap:16px;padding:16px 0 18px;border-top:1px solid var(--border);margin-bottom:4px}
-.bank-card:first-of-type{border-top:none;padding-top:0}
+.bank-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;padding:12px 0 28px;margin-bottom:4px}
 .logo{
-  width:56px;height:56px;flex-shrink:0;border-radius:8px;background:var(--white);
+  width:160px;height:160px;flex-shrink:0;border-radius:16px;background:var(--white);
   display:flex;align-items:center;justify-content:center;overflow:hidden;
-  font-family:"Bebas Neue",sans-serif;font-size:1.5rem;color:var(--black);letter-spacing:0.02em;
+  font-family:"Bebas Neue",sans-serif;font-size:3.5rem;color:var(--black);letter-spacing:0.02em;
 }
-.logo img{width:100%;height:100%;object-fit:contain;padding:6px}
-.bank-meta{display:flex;flex-direction:column;gap:3px;min-width:0}
-.bank-name{font-family:"Syne",sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);line-height:1.2}
-.bank-tag{font-family:"Syne",sans-serif;font-size:0.68rem;font-weight:600;color:var(--grey4);letter-spacing:0.14em;text-transform:uppercase}
+.logo img{
+  width:100%;height:100%;object-fit:contain;padding:18px;
+}
+.bank-meta{display:flex;flex-direction:column;gap:6px;align-items:center;min-width:0;width:100%}
+.bank-name{font-family:"Bebas Neue",sans-serif;font-weight:400;font-size:1.8rem;color:var(--white);line-height:1.1;letter-spacing:0.02em}
+.bank-tag{font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:700;color:var(--grey4);letter-spacing:0.16em;text-transform:uppercase}
+.reported-note{
+  font-family:"Instrument Sans",sans-serif;font-size:0.82rem;color:var(--grey5);
+  background:var(--grey2);border:1px solid var(--border);
+  padding:10px 16px;border-radius:2px;max-width:380px;line-height:1.5;margin-top:8px;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.reported-note svg{flex-shrink:0;color:var(--ok)}
 
 .row{display:grid;grid-template-columns:140px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--border)}
 .k{font-family:"Syne",sans-serif;font-size:0.72rem;font-weight:600;color:var(--grey4);letter-spacing:0.12em;text-transform:uppercase;align-self:center}
 .v{font-family:"Instrument Sans",sans-serif;font-size:1rem;color:var(--white);word-break:break-all}
 .v.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0.04em}
+.iban-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.iban-text{flex:1;min-width:0}
+.copy-btn{
+  background:transparent;border:1px solid var(--border);color:var(--grey5);
+  padding:7px 12px;font-family:"Syne",sans-serif;font-size:0.68rem;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;border-radius:2px;
+  display:inline-flex;align-items:center;gap:7px;transition:border-color 0.2s,color 0.2s;line-height:1;
+  flex-shrink:0;
+}
+.copy-btn:hover{border-color:var(--grey4);color:var(--white)}
+.copy-btn.copied{border-color:var(--ok);color:var(--ok)}
+.copy-btn svg{width:12px;height:12px;flex-shrink:0}
 
 .note{margin-top:20px;color:var(--grey4);font-size:0.82rem;line-height:1.55}
 .note b{color:var(--grey5);font-weight:600}
 
-footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);font-size:0.75rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.content-boost{max-width:1100px;margin:64px auto 0;padding:0 24px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+@media (max-width:760px){.content-boost{grid-template-columns:1fr;gap:0}}
+.content-boost .section-head{font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:700;color:var(--grey4);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:12px}
+.content-boost details{border-top:1px solid var(--border)}
+.content-boost details:last-of-type{border-bottom:1px solid var(--border)}
+.content-boost summary{
+  list-style:none;cursor:pointer;padding:16px 0;
+  font-family:"Syne",sans-serif;font-size:0.95rem;font-weight:600;color:var(--white);letter-spacing:0.02em;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+}
+.content-boost summary::-webkit-details-marker{display:none}
+.content-boost summary::after{
+  content:"+";font-family:"Instrument Sans",sans-serif;font-weight:400;color:var(--grey4);
+  font-size:1.3rem;line-height:1;
+}
+.content-boost details[open] summary::after{content:"−"}
+.content-boost .body{padding:4px 0 22px;color:var(--grey5);font-size:0.92rem;line-height:1.65}
+.content-boost .body p{margin-bottom:12px}
+.content-boost .body p:last-child{margin-bottom:0}
+.content-boost .body ul,.content-boost .body ol{padding-left:20px;margin-bottom:12px}
+.content-boost .body li{margin-bottom:6px}
+.content-boost .body strong{color:var(--white);font-weight:600}
+.content-boost .group{margin-bottom:36px}
+.content-boost .group:last-of-type{margin-bottom:0}
+
+.legal{max-width:900px;margin:0 auto;padding:24px;width:100%;border-top:1px solid var(--border)}
+.legal details{padding:0}
+.legal summary{
+  list-style:none;cursor:pointer;padding:10px 0;
+  font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:600;color:var(--grey5);letter-spacing:0.14em;text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+}
+.legal summary:hover{color:var(--white)}
+.legal summary::-webkit-details-marker{display:none}
+.legal summary::after{
+  content:"+";font-family:"Instrument Sans",sans-serif;font-weight:400;color:var(--grey4);
+  font-size:1rem;line-height:1;
+}
+.legal details[open] summary::after{content:"−"}
+.legal details[open] summary{color:var(--white)}
+.legal .body{padding:4px 0 16px;color:var(--grey4);font-size:0.78rem;line-height:1.6}
+.legal .body p{margin-bottom:8px}
+.legal .body p:last-child{margin-bottom:0}
+.legal .body ul{padding-left:20px;margin-bottom:8px}
+.legal .body li{margin-bottom:3px}
+.legal .body a{color:var(--grey5);text-decoration:underline}
+
+footer{padding:24px 48px;border-top:1px solid var(--border);color:var(--grey4);font-size:0.75rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:72px}
+.footer-link{color:var(--grey5);text-decoration:underline;cursor:pointer;background:none;border:none;font-family:inherit;font-size:inherit;padding:0}
+.footer-link:hover{color:var(--white)}
+
+.ad-container{
+  max-width:640px;margin:56px auto 0;padding:0 24px;width:100%;
+  min-height:90px;display:flex;align-items:center;justify-content:center;
+}
+.ad-container .adsbygoogle{display:block;width:100%;min-height:90px}
+
+.cookie-consent{
+  position:fixed;bottom:0;left:0;right:0;z-index:1000;
+  background:var(--grey1);border-top:1px solid var(--border);
+  padding:18px 32px;box-shadow:0 -12px 30px rgba(0,0,0,0.4);
+}
+.cookie-consent[hidden]{display:none}
+.cookie-content{
+  max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.cookie-text{flex:1;min-width:260px}
+.cookie-text strong{font-family:"Syne",sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--white);display:block;margin-bottom:6px}
+.cookie-text p{color:var(--grey5);font-size:0.82rem;line-height:1.5}
+.cookie-text a{color:var(--white);text-decoration:underline}
+.cookie-actions{display:flex;gap:10px;flex-shrink:0}
+.cookie-btn{
+  font-family:"Syne",sans-serif;font-size:0.7rem;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;padding:12px 18px;
+  border-radius:2px;cursor:pointer;border:1px solid var(--border);line-height:1;
+  transition:background 0.2s,color 0.2s,border-color 0.2s;
+}
+.cookie-accept{background:var(--white);color:var(--black);border-color:var(--white)}
+.cookie-accept:hover{background:var(--grey5)}
+.cookie-reject{background:transparent;color:var(--grey5)}
+.cookie-reject:hover{color:var(--white);border-color:var(--grey4)}
 
 @media (max-width:560px){
-  nav{padding:18px 24px}
+  nav{padding:18px 24px;gap:10px}
   footer{padding:18px 24px}
+  .brand-logo{height:54px}
+  .brand-fallback{font-size:1.8rem}
+  .back{display:none}
+  .nav-actions{gap:8px}
+  .lang-btn{padding:5px 8px;font-size:0.65rem}
   .row{grid-template-columns:110px 1fr}
+  .logo{width:130px;height:130px}
+  .bank-name{font-size:1.5rem}
+  .cookie-consent{padding:16px 20px}
+  .cookie-actions{width:100%}
+  .cookie-btn{flex:1}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="./" class="brand-wrap">
-    <!-- Logo hazır olunca: <img src="logo.svg" alt="Her-iban" class="brand-logo"> -->
-    <span class="brand">HER-İBAN</span>
+  <a href="./" class="brand-wrap" aria-label="Her-iban">
+    <img src="logo.png" alt="Her-iban" class="brand-logo"
+         onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'brand-fallback',textContent:'HER-İBAN'}))">
   </a>
-  <span class="back">IBAN Doğrulama Aracı</span>
+  <div class="nav-actions">
+    <span class="back" data-i18n="nav.tagline">IBAN Doğrulama Aracı</span>
+    <div class="lang-switch" role="group" aria-label="Dil">
+      <button type="button" class="lang-btn" data-lang="tr">TR</button>
+      <button type="button" class="lang-btn" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" data-lang="ar">AR</button>
+    </div>
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Tema değiştir">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
 </nav>
+
+<form name="unknown-bank" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="bank_code">
+  <input type="text" name="timestamp">
+  <input type="text" name="bot-field">
+</form>
 
 <main>
   <div class="wrap">
-    <div class="eyebrow">Ücretsiz Araç</div>
-    <h1>IBAN SORGULAMA</h1>
-    <p class="lead">IBAN numarasını girin; numaranın geçerli olup olmadığını ve hangi banka ya da fintech kuruluşuna ait olduğunu anında öğrenin. Hiçbir veri sunucuya gönderilmez, doğrulama tarayıcınızda yapılır.</p>
+    <div class="eyebrow" data-i18n="eyebrow">Ücretsiz Araç</div>
+    <h1 data-i18n="h1">IBAN SORGULAMA</h1>
+    <p class="lead" data-i18n="lead">IBAN numarasını girin; numaranın geçerli olup olmadığını ve hangi banka ya da fintech kuruluşuna ait olduğunu anında öğrenin. Hiçbir veri sunucuya gönderilmez, doğrulama tarayıcınızda yapılır.</p>
 
     <form id="iban-form" autocomplete="off" novalidate>
-      <label for="iban">IBAN</label>
+      <label for="iban" data-i18n="form.label">IBAN</label>
       <div class="input-row">
         <input id="iban" name="iban" placeholder="TR33 0006 1005 1978 6457 8413 26" maxlength="42" spellcheck="false">
-        <button type="submit">Sorgula</button>
+        <button type="submit" data-i18n="form.submit">Sorgula</button>
       </div>
     </form>
 
     <div id="result" class="result" aria-live="polite"></div>
 
-    <p class="note"><b>Not:</b> IBAN standartı şehir veya şube bilgisini içermez; bu bilgiler yalnızca ilgili kurumun iç sisteminde bulunur.</p>
+    <p class="note" data-i18n-html="note"><b>Not:</b> IBAN standartı şehir veya şube bilgisini içermez; bu bilgiler yalnızca ilgili kurumun iç sisteminde bulunur.</p>
   </div>
 </main>
 
+<section class="content-boost">
+  <div class="group">
+    <div class="section-head" data-i18n="guide.head">Bilgi Rehberi</div>
+
+    <details data-i18n-key="guide.whatIsIban">
+      <summary data-i18n="guide.whatIsIban.q">IBAN Nedir?</summary>
+      <div class="body" data-i18n-html="guide.whatIsIban.a">
+        <p>IBAN (<i>International Bank Account Number</i>), bankalar arası para transferlerini standartlaştırmak için ISO 13616 standardı kapsamında tanımlanmış uluslararası banka hesap numarasıdır. Türkiye'de bir IBAN <strong>26 karakterden</strong> oluşur ve şu bileşenleri içerir:</p>
+        <ul>
+          <li><strong>Ülke kodu (2 hane):</strong> Türkiye için <code>TR</code>.</li>
+          <li><strong>Kontrol rakamları (2 hane):</strong> IBAN'ın bütünlüğünü doğrulamak için mod-97 algoritmasıyla hesaplanır.</li>
+          <li><strong>Banka kodu (5 hane):</strong> BKM tarafından her bankaya atanan eşsiz kimlik.</li>
+          <li><strong>Hesap bilgisi (16 hane):</strong> Bankanın kendi sisteminde şube ve hesap numarasını temsil eder.</li>
+        </ul>
+        <p>Her ülkenin IBAN uzunluğu farklıdır: Almanya 22, Birleşik Krallık 22, Fransa 27, Hollanda 18 karakter. Her-iban 70+ ülkenin IBAN formatını tanıyabilir.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary data-i18n="guide.howItWorks.q">Her-iban Nasıl Çalışır?</summary>
+      <div class="body" data-i18n-html="guide.howItWorks.a">
+        <p>Her-iban, IBAN doğrulamasını <strong>tamamen tarayıcınızda</strong> gerçekleştirir — hiçbir veri sunucumuza veya üçüncü taraflara gönderilmez.</p>
+        <ol>
+          <li>Girdiğiniz IBAN boşluk ve harf/rakam kontrolünden geçer.</li>
+          <li>ISO 13616 tablosuna göre ülke kodu ve uzunluk kontrol edilir.</li>
+          <li>ISO 7064 <strong>mod-97</strong> algoritmasıyla kontrol rakamları doğrulanır.</li>
+          <li>TR IBAN'larında 5-9. haneler (banka kodu) BKM/TCMB kayıtlarıyla eşleştirilir.</li>
+        </ol>
+        <p>Tüm doğrulama mantığı cihazınızın JavaScript motorunda çalışır; ne biz ne de başka bir sunucu IBAN'ınızı görmez.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary data-i18n="guide.whyImportant.q">IBAN Doğrulama Neden Önemli?</summary>
+      <div class="body" data-i18n-html="guide.whyImportant.a">
+        <p>Yanlış yazılmış bir IBAN'a gönderilen para, bankalar arası prosedürler nedeniyle her zaman geri alınamayabilir. Tek karakter farkı paranın başka bir hesaba gitmesine yol açabilir.</p>
+        <p>Her-iban üç koruma katmanı sunar:</p>
+        <ul>
+          <li><strong>Kontrol rakamı doğrulama:</strong> Yazım hatasını matematiksel olarak yakalar.</li>
+          <li><strong>Banka eşleşmesi:</strong> Gönderdiğiniz banka, beklediğiniz banka mı?</li>
+          <li><strong>Uzunluk kontrolü:</strong> Eksik veya fazla karakterli IBAN'ları tespit eder.</li>
+        </ul>
+        <p>Bu araç <strong>hesap sahibinin kimliğini doğrulamaz</strong>. Para transferi öncesi IBAN'ı alıcıyla teyit edin.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="group">
+    <div class="section-head" data-i18n="faq.head">Sıkça Sorulan Sorular</div>
+
+    <details>
+      <summary data-i18n="faq.q1">IBAN'ım "Geçerli" çıktı — hesap gerçek mi?</summary>
+      <div class="body" data-i18n-html="faq.a1"><p>Hayır. IBAN doğrulama yalnızca numaranın <strong>matematiksel yapısının</strong> doğru olduğunu gösterir. Arkasında aktif bir banka hesabı olduğunu veya belirtilen kişiye ait olduğunu garanti etmez. Para transferi öncesi daima alıcıyla teyit edin.</p></div>
+    </details>
+
+    <details>
+      <summary data-i18n="faq.q2">IBAN numaramı girmek güvenli mi?</summary>
+      <div class="body" data-i18n-html="faq.a2"><p>Evet. IBAN'ınız sunucumuza <strong>hiç iletilmez</strong>; doğrulama tarayıcınızın belleğinde gerçekleşir. Veri saklanmaz, loglanmaz veya üçüncü taraflarla paylaşılmaz.</p></div>
+    </details>
+
+    <details>
+      <summary data-i18n="faq.q3">Hangi ülkelerin IBAN'ı destekleniyor?</summary>
+      <div class="body" data-i18n-html="faq.a3"><p>Araç 70+ ülkenin IBAN formatını destekler — AB ülkeleri, Türkiye, Birleşik Krallık, İsviçre, Norveç, Orta Doğu ve seçili diğer bölgeler. ABD ve Japonya gibi IBAN kullanmayan ülkelerde bu standart yoktur.</p></div>
+    </details>
+
+    <details>
+      <summary data-i18n="faq.q4">Banka "Kayıtlı olmayan" çıktı, ne yapabilirim?</summary>
+      <div class="body" data-i18n-html="faq.a4"><p>Yeni kurulmuş dijital bankalar veya yeni BKM kodları henüz listeye eklenmemiş olabilir. Sistem ilgili kodu otomatik olarak ekibimize iletir; en kısa sürede eklenir. Kontrol rakamı doğru çıktıysa IBAN matematiksel olarak geçerlidir.</p></div>
+    </details>
+
+    <details>
+      <summary data-i18n="faq.q5">Fintech kuruluşları IBAN verebilir mi?</summary>
+      <div class="body" data-i18n-html="faq.a5"><p>Evet. Kendi banka lisansı olan fintech'ler (ör. Papara) ayrı BKM kodlarıyla IBAN çıkarır. Lisansı olmayan elektronik para kuruluşları (EPK) partner bankanın kodunu kullanır — bu durumda sistem partner bankayı gösterir.</p></div>
+    </details>
+
+    <details>
+      <summary data-i18n="faq.q6">IBAN şehir veya şube bilgisi gösterir mi?</summary>
+      <div class="body" data-i18n-html="faq.a6"><p>Hayır. IBAN standardı şehir veya şube bilgisini <strong>içermez</strong>. Bu bilgiler yalnızca bankanın kendi iç sisteminde tutulur.</p></div>
+    </details>
+
+    <details>
+      <summary data-i18n="faq.q7">Bu araç ücretli mi olacak?</summary>
+      <div class="body" data-i18n-html="faq.a7"><p>Her-iban tamamen ücretsizdir ve öyle kalacaktır. Hizmeti ayakta tutmak için sayfada reklam gösterilir. Çerez onayını reddetseniz bile IBAN doğrulama aracı eksiksiz çalışır.</p></div>
+    </details>
+  </div>
+</section>
+
+<aside class="ad-container" aria-label="Reklam alanı">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+       data-ad-slot="XXXXXXXXXX"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+</aside>
+
 <footer>
-  <span>© Her-iban</span>
-  <span>Tarayıcıda çalışır · Veri toplanmaz</span>
+  <span>© 2026 Her-iban</span>
+  <span><button type="button" class="footer-link" id="cookie-manage" data-i18n="footer.preferences">Çerez Tercihleri</button></span>
 </footer>
+
+<section class="legal" aria-label="Yasal Bilgilendirme">
+  <details>
+    <summary data-i18n="legal.privacy">Gizlilik Politikası & KVKK</summary>
+    <div class="body">
+      <p>Her-iban, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve 2016/679 sayılı Genel Veri Koruma Tüzüğü (GDPR) ilkelerine uygun olarak tasarlanmıştır.</p>
+      <p><b>Tarafımızca işlenen veriler:</b></p>
+      <ul>
+        <li><b>IBAN doğrulama:</b> Girdiğiniz IBAN numarası <b>sunucumuza gönderilmez</b>; doğrulama tamamen cihazınızın tarayıcısında gerçekleşir. IBAN'ınız, kimliğiniz veya hesap bilgileriniz tarafımızca hiçbir şekilde görülmez, saklanmaz veya işlenmez.</li>
+        <li><b>Bilinmeyen banka kodu bildirimi:</b> Listemizde bulunmayan bir banka kodu ile karşılaşıldığında, yalnızca o 5 haneli kod (örn. <code>00160</code>) ve zaman damgası sistemimize iletilir. IBAN'ın geri kalanı veya kişisel bilgi gönderilmez. BKM banka kodları kamuya açık tanımlayıcılardır; kişisel veri niteliğinde değildir.</li>
+        <li><b>Çerez tercihiniz:</b> "Kabul Et" veya "Reddet" kararınız, bir sonraki ziyaretinizde tekrar sorulmamak üzere <b>kendi tarayıcınızın yerel depolamasında</b> tutulur. Bu bilgi bize gönderilmez.</li>
+      </ul>
+      <p><b>Üçüncü taraflarca işlenen veriler (onay durumunda):</b> "Kabul Et" seçeneğini işaretlerseniz Google AdSense ve ilgili reklam ağları, çerez ve IP adresi gibi veriler aracılığıyla reklam kişiselleştirmesi yapabilir. Reddettiğinizde reklam yüklenmez. Detaylar için <b>"Çerez Politikası"</b> bölümüne bakınız.</p>
+      <p><b>Haklarınız:</b> KVKK Madde 11 kapsamında verilerinizle ilgili haklarınızı kullanmak için <a href="mailto:iletisim@her-iban.com" style="color:var(--white);text-decoration:underline">iletisim@her-iban.com</a> adresine başvurabilirsiniz.</p>
+    </div>
+  </details>
+
+  <details id="cookie-policy">
+    <summary data-i18n="legal.cookies">Çerez Politikası</summary>
+    <div class="body">
+      <p>Her-iban, kullanıcı deneyimini etkilemeyen zorunlu çerezlerin dışında hiçbir çerezi <b>onayınız olmadan</b> yüklemez.</p>
+      <p><b>Zorunlu çerez (yok):</b> Site temel işlevselliği için çerez gerektirmez.</p>
+      <p><b>Reklam çerezleri (Google AdSense):</b> "Kabul Et" seçeneğini işaretlerseniz, Google AdSense ve iş ortakları aşağıdaki amaçlarla çerez ve benzeri teknolojiler kullanır:</p>
+      <ul>
+        <li>Reklamları ilgi alanlarınıza göre kişiselleştirmek,</li>
+        <li>Aynı reklamı tekrar göstermemek için sıklık kontrolü,</li>
+        <li>Reklam performansını ölçmek ve dolandırıcılığı önlemek.</li>
+      </ul>
+      <p>Bu çerezlere onay vermek istemiyorsanız "Reddet" butonuna tıklayın; site aynı şekilde reklamsız çalışmaya devam eder. Kararınızı istediğiniz zaman sayfa altındaki <b>"Çerez Tercihleri"</b> bağlantısından değiştirebilirsiniz.</p>
+      <p>Google'ın reklam çerezi uygulamaları hakkında detay: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener" style="color:var(--white);text-decoration:underline">policies.google.com/technologies/ads</a></p>
+    </div>
+  </details>
+
+  <details>
+    <summary data-i18n="legal.terms">Kullanım Koşulları</summary>
+    <div class="body">
+      <p>Bu araç, IBAN numaralarının ISO 13616 standardına uygunluğunu ve Türk IBAN'larında BKM/TCMB kayıtlarına göre hangi banka veya finans kuruluşuna ait olduğunu belirlemek amacıyla ücretsiz olarak sunulmaktadır.</p>
+      <ul>
+        <li>Hizmet "olduğu gibi" (as-is) sunulur; kesintisizlik veya hatasızlık garanti edilmez.</li>
+        <li>Kullanıcı, aracı yürürlükteki mevzuata uygun amaçlarla kullanmayı kabul eder.</li>
+        <li>Otomatize erişim, kazıma (scraping) veya servisi aksatacak girişimler kabul edilmez.</li>
+        <li>Bu araç finansal danışmanlık hizmeti değildir; yatırım, transfer veya hukuki kararlar için yetkili kurumlara danışın.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary data-i18n="legal.disclaimer">Sorumluluk Reddi</summary>
+    <div class="body">
+      <p>IBAN doğrulama sonucu, numaranın <b>matematiksel olarak geçerli</b> olduğunu ifade eder; bu durum aşağıdakilerin garantisi değildir:</p>
+      <ul>
+        <li>Numaranın gerçekten bir banka hesabına karşılık geldiği,</li>
+        <li>Hesabın aktif veya açık olduğu,</li>
+        <li>Hesap sahibinin beyan edilen kişi olduğu.</li>
+      </ul>
+      <p>Banka/kuruluş eşlemeleri, Bankalararası Kart Merkezi (BKM) ve TCMB tarafından yayınlanan kayıtlara dayanır; kayıtlar zamanla değişebilir. Para transferi yapmadan önce IBAN'ı daima alıcının kendisiyle teyit edin. Her-iban, bu araç kullanılarak yapılan işlemlerden doğabilecek doğrudan veya dolaylı zararlardan sorumlu tutulamaz.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary data-i18n="legal.thirdparty">Üçüncü Taraf Servisler</summary>
+    <div class="body">
+      <p>Araç aşağıdaki üçüncü taraf servislerinden dinamik olarak yararlanır:</p>
+      <ul>
+        <li><b>Google Fonts</b> — sayfa tipografisi için yazı tipleri yüklenir (fonts.googleapis.com, fonts.gstatic.com).</li>
+        <li><b>Clearbit Logo API</b> — banka logoları için birincil görsel kaynağıdır (logo.clearbit.com).</li>
+        <li><b>Google Favicon Service</b> — Clearbit'te bulunmayan logolar için yedek kaynaktır (google.com/s2/favicons).</li>
+        <li><b>Google AdSense</b> — <i>yalnızca kullanıcı onayı verdiğinde</i> reklam göstermek için yüklenir (pagead2.googlesyndication.com, googleads.g.doubleclick.net, google.com). Detaylar "Çerez Politikası" bölümünde.</li>
+        <li><b>Netlify</b> — site barındırma ve bilinmeyen banka kodu form bildirimleri için altyapı sağlayıcıdır.</li>
+      </ul>
+      <p>Bu servisler, teknik çalışmaları gereği IP adresiniz gibi bilgileri kendi sunucularında alabilir ve kendi gizlilik politikaları çerçevesinde işleyebilir. Bu veri akışı üzerinde Her-iban'ın kontrolü bulunmamaktadır.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary data-i18n="legal.trademarks">Telif & Marka Hakları</summary>
+    <div class="body">
+      <p>Banka ve finans kuruluşlarının isim, logo ve markaları, ilgili kurumların tescilli mülkiyetidir. Bu araçta söz konusu markalar yalnızca <b>tanımlama amacıyla</b> ve nominatif kullanım ilkesi çerçevesinde yer almaktadır; Her-iban bu kurumlarla resmi bir bağlantıya sahip değildir.</p>
+      <p>Aracın kaynak kodu ve arayüz tasarımı Her-iban'a aittir; izinsiz çoğaltılması, tersine mühendisliği veya ticari amaçla yeniden dağıtımı yasaktır.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary data-i18n="legal.contact">İletişim</summary>
+    <div class="body">
+      <p>Her-iban hakkındaki soru, talep, hata bildirimi, gizlilik veya telif itirazlarınız için aşağıdaki kanallardan ulaşabilirsiniz:</p>
+      <ul>
+        <li><b>Web:</b> <a href="https://her-iban.com">her-iban.com</a></li>
+        <li><b>E-posta:</b> <a href="mailto:iletisim@her-iban.com">iletisim@her-iban.com</a></li>
+      </ul>
+      <p>E-posta taleplerinize genellikle 3 iş günü içinde yanıt verilir.</p>
+    </div>
+  </details>
+</section>
+
+<div id="cookie-consent" class="cookie-consent" hidden role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-desc">
+  <div class="cookie-content">
+    <div class="cookie-text">
+      <strong id="cookie-title" data-i18n="cookie.title">Çerez ve Reklam Tercihleri</strong>
+      <p id="cookie-desc" data-i18n-html="cookie.desc">IBAN doğrulama aracımız tarayıcıda çalışır; sizin verinizi bizim sunucumuz görmez. Siteyi ayakta tutmak için Google AdSense reklamlarını kullanırız ve bu reklamlar çerezlerle kişiselleştirilir.</p>
+    </div>
+    <div class="cookie-actions">
+      <button type="button" class="cookie-btn cookie-reject" id="cookie-reject" data-i18n="cookie.reject">Reddet</button>
+      <button type="button" class="cookie-btn cookie-accept" id="cookie-accept" data-i18n="cookie.accept">Kabul Et</button>
+    </div>
+  </div>
+</div>
 
 <script>
 const IBAN_LENGTHS = {
@@ -137,55 +579,86 @@ const IBAN_LENGTHS = {
 // Türkiye EFT banka kodları (TCMB / BKM kayıtlı kuruluşlar).
 // type: "kamu" | "ozel" | "yabanci" | "yatirim" | "katilim" | "dijital" | "merkez"
 const TR_BANKS = {
-  "00001": {name:"Türkiye Cumhuriyet Merkez Bankası", domain:"tcmb.gov.tr",           type:"merkez"},
+  "00001": {name:"Türkiye Cumhuriyet Merkez Bankası", domain:"tcmb.gov.tr",           type:"merkez", swift:"TCMBTR2A"},
   "00004": {name:"İller Bankası",                     domain:"ilbank.gov.tr",         type:"yatirim"},
-  "00010": {name:"Ziraat Bankası",                    domain:"ziraatbank.com.tr",     type:"kamu"},
-  "00012": {name:"Halkbank",                          domain:"halkbank.com.tr",       type:"kamu"},
-  "00014": {name:"Türk Eximbank",                     domain:"eximbank.gov.tr",       type:"yatirim"},
-  "00015": {name:"Vakıfbank",                         domain:"vakifbank.com.tr",      type:"kamu"},
-  "00016": {name:"Türkiye Sınai Kalkınma Bankası",    domain:"tskb.com.tr",           type:"yatirim"},
-  "00017": {name:"Türkiye Kalkınma ve Yatırım Bankası", domain:"kalkinma.com.tr",     type:"yatirim"},
+  "00010": {name:"Ziraat Bankası",                    domain:"ziraatbank.com.tr",     type:"kamu",    swift:"TCZBTR2A"},
+  "00012": {name:"Halkbank",                          domain:"halkbank.com.tr",       type:"kamu",    swift:"TRHBTR2A"},
+  "00014": {name:"Türk Eximbank",                     domain:"eximbank.gov.tr",       type:"yatirim", swift:"EXIMTRIA"},
+  "00015": {name:"Vakıfbank",                         domain:"vakifbank.com.tr",      type:"kamu",    swift:"TVBATR2A"},
+  "00016": {name:"Türkiye Sınai Kalkınma Bankası",    domain:"tskb.com.tr",           type:"yatirim", swift:"TSKBTRIS"},
+  "00017": {name:"Türkiye Kalkınma ve Yatırım Bankası", domain:"kalkinma.com.tr",     type:"yatirim", swift:"DEVBTRIA"},
   "00029": {name:"Birleşik Fon Bankası",              domain:"bfb.com.tr",            type:"ozel"},
-  "00032": {name:"Türk Ekonomi Bankası (TEB)",        domain:"teb.com.tr",            type:"ozel"},
-  "00046": {name:"Akbank",                            domain:"akbank.com",            type:"ozel"},
-  "00059": {name:"Şekerbank",                         domain:"sekerbank.com.tr",      type:"ozel"},
-  "00062": {name:"Garanti BBVA",                      domain:"garantibbva.com.tr",    type:"ozel"},
-  "00064": {name:"Türkiye İş Bankası",                domain:"isbank.com.tr",         type:"ozel"},
-  "00067": {name:"Yapı Kredi",                        domain:"yapikredi.com.tr",      type:"ozel"},
-  "00091": {name:"Millennium Bank",                   domain:"millenniumbank.com.tr", type:"yabanci"},
-  "00092": {name:"Denizbank",                         domain:"denizbank.com",         type:"ozel"},
-  "00094": {name:"Citibank",                          domain:"citibank.com.tr",       type:"yabanci"},
-  "00096": {name:"Turkish Bank",                      domain:"turkishbank.com",       type:"ozel"},
-  "00098": {name:"Arap Türk Bankası",                 domain:"atbank.com.tr",         type:"ozel"},
-  "00099": {name:"Société Générale",                  domain:"societegenerale.com",   type:"yabanci"},
-  "00100": {name:"HSBC Bank",                         domain:"hsbc.com.tr",           type:"yabanci"},
-  "00103": {name:"Fibabanka",                         domain:"fibabanka.com.tr",      type:"ozel"},
-  "00108": {name:"Odeabank",                          domain:"odeabank.com.tr",       type:"yabanci"},
-  "00109": {name:"Bank of China Turkey",              domain:"bankofchina.com",       type:"yabanci"},
-  "00111": {name:"QNB (eski QNB Finansbank)",         domain:"qnb.com.tr",            type:"yabanci"},
-  "00115": {name:"Deutsche Bank",                     domain:"db.com",                type:"yabanci"},
-  "00121": {name:"Alternatifbank",                    domain:"alternatifbank.com.tr", type:"yabanci"},
-  "00123": {name:"HSBC Bank",                         domain:"hsbc.com.tr",           type:"yabanci"},
-  "00124": {name:"Alternatifbank",                    domain:"alternatifbank.com.tr", type:"yabanci"},
-  "00125": {name:"Burgan Bank",                       domain:"burgan.com.tr",         type:"yabanci"},
-  "00134": {name:"ICBC Turkey Bank",                  domain:"icbc.com.tr",           type:"yabanci"},
-  "00135": {name:"Rabobank",                          domain:"rabobank.com",          type:"yabanci"},
-  "00137": {name:"Intesa Sanpaolo",                   domain:"intesasanpaolo.com",    type:"yabanci"},
-  "00138": {name:"Standard Chartered Yatırım Bankası",domain:"sc.com",                type:"yabanci"},
-  "00139": {name:"Turkland Bank (T-Bank)",            domain:"tbank.com.tr",          type:"yabanci"},
-  "00143": {name:"MUFG Bank Turkey",                  domain:"mufgemea.com",          type:"yabanci"},
-  "00146": {name:"Golden Global Yatırım Bankası",     domain:"goldenglobalbank.com",  type:"yatirim"},
-  "00147": {name:"ING",                               domain:"ing.com.tr",            type:"yabanci"},
-  "00148": {name:"Vakıf Katılım",                     domain:"vakifkatilim.com.tr",   type:"katilim"},
-  "00203": {name:"Albaraka Türk",                     domain:"albaraka.com.tr",       type:"katilim"},
-  "00205": {name:"Kuveyt Türk",                       domain:"kuveytturk.com.tr",     type:"katilim"},
-  "00206": {name:"Türkiye Finans Katılım",            domain:"turkiyefinans.com.tr",  type:"katilim"},
-  "00209": {name:"Ziraat Katılım",                    domain:"ziraatkatilim.com.tr",  type:"katilim"},
-  "00210": {name:"Emlak Katılım",                     domain:"emlakkatilim.com.tr",   type:"katilim"},
-  "00211": {name:"Hayat Finans Katılım",              domain:"hayatfinans.com.tr",    type:"katilim"},
-  "00212": {name:"TOM Bank",                          domain:"tombank.com.tr",        type:"dijital"},
-  "00213": {name:"Colendi Bank",                      domain:"colendi.com",           type:"dijital"},
-  "00214": {name:"Enpara.com",                        domain:"enpara.com",            type:"dijital"}
+  "00032": {name:"Türk Ekonomi Bankası (TEB)",        domain:"teb.com.tr",            type:"ozel",    swift:"TEBUTRIS"},
+  "00046": {name:"Akbank",                            domain:"akbank.com",            type:"ozel",    swift:"AKBKTRIS"},
+  "00059": {name:"Şekerbank",                         domain:"sekerbank.com.tr",      type:"ozel",    swift:"SEKETR2A"},
+  "00060": {name:"Türk Ticaret Bankası",              domain:"turkbank.com.tr",       type:"ozel"},
+  "00062": {name:"Garanti BBVA",                      domain:"garantibbva.com.tr",    type:"ozel",    swift:"TGBATRIS"},
+  "00064": {name:"Türkiye İş Bankası",                domain:"isbank.com.tr",         type:"ozel",    swift:"ISBKTRIS"},
+  "00067": {name:"Yapı Kredi",                        domain:"yapikredi.com.tr",      type:"ozel",    swift:"YAPITRIS"},
+  "00088": {name:"Royal Bank of Scotland",            domain:"rbs.com",               type:"yabanci", swift:"ABNATRIS"},
+  "00091": {name:"Arap Türk Bankası",                 domain:"atbank.com.tr",         type:"ozel",    swift:"ARTTTRIS"},
+  "00092": {name:"Citibank",                          domain:"citibank.com.tr",       type:"yabanci", swift:"CITITRIX"},
+  "00094": {name:"Bank Mellat",                       domain:"bankmellat.com.tr",     type:"yabanci", swift:"BMELTRIS"},
+  "00096": {name:"Turkish Bank",                      domain:"turkishbank.com",       type:"ozel",    swift:"TUBATR2A"},
+  "00098": {name:"JPMorgan Chase Bank",               domain:"jpmorgan.com",          type:"yabanci", swift:"CHASTRIS"},
+  "00099": {name:"ING Bank",                          domain:"ing.com.tr",            type:"yabanci", swift:"INGBTRIS"},
+  "00100": {name:"Adabank",                           domain:"adabank.com.tr",        type:"ozel",    swift:"ADABTRIS"},
+  "00103": {name:"Fibabanka",                         domain:"fibabanka.com.tr",      type:"ozel",    swift:"FBHLTRIS"},
+  "00108": {name:"Turkland Bank (T-Bank)",            domain:"tbank.com.tr",          type:"yabanci", swift:"TBOSTR2A"},
+  "00109": {name:"ICBC Turkey Bank",                  domain:"icbc.com.tr",           type:"yabanci", swift:"ICBKTR2A"},
+  "00111": {name:"QNB Bank (eski QNB Finansbank)",    domain:"qnb.com.tr",            type:"yabanci", swift:"FNNBTRIS"},
+  "00115": {name:"Deutsche Bank",                     domain:"db.com",                type:"yabanci", swift:"DEUTTRIS"},
+  "00116": {name:"Pasha Yatırım Bankası",             domain:"pashabank.com.tr",      type:"yatirim", swift:"PSHYTRIS"},
+  "00121": {name:"Standard Chartered Yatırım Bankası",domain:"sc.com",                type:"yabanci", swift:"SCBLTR2A"},
+  "00122": {name:"Société Générale",                  domain:"societegenerale.com",   type:"yabanci", swift:"SOGETRIS"},
+  "00123": {name:"HSBC Bank",                         domain:"hsbc.com.tr",           type:"yabanci", swift:"HSBCTRIX"},
+  "00124": {name:"Alternatif Bank",                   domain:"alternatifbank.com.tr", type:"yabanci", swift:"ABNATRIS"},
+  "00125": {name:"Burgan Bank",                       domain:"burgan.com.tr",         type:"yabanci", swift:"EBBETRIS"},
+  "00129": {name:"Merrill Lynch Yatırım Bank",        domain:"ml.com",                type:"yatirim", swift:"MLINTRIX"},
+  "00132": {name:"Takasbank",                         domain:"takasbank.com.tr",      type:"yatirim", swift:"TAKSTRIS"},
+  "00134": {name:"Denizbank",                         domain:"denizbank.com",         type:"ozel",    swift:"DENITRIS"},
+  "00135": {name:"Anadolubank",                       domain:"anadolubank.com.tr",    type:"ozel",    swift:"ANDLTRIS"},
+  "00137": {name:"Rabobank",                          domain:"rabobank.com",          type:"yabanci", swift:"RABOTRIS"},
+  "00138": {name:"Diler Yatırım Bankası",             domain:"dilerbank.com.tr",      type:"yatirim"},
+  "00139": {name:"GSD Yatırım Bankası",               domain:"gsdbank.com.tr",        type:"yatirim"},
+  "00141": {name:"Nurol Yatırım Bankası",             domain:"nurolbank.com.tr",      type:"yatirim"},
+  "00142": {name:"BankPozitif Kredi ve Kalkınma Bankası", domain:"bankpozitif.com.tr",type:"yatirim"},
+  "00143": {name:"Aktif Yatırım Bankası",             domain:"aktifbank.com.tr",      type:"yatirim", swift:"CAYTTRIS"},
+  "00146": {name:"Odea Bank",                         domain:"odeabank.com.tr",       type:"yabanci", swift:"ODEATRIS"},
+  "00147": {name:"Bank of Tokyo-Mitsubishi UFJ Turkey",domain:"mufgemea.com",         type:"yabanci", swift:"BOTKTRIS"},
+  "00148": {name:"Intesa Sanpaolo",                   domain:"intesasanpaolo.com",    type:"yabanci", swift:"BCITTRIS"},
+  "00150": {name:"Golden Global Yatırım Bankası",     domain:"goldenglobalbank.com",  type:"yatirim"},
+  "00152": {name:"Destek Yatırım Bankası",            domain:"destekbank.com.tr",     type:"yatirim"},
+  "00153": {name:"Misyon Yatırım Bankası",            domain:"misyonbank.com.tr",     type:"yatirim"},
+  "00157": {name:"Enpara Bank",                       domain:"enpara.com",            type:"dijital"},
+  "00158": {name:"Colendi Bank",                      domain:"colendi.com",           type:"dijital"},
+  "00159": {name:"FUPS Bank",                         domain:"fupsbank.com",          type:"dijital"},
+  "00160": {name:"Ziraat Dinamik Bankası",            domain:"ziraatdinamik.com.tr",  type:"dijital"},
+  "00203": {name:"Albaraka Türk",                     domain:"albaraka.com.tr",       type:"katilim", swift:"BTFHTRIS"},
+  "00205": {name:"Kuveyt Türk",                       domain:"kuveytturk.com.tr",     type:"katilim", swift:"KTEFTRIS"},
+  "00206": {name:"Türkiye Finans Katılım",            domain:"turkiyefinans.com.tr",  type:"katilim", swift:"AFKBTRIS"},
+  "00209": {name:"Ziraat Katılım",                    domain:"ziraatkatilim.com.tr",  type:"katilim", swift:"ZKBATRIS"},
+  "00210": {name:"Vakıf Katılım",                     domain:"vakifkatilim.com.tr",   type:"katilim", swift:"VAKFTRIS"},
+  "00211": {name:"Emlak Katılım",                     domain:"emlakkatilim.com.tr",   type:"katilim", swift:"EMKBTRIS"},
+  "00212": {name:"Hayat Finans Katılım",              domain:"hayatfinans.com.tr",    type:"katilim", swift:"HAYFTRIS"},
+  "00213": {name:"T.O.M. Katılım Bankası",            domain:"tombank.com.tr",        type:"katilim", swift:"TOMBTRIS"},
+  "00214": {name:"Dünya Katılım Bankası",             domain:"dunyakatilim.com.tr",   type:"katilim", swift:"DNYATRIS"},
+  "00807": {name:"PTT (Posta ve Telgraf Teşkilatı)",  domain:"ptt.gov.tr",            type:"dijital"},
+  "00825": {name:"Birleşik Ödeme",                    domain:"birlesikodeme.com.tr",  type:"dijital"},
+  "00827": {name:"TURK Elektronik Para",              domain:"param.com.tr",          type:"dijital"},
+  "00828": {name:"Belbim Elektronik Para",            domain:"belbim.com.tr",         type:"dijital"},
+  "00829": {name:"Papara",                            domain:"papara.com",            type:"dijital"},
+  "00832": {name:"İninal",                            domain:"ininal.com",            type:"dijital"},
+  "00838": {name:"Sipay",                             domain:"sipay.com.tr",          type:"dijital"},
+  "00846": {name:"Parolapara",                        domain:"parolapara.com",        type:"dijital"},
+  "00850": {name:"BPN Ödeme",                         domain:"bpn.com.tr",            type:"dijital"},
+  "00864": {name:"iyzico",                            domain:"iyzico.com",            type:"dijital"},
+  "00869": {name:"Paycell (Turkcell Ödeme)",          domain:"paycell.com.tr",        type:"dijital"},
+  "00882": {name:"PayFix",                            domain:"payfix.com",            type:"dijital"},
+  "00890": {name:"Lydians",                           domain:"lydians.com",           type:"dijital"},
+  "00894": {name:"Ahlatcı Ödeme",                     domain:"ahlatciodeme.com",      type:"dijital"},
+  "00900": {name:"FAST (TCMB Anlık Transfer)",        domain:"tcmb.gov.tr",           type:"merkez"},
+  "00914": {name:"Papel",                             domain:"papel.com.tr",          type:"dijital"}
 };
 
 const TYPE_LABELS = {
@@ -231,34 +704,61 @@ function pretty(iban){ return iban.replace(/(.{4})/g,"$1 ").trim(); }
 
 function parseIban(input){
   const iban = normalize(input);
-  if (!iban) return {valid:false, error:"IBAN girin."};
-  if (!/^[A-Z0-9]+$/.test(iban)) return {valid:false, error:"IBAN sadece harf ve rakam içerebilir."};
+  if (!iban) return {valid:false, errorKey:"error.empty"};
+  if (!/^[A-Z0-9]+$/.test(iban)) return {valid:false, errorKey:"error.chars"};
   const country = iban.slice(0,2);
   const expected = IBAN_LENGTHS[country];
-  if (!expected) return {valid:false, error:`Bilinmeyen ülke kodu: ${country}`, country};
-  if (iban.length !== expected) return {valid:false, error:`${country} IBAN uzunluğu ${expected} karakter olmalı (girilen ${iban.length}).`, country};
-  if (mod97(iban) !== 1) return {valid:false, error:"Kontrol rakamı hatalı — IBAN yanlış yazılmış olabilir.", country};
+  if (!expected) return {valid:false, errorKey:"error.country", errorData:{country}, country};
+  if (iban.length !== expected) return {valid:false, errorKey:"error.length", errorData:{country, expected, actual:iban.length}, country};
+  if (mod97(iban) !== 1) return {valid:false, errorKey:"error.mod97", country};
 
   const out = {valid:true, iban, country};
   if (country === "TR"){
     const code = iban.slice(4,9);
     out.bankCode = code;
     out.bank = TR_BANKS[code] || null;
+    out.accountNo = iban.slice(10);
   }
   return out;
 }
 
+function errorText(res){
+  const t = i18nDict();
+  if (res.errorKey === "error.country") return t["error.country"].replace("{country}", res.errorData.country);
+  if (res.errorKey === "error.length") return t["error.length"]
+    .replace("{country}", res.errorData.country)
+    .replace("{expected}", res.errorData.expected)
+    .replace("{actual}", res.errorData.actual);
+  return t[res.errorKey] || "";
+}
+
 function esc(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])); }
+
+const _reportedCodes = new Set();
+function reportUnknownBank(code){
+  if (!code || _reportedCodes.has(code)) return;
+  _reportedCodes.add(code);
+  const body = new URLSearchParams({
+    "form-name": "unknown-bank",
+    "bank_code": code,
+    "timestamp": new Date().toISOString()
+  });
+  fetch("/", {
+    method: "POST",
+    headers: {"Content-Type": "application/x-www-form-urlencoded"},
+    body: body.toString()
+  }).catch(()=>{});
+}
 
 function logoHtml(bank, bankCode){
   if (!bank || !bank.domain){
     const initials = bank ? bank.name.split(/\s+/).slice(0,2).map(w=>w[0]||"").join("").toUpperCase() : (bankCode||"?").slice(-2);
     return `<div class="logo">${esc(initials)}</div>`;
   }
-  const primary  = `https://logo.clearbit.com/${bank.domain}`;
-  const fallback = `https://www.google.com/s2/favicons?domain=${bank.domain}&sz=128`;
-  return `<div class="logo"><img src="${primary}" alt="${esc(bank.name)} logo"
-     onerror="if(this.src!=='${fallback}'){this.onerror=null;this.src='${fallback}';}else{this.remove();}"></div>`;
+  const primary  = `https://logo.clearbit.com/${bank.domain}?size=400&format=png`;
+  const fallback = `https://www.google.com/s2/favicons?domain=${bank.domain}&sz=256`;
+  return `<div class="logo"><img src="${primary}" alt="${esc(bank.name)} logo" width="400" height="400"
+     onerror="if(this.src.indexOf('google.com')===-1){this.onerror=null;this.src='${fallback}';}else{this.remove();}"></div>`;
 }
 
 const form = document.getElementById("iban-form");
@@ -266,43 +766,105 @@ const input = document.getElementById("iban");
 const result = document.getElementById("result");
 
 function render(res, raw){
+  const t = i18nDict();
   result.classList.remove("valid","invalid");
   result.classList.add("show", res.valid ? "valid" : "invalid");
 
   const parts = [];
-  parts.push(`<div class="status ${res.valid?'valid':'invalid'}">${res.valid?'Geçerli':'Geçersiz'}</div>`);
-  parts.push(`<div class="status-sub">${res.valid?'Kontrol rakamı doğrulandı':'IBAN doğrulanamadı'}</div>`);
+  parts.push(`<div class="status ${res.valid?'valid':'invalid'}">${res.valid?t["status.valid"]:t["status.invalid"]}</div>`);
+  parts.push(`<div class="status-sub">${res.valid?t["status.validSub"]:t["status.invalidSub"]}</div>`);
 
   if (!res.valid){
-    parts.push(`<div class="row"><div class="k">Sebep</div><div class="v">${esc(res.error)}</div></div>`);
-    if (raw) parts.push(`<div class="row"><div class="k">Giriş</div><div class="v mono">${esc(pretty(normalize(raw)))}</div></div>`);
+    parts.push(`<div class="row"><div class="k">${t["label.reason"]}</div><div class="v">${esc(errorText(res))}</div></div>`);
+    if (raw) parts.push(`<div class="row"><div class="k">${t["label.input"]}</div><div class="v mono">${esc(pretty(normalize(raw)))}</div></div>`);
   } else {
     if (res.country === "TR"){
       const b = res.bank;
-      const name = b ? b.name : "Kayıtlı olmayan banka kodu";
-      const tag  = b ? (TYPE_LABELS[b.type] || "") : "Listede yok";
+      const name = b ? b.name : t["bank.notInList"];
+      const tag  = b ? (typeLabel(b.type)) : t["bank.tagNotInList"];
+      const reportedNote = !b && res.bankCode ? `
+          <div class="reported-note">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+              <path d="M3 8l3 3 7-7"/>
+            </svg>
+            <span>${t["reported"]}</span>
+          </div>` : "";
       parts.push(`
         <div class="bank-card">
           ${logoHtml(b, res.bankCode)}
           <div class="bank-meta">
             <span class="bank-name">${esc(name)}</span>
             <span class="bank-tag">${esc(tag)}</span>
-          </div>
+          </div>${reportedNote}
         </div>`);
+      if (!b && res.bankCode) reportUnknownBank(res.bankCode);
     }
-    parts.push(`<div class="row"><div class="k">IBAN</div><div class="v mono">${esc(pretty(res.iban))}</div></div>`);
-    const cl = COUNTRY_NAMES[res.country] ? `${COUNTRY_NAMES[res.country]} (${res.country})` : res.country;
-    parts.push(`<div class="row"><div class="k">Ülke</div><div class="v">${esc(cl)}</div></div>`);
+    parts.push(`
+      <div class="row">
+        <div class="k">${t["label.iban"]}</div>
+        <div class="v mono iban-row">
+          <span class="iban-text">${esc(pretty(res.iban))}</span>
+          <button class="copy-btn" type="button" data-copy="${esc(res.iban)}" aria-label="${t["btn.copy"]}">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+              <rect x="4.5" y="4.5" width="8" height="9" rx="1"/>
+              <path d="M3.5 11V2.5h8"/>
+            </svg>
+            <span class="copy-label">${t["btn.copy"]}</span>
+          </button>
+        </div>
+      </div>`);
+    const cname = countryName(res.country);
+    const cl = cname ? `${cname} (${res.country})` : res.country;
+    parts.push(`<div class="row"><div class="k">${t["label.country"]}</div><div class="v">${esc(cl)}</div></div>`);
     if (res.bankCode){
-      parts.push(`<div class="row"><div class="k">Banka kodu</div><div class="v mono">${esc(res.bankCode)}</div></div>`);
+      parts.push(`<div class="row"><div class="k">${t["label.bankCode"]}</div><div class="v mono">${esc(res.bankCode)}</div></div>`);
+    }
+    if (res.bank && res.bank.swift){
+      parts.push(`<div class="row"><div class="k">${t["label.swift"]}</div><div class="v mono">${esc(res.bank.swift)}</div></div>`);
+    }
+    if (res.accountNo){
+      parts.push(`<div class="row"><div class="k">${t["label.accountNo"]}</div><div class="v mono">${esc(res.accountNo.replace(/(.{4})/g,"$1 ").trim())}</div></div>`);
     }
   }
   result.innerHTML = parts.join("");
 }
 
+function typeLabel(type){
+  const t = i18nDict();
+  return t["type."+type] || type;
+}
+function countryName(code){
+  const t = i18nDict();
+  return t["country."+code] || COUNTRY_NAMES[code] || "";
+}
+
 form.addEventListener("submit",(e)=>{
   e.preventDefault();
   render(parseIban(input.value), input.value);
+});
+
+result.addEventListener("click", async (e) => {
+  const btn = e.target.closest(".copy-btn");
+  if (!btn) return;
+  const iban = btn.dataset.copy || "";
+  try {
+    await navigator.clipboard.writeText(iban);
+  } catch {
+    const ta = document.createElement("textarea");
+    ta.value = iban; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); } catch {}
+    ta.remove();
+  }
+  const label = btn.querySelector(".copy-label");
+  const orig = label ? label.textContent : "";
+  btn.classList.add("copied");
+  if (label) label.textContent = i18nDict()["btn.copied"];
+  clearTimeout(btn._t);
+  btn._t = setTimeout(() => {
+    btn.classList.remove("copied");
+    if (label) label.textContent = orig;
+  }, 1600);
 });
 
 input.addEventListener("input",()=>{
@@ -311,6 +873,233 @@ input.addEventListener("input",()=>{
 });
 
 const urlIban = new URLSearchParams(location.search).get("iban");
+
+// --- Cookie consent + AdSense ---
+const ADSENSE_CLIENT = "ca-pub-XXXXXXXXXXXXXXXX"; // TODO: AdSense onaylandığında publisher ID buraya
+const CONSENT_KEY = "her-iban-consent";
+const consentBanner = document.getElementById("cookie-consent");
+
+function getConsent(){
+  try { return localStorage.getItem(CONSENT_KEY); } catch { return null; }
+}
+function setConsent(v){
+  try { localStorage.setItem(CONSENT_KEY, v); } catch {}
+}
+
+function loadAdSense(){
+  if (window._adsenseLoaded) return;
+  if (!ADSENSE_CLIENT || ADSENSE_CLIENT.indexOf("XXXX") !== -1) return;
+  window._adsenseLoaded = true;
+  const s = document.createElement("script");
+  s.async = true;
+  s.crossOrigin = "anonymous";
+  s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + ADSENSE_CLIENT;
+  document.head.appendChild(s);
+  document.querySelectorAll(".adsbygoogle").forEach(() => {
+    try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch {}
+  });
+}
+
+function applyConsent(decision){
+  setConsent(decision);
+  consentBanner.hidden = true;
+  if (decision === "accepted") loadAdSense();
+}
+
+document.getElementById("cookie-accept").addEventListener("click", () => applyConsent("accepted"));
+document.getElementById("cookie-reject").addEventListener("click", () => applyConsent("rejected"));
+document.getElementById("cookie-manage").addEventListener("click", () => { consentBanner.hidden = false; });
+
+const initial = getConsent();
+if (initial === "accepted") loadAdSense();
+else if (!initial) consentBanner.hidden = false;
+
+// --- i18n ---
+const translations = {
+  tr: {
+    "meta.title": "Her-iban · Ücretsiz IBAN Sorgulama ve Doğrulama Aracı",
+    "nav.tagline": "IBAN Doğrulama Aracı",
+    "eyebrow": "Ücretsiz Araç",
+    "h1": "IBAN SORGULAMA",
+    "lead": "IBAN numarasını girin; numaranın geçerli olup olmadığını ve hangi banka ya da fintech kuruluşuna ait olduğunu anında öğrenin. Hiçbir veri sunucuya gönderilmez, doğrulama tarayıcınızda yapılır.",
+    "form.label": "IBAN",
+    "form.submit": "Sorgula",
+    "form.placeholder": "TR33 0006 1005 1978 6457 8413 26",
+    "note": "<b>Not:</b> IBAN standartı şehir veya şube bilgisini içermez; bu bilgiler yalnızca ilgili kurumun iç sisteminde bulunur.",
+    "status.valid": "Geçerli", "status.invalid": "Geçersiz",
+    "status.validSub": "Kontrol rakamı doğrulandı", "status.invalidSub": "IBAN doğrulanamadı",
+    "label.reason": "Sebep", "label.input": "Giriş", "label.iban": "IBAN", "label.country": "Ülke", "label.bankCode": "Banka kodu", "label.swift": "SWIFT/BIC", "label.accountNo": "Hesap No",
+    "btn.copy": "Kopyala", "btn.copied": "Kopyalandı",
+    "bank.notInList": "Kayıtlı olmayan banka kodu", "bank.tagNotInList": "Listede yok",
+    "reported": "Bu banka kodu ekibimize iletildi. En kısa sürede sisteme eklenecek.",
+    "error.empty": "IBAN girin.",
+    "error.chars": "IBAN sadece harf ve rakam içerebilir.",
+    "error.country": "Bilinmeyen ülke kodu: {country}",
+    "error.length": "{country} IBAN uzunluğu {expected} karakter olmalı (girilen {actual}).",
+    "error.mod97": "Kontrol rakamı hatalı — IBAN yanlış yazılmış olabilir.",
+    "type.kamu":"Kamu Bankası","type.ozel":"Özel Banka","type.yabanci":"Yabancı Sermayeli Banka",
+    "type.yatirim":"Kalkınma ve Yatırım Bankası","type.katilim":"Katılım Bankası",
+    "type.dijital":"Dijital Banka / Fintech","type.merkez":"Merkez Bankası",
+    "guide.head": "Bilgi Rehberi",
+    "guide.whatIsIban.q": "IBAN Nedir?",
+    "guide.howItWorks.q": "Her-iban Nasıl Çalışır?",
+    "guide.whyImportant.q": "IBAN Doğrulama Neden Önemli?",
+    "faq.head": "Sıkça Sorulan Sorular",
+    "faq.q1":"IBAN'ım \"Geçerli\" çıktı — hesap gerçek mi?","faq.q2":"IBAN numaramı girmek güvenli mi?",
+    "faq.q3":"Hangi ülkelerin IBAN'ı destekleniyor?","faq.q4":"Banka \"Kayıtlı olmayan\" çıktı, ne yapabilirim?",
+    "faq.q5":"Fintech kuruluşları IBAN verebilir mi?","faq.q6":"IBAN şehir veya şube bilgisi gösterir mi?",
+    "faq.q7":"Bu araç ücretli mi olacak?",
+    "footer.preferences": "Çerez Tercihleri",
+    "legal.privacy":"Gizlilik Politikası & KVKK","legal.cookies":"Çerez Politikası",
+    "legal.terms":"Kullanım Koşulları","legal.disclaimer":"Sorumluluk Reddi",
+    "legal.thirdparty":"Üçüncü Taraf Servisler","legal.trademarks":"Telif & Marka Hakları",
+    "legal.contact":"İletişim",
+    "cookie.title":"Çerez ve Reklam Tercihleri",
+    "cookie.desc":"IBAN doğrulama aracımız tarayıcıda çalışır; sizin verinizi bizim sunucumuz görmez. Siteyi ayakta tutmak için Google AdSense reklamlarını kullanırız ve bu reklamlar çerezlerle kişiselleştirilir.",
+    "cookie.accept":"Kabul Et","cookie.reject":"Reddet"
+  },
+  en: {
+    "meta.title": "Her-iban · Free IBAN Validation & Bank Lookup Tool",
+    "nav.tagline": "IBAN Validator",
+    "eyebrow": "Free Tool",
+    "h1": "IBAN LOOKUP",
+    "lead": "Enter an IBAN to instantly check whether it is valid and which bank or fintech institution it belongs to. No data is sent to any server — everything runs in your browser.",
+    "form.label": "IBAN", "form.submit": "Check", "form.placeholder": "TR33 0006 1005 1978 6457 8413 26",
+    "note": "<b>Note:</b> The IBAN standard does not encode city or branch information; those details exist only in the bank's internal systems.",
+    "status.valid": "Valid", "status.invalid": "Invalid",
+    "status.validSub": "Checksum verified", "status.invalidSub": "IBAN could not be validated",
+    "label.reason":"Reason","label.input":"Input","label.iban":"IBAN","label.country":"Country","label.bankCode":"Bank code","label.swift":"SWIFT/BIC","label.accountNo":"Account No.",
+    "btn.copy":"Copy","btn.copied":"Copied",
+    "bank.notInList":"Unregistered bank code","bank.tagNotInList":"Not in list",
+    "reported":"This bank code has been reported to our team and will be added soon.",
+    "error.empty":"Please enter an IBAN.",
+    "error.chars":"IBAN may contain only letters and digits.",
+    "error.country":"Unknown country code: {country}",
+    "error.length":"{country} IBANs must be {expected} characters long (got {actual}).",
+    "error.mod97":"Checksum failed — the IBAN may be mistyped.",
+    "type.kamu":"State-owned Bank","type.ozel":"Private Bank","type.yabanci":"Foreign-owned Bank",
+    "type.yatirim":"Development & Investment Bank","type.katilim":"Participation Bank",
+    "type.dijital":"Digital Bank / Fintech","type.merkez":"Central Bank",
+    "guide.head":"Guide",
+    "guide.whatIsIban.q":"What is an IBAN?",
+    "guide.howItWorks.q":"How Does Her-iban Work?",
+    "guide.whyImportant.q":"Why Is IBAN Validation Important?",
+    "faq.head":"Frequently Asked Questions",
+    "faq.q1":"My IBAN shows \"Valid\" — is the account real?","faq.q2":"Is it safe to enter my IBAN?",
+    "faq.q3":"Which countries' IBANs are supported?","faq.q4":"Bank shows \"Unregistered\" — what can I do?",
+    "faq.q5":"Can fintechs issue IBANs?","faq.q6":"Does the IBAN reveal city or branch info?",
+    "faq.q7":"Will this tool ever cost money?",
+    "footer.preferences":"Cookie Preferences",
+    "legal.privacy":"Privacy Policy & KVKK","legal.cookies":"Cookie Policy",
+    "legal.terms":"Terms of Use","legal.disclaimer":"Disclaimer",
+    "legal.thirdparty":"Third-party Services","legal.trademarks":"Trademarks","legal.contact":"Contact",
+    "cookie.title":"Cookie & Ad Preferences",
+    "cookie.desc":"Our IBAN validator runs entirely in your browser; we never see your data. To keep the service free we use Google AdSense, whose ads rely on cookies.",
+    "cookie.accept":"Accept","cookie.reject":"Reject"
+  },
+  ar: {
+    "meta.title": "Her-iban · أداة مجانية للتحقق من IBAN والبحث عن البنك",
+    "nav.tagline": "أداة التحقق من IBAN",
+    "eyebrow": "أداة مجانية",
+    "h1": "التحقق من IBAN",
+    "lead": "أدخل رقم IBAN لمعرفة ما إذا كان صالحاً وإلى أي بنك أو مؤسسة مالية ينتمي. لا يتم إرسال أي بيانات إلى الخادم — يعمل كل شيء داخل متصفحك.",
+    "form.label": "IBAN", "form.submit": "تحقق", "form.placeholder": "TR33 0006 1005 1978 6457 8413 26",
+    "note": "<b>ملاحظة:</b> معيار IBAN لا يتضمن معلومات المدينة أو الفرع؛ هذه المعلومات متوفرة فقط في الأنظمة الداخلية للبنك.",
+    "status.valid":"صالح","status.invalid":"غير صالح",
+    "status.validSub":"تم التحقق من خانة الرقابة","status.invalidSub":"تعذّر التحقق من IBAN",
+    "label.reason":"السبب","label.input":"المدخل","label.iban":"IBAN","label.country":"الدولة","label.bankCode":"رمز البنك","label.swift":"SWIFT/BIC","label.accountNo":"رقم الحساب",
+    "btn.copy":"نسخ","btn.copied":"تم النسخ",
+    "bank.notInList":"رمز بنك غير مسجل","bank.tagNotInList":"غير مُدرج",
+    "reported":"تم إرسال رمز البنك إلى فريقنا وسيُضاف قريباً.",
+    "error.empty":"يرجى إدخال IBAN.",
+    "error.chars":"يجب أن يحتوي IBAN على حروف وأرقام فقط.",
+    "error.country":"رمز دولة غير معروف: {country}",
+    "error.length":"يجب أن يكون طول IBAN الخاص بـ {country} هو {expected} حرفاً (أدخلت {actual}).",
+    "error.mod97":"فشل التحقق من خانة الرقابة — قد يكون IBAN مكتوباً بشكل خاطئ.",
+    "type.kamu":"بنك حكومي","type.ozel":"بنك خاص","type.yabanci":"بنك أجنبي",
+    "type.yatirim":"بنك تنمية واستثمار","type.katilim":"بنك مشاركة",
+    "type.dijital":"بنك رقمي / فينتك","type.merkez":"بنك مركزي",
+    "guide.head":"دليل",
+    "guide.whatIsIban.q":"ما هو IBAN؟",
+    "guide.howItWorks.q":"كيف يعمل Her-iban؟",
+    "guide.whyImportant.q":"لماذا التحقق من IBAN مهم؟",
+    "faq.head":"الأسئلة الشائعة",
+    "faq.q1":"ظهر IBAN \"صالح\" — هل الحساب حقيقي؟","faq.q2":"هل إدخال IBAN آمن؟",
+    "faq.q3":"أي دول تدعم IBAN؟","faq.q4":"ظهر البنك \"غير مسجل\" — ماذا أفعل؟",
+    "faq.q5":"هل يمكن للفينتك إصدار IBAN؟","faq.q6":"هل يكشف IBAN معلومات المدينة أو الفرع؟",
+    "faq.q7":"هل ستصبح هذه الأداة مدفوعة؟",
+    "footer.preferences":"تفضيلات ملفات تعريف الارتباط",
+    "legal.privacy":"سياسة الخصوصية و KVKK","legal.cookies":"سياسة ملفات تعريف الارتباط",
+    "legal.terms":"شروط الاستخدام","legal.disclaimer":"إخلاء المسؤولية",
+    "legal.thirdparty":"خدمات الطرف الثالث","legal.trademarks":"حقوق النشر والعلامات التجارية","legal.contact":"اتصل بنا",
+    "cookie.title":"تفضيلات ملفات تعريف الارتباط والإعلانات",
+    "cookie.desc":"تعمل أداة التحقق من IBAN بالكامل في متصفحك؛ لا نرى بياناتك. لإبقاء الخدمة مجانية نستخدم Google AdSense وهو يعتمد على ملفات تعريف الارتباط.",
+    "cookie.accept":"قبول","cookie.reject":"رفض"
+  }
+};
+
+const LANG_KEY = "her-iban-lang";
+const THEME_KEY = "her-iban-theme";
+let currentLang = "tr";
+
+function i18nDict(){ return translations[currentLang] || translations.tr; }
+
+function applyI18n(){
+  const t = i18nDict();
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+  if (t["meta.title"]) document.title = t["meta.title"];
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const k = el.getAttribute("data-i18n");
+    if (t[k] !== undefined) el.textContent = t[k];
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => {
+    const k = el.getAttribute("data-i18n-html");
+    if (t[k] !== undefined) el.innerHTML = t[k];
+  });
+  const ph = document.getElementById("iban");
+  if (ph && t["form.placeholder"]) ph.placeholder = t["form.placeholder"];
+
+  document.querySelectorAll(".lang-btn").forEach(b => {
+    b.classList.toggle("active", b.dataset.lang === currentLang);
+  });
+}
+
+function setLang(lang){
+  if (!translations[lang]) return;
+  currentLang = lang;
+  try { localStorage.setItem(LANG_KEY, lang); } catch {}
+  applyI18n();
+}
+
+function applyTheme(theme){
+  document.documentElement.setAttribute("data-theme", theme);
+  try { localStorage.setItem(THEME_KEY, theme); } catch {}
+}
+
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute("data-theme") || "dark";
+  applyTheme(cur === "dark" ? "light" : "dark");
+}
+
+document.querySelectorAll(".lang-btn").forEach(b => {
+  b.addEventListener("click", () => setLang(b.dataset.lang));
+});
+document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
+
+try {
+  const savedLang = localStorage.getItem(LANG_KEY);
+  if (savedLang && translations[savedLang]) currentLang = savedLang;
+  else {
+    const nav = (navigator.language || "tr").slice(0,2).toLowerCase();
+    if (translations[nav]) currentLang = nav;
+  }
+  const savedTheme = localStorage.getItem(THEME_KEY);
+  if (savedTheme) applyTheme(savedTheme);
+} catch {}
+applyI18n();
+
 if (urlIban){
   input.value = urlIban.replace(/\s+/g,"").toUpperCase().replace(/(.{4})/g,"$1 ").trim();
   render(parseIban(urlIban), urlIban);

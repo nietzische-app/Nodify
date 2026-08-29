@@ -1,0 +1,4 @@
+# Her-iban ads.txt
+# AdSense onayından sonra aşağıdaki satırdaki pub-XXXXXXXXXXXXXXXX kısmını
+# kendi publisher ID'nizle değiştirin.
+google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
