@@ -303,6 +303,88 @@ nav{
 .pc:hover .pc-link{gap:10px}
 .pc:hover .pc-link svg{transform:translate(3px,-3px)}
 
+.pc-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.store-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  min-height:46px;padding:7px 16px 7px 12px;
+  color:var(--white);background:#07080a;
+  border:1px solid var(--border2);border-radius:10px;
+  text-decoration:none;
+  transition:border-color .2s,transform .2s,background .2s;
+}
+.store-btn:hover{border-color:var(--accent);background:var(--grey2);transform:translateY(-2px)}
+.store-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.store-btn svg{width:22px;height:22px;flex-shrink:0;display:block}
+.store-btn span{display:flex;flex-direction:column;line-height:1.05;min-width:0}
+.store-btn small{
+  font-size:0.52rem;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--grey4);
+}
+.store-btn strong{
+  font-family:"Syne",sans-serif;font-size:0.92rem;font-weight:700;letter-spacing:-0.02em;color:var(--white);
+}
+
+.ph-card{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  border:1px solid var(--border2);
+  border-radius:12px;
+  padding:16px;
+  max-width:440px;
+  background:var(--grey2);
+  box-shadow:0 10px 28px rgba(0,0,0,0.32);
+}
+.ph-row{display:flex;align-items:center;gap:12px}
+.ph-card img{
+  width:56px;height:56px;border-radius:8px;object-fit:cover;flex-shrink:0;display:block;
+}
+.ph-copy{flex:1;min-width:0}
+.ph-card h3{
+  margin:0;font-family:inherit;font-size:16px;font-weight:600;letter-spacing:0;text-transform:none;
+  color:var(--white);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.ph-card p{
+  margin:4px 0 0;font-size:13px;color:var(--grey4);line-height:1.4;
+  overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+}
+.ph-cta{
+  display:inline-flex;align-items:center;gap:4px;
+  margin-top:14px;padding:8px 16px;
+  background:#ff6154;color:#fff;text-decoration:none;
+  border-radius:9999px;font-size:14px;font-weight:600;line-height:1.5;letter-spacing:0;text-transform:none;
+  transition:filter .2s,transform .2s;
+}
+.ph-cta:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.ph-cta:focus-visible{outline:2px solid #ff6154;outline-offset:3px}
+
+.shot-stage{
+  position:relative;width:100%;
+  display:flex;flex-direction:column;align-items:center;
+  transition:transform .5s cubic-bezier(0.16,1,0.3,1);
+}
+.pc:hover .shot-stage{transform:translateY(-6px)}
+.pc:hover .shot-stage img{transform:none}
+.pc-shot img.shot-menu{aspect-ratio:1400/984;object-fit:cover;object-position:center center}
+.ph-cta{white-space:nowrap}
+.live-badge{
+  position:relative;z-index:2;
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  margin:-18px auto 0;
+  max-width:calc(100% - 20px);
+  padding:7px 12px 7px 10px;
+  background:rgba(10,11,13,0.9);
+  border:1px solid rgba(255,255,255,0.28);
+  border-radius:999px;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  color:#fff;
+  font-size:0.58rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  box-shadow:0 10px 24px rgba(0,0,0,0.45);
+  pointer-events:none;
+}
+.live-badge svg{width:13px;height:13px;flex-shrink:0}
+.live-dot{
+  width:6px;height:6px;border-radius:50%;background:#3DDC84;
+  box-shadow:0 0 0 3px rgba(61,220,132,0.22);flex-shrink:0;
+}
+
 /* ── SKILLS ── */
 #skills{border-top:1px solid var(--border);background:var(--grey1)}
 .sk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:0}
@@ -456,6 +538,10 @@ footer{border-top:1px solid var(--border);background:var(--black)}
   .stat{padding:12px 0;border-right:none;border-bottom:1px solid var(--border);width:100%}
   .hero-actions{flex-direction:column;width:100%}
   .btn-primary,.btn-cal-hero{width:100%;justify-content:center}
+  .pc-ctas{flex-direction:column;align-items:stretch}
+  .store-btn{justify-content:flex-start}
+  .ph-card{max-width:none}
+  .live-badge{font-size:0.52rem;letter-spacing:0.04em;margin-top:-14px;text-align:center}
 }
 </style>
 </head>
@@ -532,13 +618,13 @@ footer{border-top:1px solid var(--border);background:var(--black)}
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-inner">
-    <div class="ticker-item"><span class="ticker-dot"></span>Filenin Sultanlar&#305;</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Retro Voleybol</div>
     <div class="ticker-item"><span class="ticker-dot"></span>HerHesap</div>
     <div class="ticker-item"><span class="ticker-dot"></span>TrafikCezalar&#305;</div>
     <div class="ticker-item"><span class="ticker-dot"></span>HerIban</div>
     <div class="ticker-item"><span class="ticker-dot"></span>AI &amp; SaaS</div>
     <div class="ticker-item"><span class="ticker-dot"></span>Nodify Studio</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>Filenin Sultanlar&#305;</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Retro Voleybol</div>
     <div class="ticker-item"><span class="ticker-dot"></span>HerHesap</div>
     <div class="ticker-item"><span class="ticker-dot"></span>TrafikCezalar&#305;</div>
     <div class="ticker-item"><span class="ticker-dot"></span>HerIban</div>
@@ -558,19 +644,46 @@ footer{border-top:1px solid var(--border);background:var(--black)}
 <div style="max-width:1140px;margin:0 auto;padding:0 48px 96px">
 <div class="proj-list">
 
-  <a href="https://fileninsultanlar.vercel.app/" target="_blank" rel="noopener" class="pc reveal">
+  <article class="pc reveal">
     <div class="pc-body">
-      <div class="pc-tag-wrap"><span class="pc-num">01</span><span class="pc-tag">Oyun · Web</span><span class="pc-tag">Vercel</span></div>
-      <h3 class="pc-name">Filenin Sultanları</h3>
-      <p class="pc-desc">Türkiye Kadın Milli Voleybol Takımı&#039;na saygıyla yapılmış, ticari olmayan bir hayran projesi. Web tabanlı 2D retro voleybol oyunu.</p>
-      <div class="pc-pills"><span class="pc-pill">Vercel</span><span class="pc-pill">2D Oyun</span><span class="pc-pill">Retro</span><span class="pc-pill">Web</span></div>
-      <span class="pc-link">fileninsultanlar.vercel.app <svg width="10" height="10" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M1 10L10 1M10 1H5M10 1v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      <div class="pc-tag-wrap"><span class="pc-num">01</span><span class="pc-tag">Oyun · Mobil</span><span class="pc-tag">Yayında</span></div>
+      <h3 class="pc-name">Retro Voleybol</h3>
+      <p class="pc-desc">8-bit piksel estetiğinde geliştirdiğimiz retro voleybol oyunu. iOS ve Android mağazalarında yayında!</p>
+      <div class="pc-pills" lang="en"><span class="pc-pill">Mobile</span><span class="pc-pill">iOS</span><span class="pc-pill">Android</span><span class="pc-pill">2D Game</span><span class="pc-pill">Retro</span><span class="pc-pill">Next.js</span></div>
+      <div class="pc-ctas">
+        <a class="store-btn" lang="en" href="https://apps.apple.com/tr/app/retro-voleybol/id6825087879" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.37 12.73c-.03-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.83-.81-3.01-.79-1.55.02-2.98.9-3.78 2.29-1.61 2.79-.41 6.92 1.16 9.19.77 1.11 1.68 2.36 2.88 2.31 1.16-.05 1.59-.74 2.99-.74 1.39 0 1.79.74 3.01.72 1.24-.02 2.03-1.13 2.79-2.25.88-1.28 1.24-2.52 1.26-2.58-.03-.01-2.42-.93-2.45-3.72zM14.55 6.3c.64-.77 1.07-1.84.95-2.91-.92.04-2.03.61-2.69 1.38-.59.68-1.1 1.77-.96 2.81 1.02.08 2.07-.52 2.7-1.28z"/></svg>
+          <span><small>Download on the</small><strong>App Store</strong></span>
+        </a>
+        <a class="store-btn" lang="en" href="https://play.google.com/store/apps/details?id=app.retrovoleybol.oyun" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#EA4335" d="M3.064 1.356a1.5 1.5 0 0 0-.564 1.19v18.908c0 .49.21.93.564 1.19l.09.08 10.59-10.59v-.25L3.154 1.276z"/><path fill="#FBBC04" d="m16.55 14.89-2.906-2.906v-.248l2.908-2.908.066.038 3.444 1.956c.984.56.984 1.472 0 2.032L16.618 14.81z"/><path fill="#4285F4" d="M16.616 14.81 13.18 11.374 3.064 21.49c.324.346.86.388 1.462.058l12.09-6.738z"/><path fill="#34A853" d="M16.616 7.938 4.526 1.2C3.924.87 3.388.912 3.064 1.258l10.116 10.116z"/></svg>
+          <span><small>Get it on</small><strong>Google Play</strong></span>
+        </a>
+      </div>
+      <div class="ph-card">
+        <div class="ph-row">
+          <img alt="Retro Voleybol" src="https://ph-files.imgix.net/8d1135a6-a7ab-4555-bc70-386c652351c0.png?auto=compress,format&amp;codec=mozjpeg&amp;cs=strip&amp;fit=crop&amp;h=80&amp;w=80" width="56" height="56" loading="lazy" decoding="async">
+          <div class="ph-copy">
+            <h3>Retro Voleybol</h3>
+            <p>8-bit pixel volleyball</p>
+          </div>
+        </div>
+        <a class="ph-cta" href="https://www.producthunt.com/products/retro-voleybol?embed=true&amp;utm_source=embed&amp;utm_medium=post_embed" target="_blank" rel="noopener noreferrer">Check it out on Product Hunt →</a>
+      </div>
       <div class="pc-watermark">01</div>
     </div>
     <div class="pc-shot">
-      <img src="filenin_sultanlari.webp" alt="Filenin Sultanları oyununun ana ekranı" width="1400" height="884" loading="lazy" decoding="async"/>
+      <div class="shot-stage">
+        <img class="shot-menu" src="retro_voleybol.webp" alt="Retro Voleybol oyununun ana ekranı" width="1400" height="984" loading="lazy" decoding="async"/>
+        <div class="live-badge" lang="en">
+          <span class="live-dot" aria-hidden="true"></span>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.37 12.73c-.03-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.83-.81-3.01-.79-1.55.02-2.98.9-3.78 2.29-1.61 2.79-.41 6.92 1.16 9.19.77 1.11 1.68 2.36 2.88 2.31 1.16-.05 1.59-.74 2.99-.74 1.39 0 1.79.74 3.01.72 1.24-.02 2.03-1.13 2.79-2.25.88-1.28 1.24-2.52 1.26-2.58-.03-.01-2.42-.93-2.45-3.72zM14.55 6.3c.64-.77 1.07-1.84.95-2.91-.92.04-2.03.61-2.69 1.38-.59.68-1.1 1.77-.96 2.81 1.02.08 2.07-.52 2.7-1.28z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M3.5 2.4v19.2c0 .8.9 1.3 1.6.9l15.4-9.6c.6-.4.6-1.3 0-1.7L5.1 1.5c-.7-.4-1.6.1-1.6.9z"/></svg>
+          <span>Now on App Store &amp; Google Play</span>
+        </div>
+      </div>
     </div>
-  </a>
+  </article>
 
   <a href="https://herhesap.org" target="_blank" rel="noopener" class="pc reveal">
     <div class="pc-body">
